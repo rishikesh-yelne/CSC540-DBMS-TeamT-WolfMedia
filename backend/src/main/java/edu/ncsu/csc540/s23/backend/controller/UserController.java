@@ -1,5 +1,7 @@
 package edu.ncsu.csc540.s23.backend.controller;
 
+import edu.ncsu.csc540.s23.backend.model.Artist;
+import edu.ncsu.csc540.s23.backend.model.PodcastHost;
 import edu.ncsu.csc540.s23.backend.model.User;
 import edu.ncsu.csc540.s23.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +24,15 @@ public class UserController {
     }
 
     @PostMapping("/add-user")
-    public boolean addUser(@RequestBody User user) {
+    public Long addUser(@RequestBody User user) {
         return userService.createNewUser(user);
     }
 
-    //TODO: to be implemented
-//    @PostMapping("/add-artist")
-//    public boolean addArtist(@RequestBody User artist) { return userService.createNewUser(artist); }
-//
-//
-//    @PostMapping("/add-podcast-host")
-//    public boolean addPodcastHost(@RequestBody User podcastHost) { return userService.createNewUser(podcastHost); }
+    @PostMapping("/add-artist")
+    public boolean addArtist(@RequestBody Artist artist) { return userService.createNewArtist(artist); }
+
+    @PostMapping("/add-podcast-host")
+    public boolean addPodcastHost(@RequestBody PodcastHost podcastHost) { return userService.createNewPodcastHost(podcastHost); }
+
+
 }

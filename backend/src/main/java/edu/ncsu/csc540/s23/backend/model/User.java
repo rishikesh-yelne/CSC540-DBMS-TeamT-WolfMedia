@@ -1,5 +1,6 @@
 package edu.ncsu.csc540.s23.backend.model;
 
+import java.sql.Date;
 import java.time.Instant;
 
 public class User {
@@ -14,7 +15,7 @@ public class User {
 
     private String phoneNum;
 
-    private Instant regDate;
+    private Date regDate;
 
     public Long getUserId() {
         return userId;
@@ -56,11 +57,11 @@ public class User {
         this.phoneNum = phoneNum;
     }
 
-    public Instant getRegDate() {
+    public Date getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(Instant regDate) {
+    public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
 }
