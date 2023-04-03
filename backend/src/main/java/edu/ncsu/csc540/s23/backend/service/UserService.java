@@ -32,6 +32,14 @@ public class UserService {
         return jdbcTemplate.query(OperationQuery.GET_ALL_USERS, BeanPropertyRowMapper.newInstance(User.class));
     }
 
+    public List<Artist> getAllArtists() {
+        return jdbcTemplate.query(OperationQuery.GET_ALL_ARTISTS, BeanPropertyRowMapper.newInstance(Artist.class));
+    }
+
+    public List<PodcastHost> getAllPodcastHosts() {
+        return jdbcTemplate.query(OperationQuery.GET_ALL_PODCAST_HOSTS, BeanPropertyRowMapper.newInstance(PodcastHost.class));
+    }
+
     public Long createNewUser(User user) {
         try {
             Connection connection = getConnection();
