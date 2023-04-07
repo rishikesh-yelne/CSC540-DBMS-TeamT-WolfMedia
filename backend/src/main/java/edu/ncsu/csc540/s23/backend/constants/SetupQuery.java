@@ -81,17 +81,61 @@ public class SetupQuery {
     public static final String INSERT_SONG_4 = "INSERT INTO Song (song_id,  album_id, title, duration, track_no, release_date, release_country, language, royalty_rate) VALUES(1004, 4002, 'Rainy Nights', '03:25:00', 2, '2023-04-02', 'United States', 'English', 0.1)";
     public static final String INSERT_PODCAST_HOST_1 = "INSERT INTO Podcast_Host (user_id, city) VALUES(6001, 'Raleigh')";
     public static final String INSERT_PODCAST = "INSERT INTO Podcast (podcast_id, pname, planguage, country) VALUES(5001, 'Mind Over Matter: Exploring the Power of the Human Mind', 'English', 'United States')";
-    public static final String INSERT_PODCAST_EPISODE_1 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7001, 5001, 'The Science of Mindfulness', '2023-04-02', '55:12:00', 0, 1)";
-    public static final String INSERT_PODCAST_EPISODE_2 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7002, 5001, 'Unlocking Your Potential', '2023-04-03', '41:52:00', 0, 2)";
+    public static final String INSERT_PODCAST_EPISODE_1 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7001, 5001, 'The Science of Mindfulness', '2023-01-14', '00:55:12', 0, 1)";
+    public static final String INSERT_PODCAST_EPISODE_2 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7002, 5001, 'Unlocking Your Potential', '2023-01-21', '00:41:52', 0, 2)";
+    public static final String INSERT_PODCAST_EPISODE_3 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7003, 5001, 'Being Successful', '2023-02-07', '00:43:25', 0, 2)";
+    public static final String INSERT_PODCAST_EPISODE_4 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7004, 5001, 'Achieving Greater Heights', '2023-03-15', '00:51:07', 0, 2)";
+    public static final String INSERT_PODCAST_EPISODE_5 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7005, 5001, 'Challenge Yourself', '2023-04-10', '00:48:16', 0, 2)";
+
+    // Transactions in January 2023
+    public static final String INSERT_TRANSACTION_JAN_1 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(1, 1, 'WolfMedia', 'Elevate Records', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_2 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(2, 10, 'WolfMedia', 'Elevate Records', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_3 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(3, 100, 'WolfMedia', 'Melodic Avenue Music', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_4 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(4, 1000, 'WolfMedia', 'Melodic Avenue Music', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_5 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(5, 0.7, 'Elevate Records', 'Forest F', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_6 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(6, 3.5, 'Elevate Records', 'Forest F', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_7 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(7, 3.5, 'Elevate Records', 'Rain R', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_8 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(8, 70, 'Melodic Avenue Music', 'Rain R', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_9 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(9, 700, 'Melodic Avenue Music', 'Rain R', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_10 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(10, 10, 'WolfMedia', 'Matthew Wilson', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_11 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(11, 10, 'WolfMedia', 'Matthew Wilson', '2023-01-31');";
+
+    // Transactions in February 2023
+    public static final String INSERT_TRANSACTION_FEB_1 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(12, 2, 'WolfMedia', 'Elevate Records', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_2 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(13, 20, 'WolfMedia', 'Elevate Records', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_3 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(14, 200, 'WolfMedia', 'Melodic Avenue Music', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_4 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(15, 2000, 'WolfMedia', 'Melodic Avenue Music', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_5 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(16, 1.4, 'Elevate Records', 'Forest F', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_6 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(17, 7, 'Elevate Records', 'Forest F', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_7 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(18, 7, 'Elevate Records', 'Rain R', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_8 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(19, 140, 'Melodic Avenue Music', 'Rain R', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_9 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(20, 1400, 'Melodic Avenue Music', 'Rain R', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_10 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(21, 10, 'WolfMedia', 'Matthew Wilson', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_11 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(22, 10, 'WolfMedia', 'Matthew Wilson', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_12 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(23, 10, 'WolfMedia', 'Matthew Wilson', '2023-02-28');";
+
+    // Transactions in March 2023
+    public static final String INSERT_TRANSACTION_MAR_1 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(24, 3, 'WolfMedia', 'Elevate Records', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_2 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(25, 30, 'WolfMedia', 'Elevate Records', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_3 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(26, 100, 'WolfMedia', 'Melodic Avenue Music', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_4 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(27, 1000, 'WolfMedia', 'Melodic Avenue Music', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_5 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(28, 2.1, 'Elevate Records', 'Forest F', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_6 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(29, 10.5, 'Elevate Records', 'Forest F', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_7 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(30, 10.5, 'Elevate Records', 'Rain R', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_8 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(31, 210, 'Melodic Avenue Music', 'Rain R', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_9 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(32, 2100, 'Melodic Avenue Music', 'Rain R', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_10 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(33, 10, 'WolfMedia', 'Matthew Wilson', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_11 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(34, 10, 'WolfMedia', 'Matthew Wilson', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_12 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(35, 10, 'WolfMedia', 'Matthew Wilson', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_13 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(36, 10, 'WolfMedia', 'Matthew Wilson', '2023-03-31');";
+
+    // TODO: Transactions - User pays WolfMedia - Subscriptions
     // endregion
     // region Insert Relationship Data
     //TODO: setup listens_to
     //TODO: setup subscribes_to
     //TODO: setup listens_to_p
     //TODO: setup user_pays
-    //TODO: setup pays_record
-    //TODO: setup pays_ph
-    //TODO: setup pays_artist
     public static final String INSERT_HOSTED_BY = "INSERT INTO hosted_by (podcast_id, user_id) VALUES(5001, 6001);";
     public static final String INSERT_RATED_1 = "INSERT INTO rates (user_id, podcast_id, rating) VALUES(8001, 5001, 5);";
     public static final String INSERT_RATED_2 = "INSERT INTO rates (user_id, podcast_id, rating) VALUES(8002, 5001, 4);";
@@ -108,5 +152,48 @@ public class SetupQuery {
     public static final String INSERT_HAS_4 = "INSERT INTO has (genre_id, song_id, album_id) VALUES(2, 1004, 4002);";
     public static final String INSERT_HAS_GENRE_1 = "INSERT INTO has_genre (genre_id, podcast_id) VALUES(3, 5001);";
     // no setup data required for sponsors and episode_has
+
+    // Payment relationship data
+    // January
+    public static final String INSERT_PAYS_RECORD_JAN_1 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1001, 4001, 1);";
+    public static final String INSERT_PAYS_RECORD_JAN_2 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1002, 4001, 2);";
+    public static final String INSERT_PAYS_RECORD_JAN_3 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 3);";
+    public static final String INSERT_PAYS_RECORD_JAN_4 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 4);";
+    public static final String INSERT_PAYS_ARTIST_JAN_1 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1001, 4001, 5);";
+    public static final String INSERT_PAYS_ARTIST_JAN_2 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1002, 4001, 6);";
+    public static final String INSERT_PAYS_ARTIST_JAN_3 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2002, 1002, 4001, 7);";
+    public static final String INSERT_PAYS_ARTIST_JAN_4 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3002, 2002, 1003, 4002, 8);";
+    public static final String INSERT_PAYS_ARTIST_JAN_5 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3002, 2002, 1004, 4002, 9);";
+    public static final String INSERT_PAYS_PODCAST_HOST_JAN_1 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7001, 5001, 6001, 10);";
+    public static final String INSERT_PAYS_PODCAST_HOST_JAN_2 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7002, 5001, 6001, 11);";
+
+    // February
+    public static final String INSERT_PAYS_RECORD_FEB_1 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1001, 4001, 12);";
+    public static final String INSERT_PAYS_RECORD_FEB_2 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1002, 4001, 13);";
+    public static final String INSERT_PAYS_RECORD_FEB_3 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 14);";
+    public static final String INSERT_PAYS_RECORD_FEB_4 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 15);";
+    public static final String INSERT_PAYS_ARTIST_FEB_1 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1001, 4001, 16);";
+    public static final String INSERT_PAYS_ARTIST_FEB_2 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1002, 4001, 17);";
+    public static final String INSERT_PAYS_ARTIST_FEB_3 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2002, 1002, 4001, 18);";
+    public static final String INSERT_PAYS_ARTIST_FEB_4 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3002, 2002, 1003, 4002, 19);";
+    public static final String INSERT_PAYS_ARTIST_FEB_5 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3002, 2002, 1004, 4002, 20);";
+    public static final String INSERT_PAYS_PODCAST_HOST_FEB_1 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7001, 5001, 6001, 21);";
+    public static final String INSERT_PAYS_PODCAST_HOST_FEB_2 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7002, 5001, 6001, 22);";
+    public static final String INSERT_PAYS_PODCAST_HOST_FEB_3 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7002, 5001, 6001, 23);";
+
+    // March
+    public static final String INSERT_PAYS_RECORD_MAR_1 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1001, 4001, 24);";
+    public static final String INSERT_PAYS_RECORD_MAR_2 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1002, 4001, 25);";
+    public static final String INSERT_PAYS_RECORD_MAR_3 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 26);";
+    public static final String INSERT_PAYS_RECORD_MAR_4 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 27);";
+    public static final String INSERT_PAYS_ARTIST_MAR_1 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1001, 4001, 28);";
+    public static final String INSERT_PAYS_ARTIST_MAR_2 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1002, 4001, 29);";
+    public static final String INSERT_PAYS_ARTIST_MAR_3 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2002, 1002, 4001, 30);";
+    public static final String INSERT_PAYS_ARTIST_MAR_4 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3002, 2002, 1003, 4002, 31);";
+    public static final String INSERT_PAYS_ARTIST_MAR_5 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3002, 2002, 1004, 4002, 32);";
+    public static final String INSERT_PAYS_PODCAST_HOST_MAR_1 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7001, 5001, 6001, 33);";
+    public static final String INSERT_PAYS_PODCAST_HOST_MAR_2 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7002, 5001, 6001, 34);";
+    public static final String INSERT_PAYS_PODCAST_HOST_MAR_3 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7002, 5001, 6001, 35);";
+    public static final String INSERT_PAYS_PODCAST_HOST_MAR_4 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7002, 5001, 6001, 36);";
     // endregion
 }
