@@ -38,5 +38,12 @@ public class UserController {
     @PostMapping("/add-podcast-host")
     public boolean addPodcastHost(@RequestBody PodcastHost podcastHost) { return userService.createNewPodcastHost(podcastHost); }
 
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Long id) { return userService.getUser(id); }
 
+    @GetMapping("/{id}/artist")
+    public Artist getArtist(@PathVariable Long id) { return userService.getArtist(id); }
+
+    @GetMapping("/{id}/podcast-host")
+    public PodcastHost getPodcastHost(@PathVariable Long id) { return userService.getPodcastHost(id); }
 }
