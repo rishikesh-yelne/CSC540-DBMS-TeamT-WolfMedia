@@ -32,12 +32,93 @@ public class UserService {
         return jdbcTemplate.query(OperationQuery.GET_ALL_USERS, BeanPropertyRowMapper.newInstance(User.class));
     }
 
+    public User getUser(Long id) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(OperationQuery.GET_USER_BY_ID);
+            statement.setLong(1, id);
+
+            ResultSet result = statement.executeQuery();
+            User user = new User();
+            while (result.next()) {
+                user.setUserId(result.getLong(1));
+                user.setFirstName(result.getString(2));
+                user.setLastName(result.getString(3));
+                user.setEmailId(result.getString(4));
+                user.setPhoneNum(result.getString(5));
+                user.setRegDate(result.getDate(6));
+            }
+            result.close();
+            statement.close();
+
+            return user;
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage(), ex);
+        }
+    }
+
     public List<Artist> getAllArtists() {
         return jdbcTemplate.query(OperationQuery.GET_ALL_ARTISTS, BeanPropertyRowMapper.newInstance(Artist.class));
     }
 
+    public Artist getArtist(Long id) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(OperationQuery.GET_ARTIST_BY_ID);
+            statement.setLong(1, id);
+
+            ResultSet result = statement.executeQuery();
+            Artist artist = new Artist();
+            while (result.next()) {
+                artist.setUserId(result.getLong(1));
+                artist.setFirstName(result.getString(2));
+                artist.setLastName(result.getString(3));
+                artist.setEmailId(result.getString(4));
+                artist.setPhoneNum(result.getString(5));
+                artist.setRegDate(result.getDate(6));
+                artist.setRecordLabelId(result.getLong(7));
+                artist.setPrimaryGenreId(result.getLong(8));
+                artist.setStatus(result.getString(9));
+                artist.setType(result.getString(10));
+                artist.setArtistCountry(result.getString(11));
+            }
+            result.close();
+            statement.close();
+
+            return artist;
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage(), ex);
+        }
+    }
+
     public List<PodcastHost> getAllPodcastHosts() {
         return jdbcTemplate.query(OperationQuery.GET_ALL_PODCAST_HOSTS, BeanPropertyRowMapper.newInstance(PodcastHost.class));
+    }
+
+    public PodcastHost getPodcastHost(Long id) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(OperationQuery.GET_PODCAST_HOST_BY_ID);
+            statement.setLong(1, id);
+
+            ResultSet result = statement.executeQuery();
+            PodcastHost podcastHost = new PodcastHost();
+            while (result.next()) {
+                podcastHost.setUserId(result.getLong(1));
+                podcastHost.setFirstName(result.getString(2));
+                podcastHost.setLastName(result.getString(3));
+                podcastHost.setEmailId(result.getString(4));
+                podcastHost.setPhoneNum(result.getString(5));
+                podcastHost.setRegDate(result.getDate(6));
+                podcastHost.setCity(result.getString(7));
+            }
+            result.close();
+            statement.close();
+
+            return podcastHost;
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage(), ex);
+        }
     }
 
     public Long createNewUser(User user) {
@@ -58,6 +139,8 @@ public class UserService {
             if (result.next()) {
                 return result.getLong(1);
             }
+            result.close();
+            statement.close();
             return -1L;
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);
