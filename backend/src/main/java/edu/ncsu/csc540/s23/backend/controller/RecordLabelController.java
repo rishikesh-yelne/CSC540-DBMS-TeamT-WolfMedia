@@ -2,9 +2,7 @@ package edu.ncsu.csc540.s23.backend.controller;
 
 import edu.ncsu.csc540.s23.backend.model.RecordLabel;
 import edu.ncsu.csc540.s23.backend.service.RecordLabelService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,4 +15,7 @@ public class RecordLabelController {
 
     @GetMapping("/all")
     public List<RecordLabel> getAllRecordLabels() { return recordLabelService.getAllRecordLabels(); }
+
+    @PostMapping("/add")
+    public Long addRecordLabel(@RequestBody RecordLabel recordLabel) { return recordLabelService.createNewRecordLabel(recordLabel); }
 }

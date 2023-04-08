@@ -17,6 +17,6 @@ public class GenreController {
     @GetMapping("/all")
     public List<Genre> getAllGenres() { return genreService.getAllGenres(); }
 
-    @PostMapping("/add-genre")
+    @PostMapping("/add")
     public Long addGenre(@RequestBody Genre genre) { return genreService.createNewGenre(genre); }
 }
