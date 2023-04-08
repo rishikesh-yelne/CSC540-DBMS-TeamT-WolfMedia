@@ -24,13 +24,11 @@ public class OperationQuery {
                     "FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +
                     "JOIN Record_Label rl ON pr.rlabel_id=rl.rlabel_id " +
                     "GROUP BY rl.rlabel_id, acc.payment_date ORDER BY rl.rlabel_id, acc.payment_date ASC";
-
     public static final String GET_PAYMENTS_TO_ARTISTS =
             "SELECT concat(artist.first_name, ' ', artist.last_name) as Artist, sum(acc.amount) as Amount, acc.payment_date as PaymentDate " +
                     "FROM Accounts acc JOIN pays_artist pa ON acc.transac_id=pa.transac_id " +
                     "JOIN User artist ON pa.user_id=artist.user_id " +
                     "GROUP BY artist.user_id, acc.payment_date ORDER BY artist.user_id, acc.payment_date ASC";
-
     public static final String GET_PAYMENTS_TO_PODCAST_HOSTS =
             "SELECT concat(phost.first_name, ' ', phost.last_name) as PodcastHost, sum(acc.amount) as Amount, acc.payment_date as PaymentDate " +
                     "FROM Accounts acc JOIN pays_ph pp ON acc.transac_id=pp.transac_id " +
