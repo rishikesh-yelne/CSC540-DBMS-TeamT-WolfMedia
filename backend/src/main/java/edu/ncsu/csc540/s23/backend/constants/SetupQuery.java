@@ -43,7 +43,7 @@ public class SetupQuery {
     public static final String CREATE_TABLE_PODCAST_EPISODE = "CREATE TABLE IF NOT EXISTS Podcast_Episode(pepi_id int NOT NULL AUTO_INCREMENT,podcast_id int,epi_title varchar(128) NOT NULL,prelease_date DATETIME NOT NULL,pduration time NOT NULL,adv_count int NOT NULL,episode_no int NOT NULL,PRIMARY KEY (pepi_id, podcast_id),UNIQUE(podcast_id, epi_title),FOREIGN KEY (`podcast_id`) REFERENCES `Podcast` (`podcast_id`) ON DELETE CASCADE);";
     public static final String CREATE_TABLE_GUEST_SPEAKER = "CREATE TABLE IF NOT EXISTS Guest_Speaker (gspeaker_id int NOT NULL AUTO_INCREMENT,gfirst_name varchar(64) NOT NULL,glast_name varchar(64) NOT NULL,gphone_num varchar(16) NOT NULL UNIQUE,gemail varchar(64) NOT NULL UNIQUE,gcity varchar(64) NOT NULL,PRIMARY KEY(gspeaker_id));";
     public static final String CREATE_TABLE_SPONSOR = "CREATE TABLE IF NOT EXISTS Sponsor (sponsor_id int NOT NULL AUTO_INCREMENT,sfirst_name varchar(64) NOT NULL,slast_name varchar(64) NOT NULL,organization varchar(128) NOT NULL,semail varchar(64) NOT NULL UNIQUE,scity varchar(64) NOT NULL,PRIMARY KEY(sponsor_id));";
-    public static final String CREATE_TABLE_ACCOUNTS = "CREATE TABLE IF NOT EXISTS Accounts (transac_id int NOT NULL AUTO_INCREMENT,amount DECIMAL NOT NULL,payee varchar(128) NOT NULL,payer varchar(128) NOT NULL,payment_date DATETIME NOT NULL,PRIMARY KEY(transac_id));";
+    public static final String CREATE_TABLE_ACCOUNTS = "CREATE TABLE IF NOT EXISTS Accounts (transac_id int NOT NULL AUTO_INCREMENT,amount DECIMAL(10,2) NOT NULL,payee varchar(128) NOT NULL,payer varchar(128) NOT NULL,payment_date DATETIME NOT NULL,PRIMARY KEY(transac_id));";
     public static final String CREATE_TABLE_HOSTED_BY = "CREATE TABLE IF NOT EXISTS hosted_by (podcast_id int NOT NULL,user_id int NOT NULL,PRIMARY KEY(podcast_id, user_id),FOREIGN KEY (`podcast_id`) REFERENCES `Podcast` (`podcast_id`) ON DELETE CASCADE,FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE);";
     public static final String CREATE_TABLE_SPONSORS = "CREATE TABLE IF NOT EXISTS sponsors (sponsor_id int NOT NULL,podcast_id int NOT NULL,PRIMARY KEY(podcast_id, sponsor_id),FOREIGN KEY (`sponsor_id`) REFERENCES `Sponsor` (`sponsor_id`) ON DELETE CASCADE,FOREIGN KEY (`podcast_id`) REFERENCES `Podcast` (`podcast_id`) ON DELETE CASCADE);";
     public static final String CREATE_TABLE_RATES = "CREATE TABLE IF NOT EXISTS rates (user_id int NOT NULL,podcast_id int NOT NULL,rating DECIMAL NOT NULL,PRIMARY KEY(podcast_id, user_id),FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE, FOREIGN KEY (`podcast_id`) REFERENCES `Podcast` (`podcast_id`) ON DELETE CASCADE);";
@@ -117,8 +117,8 @@ public class SetupQuery {
     // Transactions in March 2023
     public static final String INSERT_TRANSACTION_MAR_1 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(24, 3, 'WolfMedia', 'Elevate Records', '2023-03-31');";
     public static final String INSERT_TRANSACTION_MAR_2 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(25, 30, 'WolfMedia', 'Elevate Records', '2023-03-31');";
-    public static final String INSERT_TRANSACTION_MAR_3 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(26, 100, 'WolfMedia', 'Melodic Avenue Music', '2023-03-31');";
-    public static final String INSERT_TRANSACTION_MAR_4 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(27, 1000, 'WolfMedia', 'Melodic Avenue Music', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_3 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(26, 300, 'WolfMedia', 'Melodic Avenue Music', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_4 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(27, 3000, 'WolfMedia', 'Melodic Avenue Music', '2023-03-31');";
     public static final String INSERT_TRANSACTION_MAR_5 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(28, 2.1, 'Elevate Records', 'Forest F', '2023-03-31');";
     public static final String INSERT_TRANSACTION_MAR_6 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(29, 10.5, 'Elevate Records', 'Forest F', '2023-03-31');";
     public static final String INSERT_TRANSACTION_MAR_7 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(30, 10.5, 'Elevate Records', 'Rain R', '2023-03-31');";
@@ -158,7 +158,7 @@ public class SetupQuery {
     public static final String INSERT_PAYS_RECORD_JAN_1 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1001, 4001, 1);";
     public static final String INSERT_PAYS_RECORD_JAN_2 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1002, 4001, 2);";
     public static final String INSERT_PAYS_RECORD_JAN_3 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 3);";
-    public static final String INSERT_PAYS_RECORD_JAN_4 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 4);";
+    public static final String INSERT_PAYS_RECORD_JAN_4 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1004, 4002, 4);";
     public static final String INSERT_PAYS_ARTIST_JAN_1 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1001, 4001, 5);";
     public static final String INSERT_PAYS_ARTIST_JAN_2 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1002, 4001, 6);";
     public static final String INSERT_PAYS_ARTIST_JAN_3 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2002, 1002, 4001, 7);";
@@ -171,7 +171,7 @@ public class SetupQuery {
     public static final String INSERT_PAYS_RECORD_FEB_1 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1001, 4001, 12);";
     public static final String INSERT_PAYS_RECORD_FEB_2 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1002, 4001, 13);";
     public static final String INSERT_PAYS_RECORD_FEB_3 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 14);";
-    public static final String INSERT_PAYS_RECORD_FEB_4 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 15);";
+    public static final String INSERT_PAYS_RECORD_FEB_4 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1004, 4002, 15);";
     public static final String INSERT_PAYS_ARTIST_FEB_1 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1001, 4001, 16);";
     public static final String INSERT_PAYS_ARTIST_FEB_2 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1002, 4001, 17);";
     public static final String INSERT_PAYS_ARTIST_FEB_3 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2002, 1002, 4001, 18);";
@@ -185,7 +185,7 @@ public class SetupQuery {
     public static final String INSERT_PAYS_RECORD_MAR_1 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1001, 4001, 24);";
     public static final String INSERT_PAYS_RECORD_MAR_2 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1002, 4001, 25);";
     public static final String INSERT_PAYS_RECORD_MAR_3 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 26);";
-    public static final String INSERT_PAYS_RECORD_MAR_4 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1003, 4002, 27);";
+    public static final String INSERT_PAYS_RECORD_MAR_4 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3002, 1004, 4002, 27);";
     public static final String INSERT_PAYS_ARTIST_MAR_1 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1001, 4001, 28);";
     public static final String INSERT_PAYS_ARTIST_MAR_2 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2001, 1002, 4001, 29);";
     public static final String INSERT_PAYS_ARTIST_MAR_3 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3001, 2002, 1002, 4001, 30);";
