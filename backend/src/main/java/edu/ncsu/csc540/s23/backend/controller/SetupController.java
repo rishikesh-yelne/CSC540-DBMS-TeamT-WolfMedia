@@ -101,6 +101,12 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.INSERT_PODCAST_EPISODE_3);
             jdbcTemplate.execute(SetupQuery.INSERT_PODCAST_EPISODE_4);
             jdbcTemplate.execute(SetupQuery.INSERT_PODCAST_EPISODE_5);
+            jdbcTemplate.execute(SetupQuery.INSERT_GUEST_SPEAKER_1);
+            jdbcTemplate.execute(SetupQuery.INSERT_GUEST_SPEAKER_2);
+            jdbcTemplate.execute(SetupQuery.INSERT_GUEST_SPEAKER_3);
+            jdbcTemplate.execute(SetupQuery.INSERT_SPONSOR_1);
+            jdbcTemplate.execute(SetupQuery.INSERT_SPONSOR_2);
+
 
             // insert payment data
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_1);
