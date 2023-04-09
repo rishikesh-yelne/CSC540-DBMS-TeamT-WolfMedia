@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("podcast")
+@RequestMapping("/podcast")
 public class PodcastController {
 
     private PodcastService podcastService;
