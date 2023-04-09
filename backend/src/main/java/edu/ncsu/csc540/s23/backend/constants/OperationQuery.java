@@ -55,5 +55,7 @@ public class OperationQuery {
                     "FROM Accounts acc JOIN pays_ph pp ON acc.transac_id=pp.transac_id " +
                     "JOIN User phost ON pp.user_id=phost.user_id " +
                     "GROUP BY phost.user_id, acc.payment_date ORDER BY phost.user_id, acc.payment_date ASC";
-
+    public static final String CHECK_IF_RECORD_PAYMENT_EXISTS =
+            "SELECT count(pr.transac_id) > 0 FROM pays_record pr JOIN Accounts acc ON pr.transac_id=acc.transac_id " +
+                    "WHERE pr.rlabel_id=? AND pr.song_id=? AND pr.album_id=? AND month(acc.payment_date)=? AND year(acc.payment_date)=?;";
 }

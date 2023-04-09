@@ -1,15 +1,14 @@
 package edu.ncsu.csc540.s23.backend.controller;
 
 import edu.ncsu.csc540.s23.backend.model.dto.ArtistPaymentDTO;
+import edu.ncsu.csc540.s23.backend.model.dto.PayRecordDTO;
 import edu.ncsu.csc540.s23.backend.model.dto.PodcastHostPaymentDTO;
 import edu.ncsu.csc540.s23.backend.model.dto.RecordLabelPaymentDTO;
 import edu.ncsu.csc540.s23.backend.service.PaymentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/payments")
@@ -47,4 +46,12 @@ public class PaymentController {
 
     @GetMapping("/podcast-hosts")
     public List<PodcastHostPaymentDTO> getPaymentToPodcastHosts() { return this.paymentService.getPaymentToPodcastHosts(); }
+
+    @PostMapping("/pay-record-label")
+    public String payRecordLabel(
+            @RequestBody PayRecordDTO payment,
+            @RequestParam(required = false) Optional<Integer> month,
+            @RequestParam(required = false) Optional<Integer> year) {
+        return this.paymentService.payRecordLabel(payment, month, year);
+    }
 }
