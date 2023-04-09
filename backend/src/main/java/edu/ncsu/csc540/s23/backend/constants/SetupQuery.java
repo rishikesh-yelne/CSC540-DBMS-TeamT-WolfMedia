@@ -86,6 +86,11 @@ public class SetupQuery {
     public static final String INSERT_PODCAST_EPISODE_3 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7003, 5001, 'Being Successful', '2023-02-07', '00:43:25', 0, 2)";
     public static final String INSERT_PODCAST_EPISODE_4 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7004, 5001, 'Achieving Greater Heights', '2023-03-15', '00:51:07', 0, 2)";
     public static final String INSERT_PODCAST_EPISODE_5 = "INSERT INTO Podcast_Episode (pepi_id, podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES(7005, 5001, 'Challenge Yourself', '2023-04-10', '00:48:16', 0, 2)";
+    public static final String INSERT_GUEST_SPEAKER_1 = "INSERT INTO Guest_Speaker (gspeaker_id, gfirst_name, glast_name, gphone_num, gemail, gcity) VALUES(9001, 'Sam', 'S', '+1(919)123-0001', 'sam.s@ncsu.edu', 'Chicago')";
+    public static final String INSERT_GUEST_SPEAKER_2 = "INSERT INTO Guest_Speaker (gspeaker_id, gfirst_name, glast_name, gphone_num, gemail, gcity) VALUES(9002, 'Justin', 'J', '+1(919)123-0002', 'justin.j@ncsu.edu', 'Denver')";
+    public static final String INSERT_GUEST_SPEAKER_3 = "INSERT INTO Guest_Speaker (gspeaker_id, gfirst_name, glast_name, gphone_num, gemail, gcity) VALUES(9003, 'Kamal', 'K', '+1(919)123-0003', 'kamal.k@ncsu.edu', 'Atlanta')";
+    public static final String INSERT_SPONSOR_1 = "INSERT INTO Sponsor (sponsor_id, sfirst_name, slast_name, organization, semail, scity) VALUES(10001, 'Christine', 'C', '+1(919)456-0001', 'christine.c@ncsu.edu', 'Dallas')";
+    public static final String INSERT_SPONSOR_2 = "INSERT INTO Sponsor (sponsor_id, sfirst_name, slast_name, organization, semail, scity) VALUES(10002, 'Crystal', 'C', '+1(919)456-0002', 'crystal.c@ncsu.edu', 'Austin')";
 
     // Transactions in January 2023
     public static final String INSERT_TRANSACTION_JAN_1 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(1, 1, 'WolfMedia', 'Elevate Records', '2023-01-31');";
