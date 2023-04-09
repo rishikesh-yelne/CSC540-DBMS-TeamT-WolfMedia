@@ -8,6 +8,7 @@ public class OperationQuery {
     public static final String GET_ALL_GUESTSPEAKERS = "SELECT gspeaker_id as guestSpeakerId, gfirst_name as guestSpeakerFirstName, glast_name as guestSpeakerLastName, gphone_num as guestSpeakerPhoneNum, gemail as guestSpeakerEmail, gcity as guestSpeakerCity FROM Guest_Speaker ";
     public static final String GET_ALL_SPONSORS = "SELECT sponsor_id as sponsorId, sfirst_name as sponsorFirstName, slast_name as sponsorLastName, organization as organization, semail as sponsorEmail, scity as sponsorCity FROM Sponsor";
     public static final String GET_ALL_RECORD_LABELS = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label";
+    public static final String GET_ALL_PODCASTS = "SELECT pname as podcastName, planguage as podcastLanguage, country FROM Podcast";
     public static final String INSERT_USER = "INSERT INTO User (first_name, last_name, email_id, phone_num, reg_date) VALUES(?, ?, ?, ?, ?)";
     public static final String INSERT_ARTIST = "INSERT INTO Artist (user_id, rlabel_id, primary_genre_id, status, type, artist_country) VALUES(?, ?, ?, ?, ?, ?)";
     public static final String INSERT_PODCAST_HOST = "INSERT INTO Podcast_Host (user_id, city) VALUES(?, ?)";
@@ -20,6 +21,7 @@ public class OperationQuery {
     public static final String INSERT_GUESTSPEAKER = "INSERT INTO Guest_Speaker (gfirst_name, glast_name, gphone_num, gemail, gcity) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_SPONSOR = "INSERT INTO Sponsor (sfirst_name, slast_name, organization, semail, scity) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_RECORD_LABEL = "INSERT INTO Record_Label (rlabel_name) VALUES (?)";
+    public static final String INSERT_PODCAST = "INSERT INTO Podcast (pname, planguage, country) VALUES (?, ?, ?)";
     public static final String GET_PAYMENT_TO_RL_BY_ID =
             "SELECT sum(acc.amount)*0.3 FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +
                     "WHERE pr.rlabel_id = ? AND month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";
