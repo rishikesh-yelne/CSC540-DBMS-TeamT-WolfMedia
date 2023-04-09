@@ -2,6 +2,8 @@ package edu.ncsu.csc540.s23.backend.controller;
 
 import edu.ncsu.csc540.s23.backend.model.Song;
 import edu.ncsu.csc540.s23.backend.model.dto.ArtistSongDTO;
+import edu.ncsu.csc540.s23.backend.model.Sponsor;
+import edu.ncsu.csc540.s23.backend.model.User;
 import edu.ncsu.csc540.s23.backend.service.SongService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,9 @@ public class SongController {
 
     @GetMapping("/all")
     public List<Song> getAllSongs() { return songService.getAllSongs(); }
+
+    @GetMapping("/{id}")
+    public Song getSong(@PathVariable Long id) { return songService.getSong(id); }
 
     @PostMapping("/add")
     public Long addSong(@RequestBody Song song) { return songService.createNewSong(song); }

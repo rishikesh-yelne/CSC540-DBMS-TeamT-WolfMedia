@@ -1,6 +1,7 @@
 package edu.ncsu.csc540.s23.backend.model;
 
-import java.time.Instant;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Album {
 
@@ -8,7 +9,7 @@ public class Album {
 
     private String albumName;
 
-    private Instant releaseYear;
+    private int releaseYear;
 
     private String edition;
 
@@ -28,11 +29,11 @@ public class Album {
         this.albumName = albumName;
     }
 
-    public Instant getReleaseYear() {
+    public int getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(Instant releaseYear) {
+    public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
 
