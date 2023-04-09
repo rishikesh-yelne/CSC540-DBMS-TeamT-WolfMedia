@@ -6,7 +6,8 @@ public class OperationQuery {
     public static final String GET_ALL_PODCAST_HOSTS = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, city FROM User u JOIN Podcast_Host p ON u.user_id=p.user_id;";
     public static final String GET_ALL_GENRES = "SELECT genre_id, name, gtype as genreType FROM Genre";
     public static final String GET_ALL_GUESTSPEAKERS = "SELECT gspeaker_id as guestSpeakerId, gfirst_name as guestSpeakerFirstName, glast_name as guestSpeakerLastName, gphone_num as guestSpeakerPhoneNum, gemail as guestSpeakerEmail, gcity as guestSpeakerCity FROM Guest_Speaker ";
-    public static final String GET_ALL_SPONSORS = "SELECT sponsor_id as sponsorId, sfirst_name as sponsorFirstName, slast_name as sponsorLastName, organization as organization, semail as sponsorEmail, scity as sponsorCity FROM Sponsor";
+    public static final String GET_ALL_SPONSORS = "SELECT sponsor_id as sponsorId, sfirst_name as sponsorFirstName, slast_name as sponsorLastName, organization, semail as sponsorEmail, scity as sponsorCity FROM Sponsor";
+    public static final String GET_ALL_SONGS = "SELECT song_id as songId, album_id as albumId, title, duration, track_no as trackNo, release_date as releaseDate, release_country as releaseCountry, language, royalty_rate as royalty_rate FROM Song";
     public static final String GET_ALL_RECORD_LABELS = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label";
     public static final String GET_ALL_PODCASTS = "SELECT pname as podcastName, planguage as podcastLanguage, country FROM Podcast";
     public static final String INSERT_USER = "INSERT INTO User (first_name, last_name, email_id, phone_num, reg_date) VALUES(?, ?, ?, ?, ?)";
@@ -15,11 +16,13 @@ public class OperationQuery {
     public static final String GET_USER_BY_ID = "SELECT user_id, first_name, last_name, email_id, phone_num, reg_date FROM User WHERE user_id=?;";
     public static final String GET_GUEST_SPEAKER_BY_ID = "SELECT gspeaker_id, gfirst_name, glast_name, gphone_num, gemail, gcity FROM Guest_Speaker WHERE gspeaker_id=?;";
     public static final String GET_SPONSOR_BY_ID = "SELECT sponsor_id, sfirst_name, slast_name, organization, semail, scity FROM Sponsor WHERE sponsor_id=?;";
+    public static final String GET_SONG_BY_ID = "SELECT song_id, album_id, title, duration, track_no, release_date, release_country, language, royalty_rate FROM Song WHERE song_id=?;";
     public static final String GET_ARTIST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, rlabel_id as recordLabelId, primary_genre_id, status, type, artist_country FROM User u JOIN Artist a ON u.user_id=a.user_id WHERE u.user_id=?;";
     public static final String GET_PODCAST_HOST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, city FROM User u JOIN Podcast_Host p ON u.user_id=p.user_id WHERE u.user_id=?;";
     public static final String INSERT_GENRE = "INSERT INTO Genre (name, gtype) VALUES (?, ?)";
     public static final String INSERT_GUESTSPEAKER = "INSERT INTO Guest_Speaker (gfirst_name, glast_name, gphone_num, gemail, gcity) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_SPONSOR = "INSERT INTO Sponsor (sfirst_name, slast_name, organization, semail, scity) VALUES (?, ?, ?, ?, ?)";
+    public static final String INSERT_SONG = "INSERT INTO Song (album_id, title, duration, track_no, release_date, release_country, language, royalty_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String INSERT_RECORD_LABEL = "INSERT INTO Record_Label (rlabel_name) VALUES (?)";
     public static final String INSERT_PODCAST = "INSERT INTO Podcast (pname, planguage, country) VALUES (?, ?, ?)";
     public static final String GET_PAYMENT_TO_RL_BY_ID =
