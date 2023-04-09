@@ -16,6 +16,7 @@ public class OperationQuery {
     public static final String INSERT_ARTIST = "INSERT INTO Artist (user_id, rlabel_id, primary_genre_id, status, type, artist_country) VALUES(?, ?, ?, ?, ?, ?)";
     public static final String INSERT_PODCAST_HOST = "INSERT INTO Podcast_Host (user_id, city) VALUES(?, ?)";
     public static final String GET_USER_BY_ID = "SELECT user_id, first_name, last_name, email_id, phone_num, reg_date FROM User WHERE user_id=?;";
+    public static final String GET_GENRE_BY_ID = "SELECT genre_id, name, gtype as genreType FROM Genre WHERE genre_id=?;";
     public static final String GET_GUEST_SPEAKER_BY_ID = "SELECT gspeaker_id, gfirst_name, glast_name, gphone_num, gemail, gcity FROM Guest_Speaker WHERE gspeaker_id=?;";
     public static final String GET_SPONSOR_BY_ID = "SELECT sponsor_id, sfirst_name, slast_name, organization, semail, scity FROM Sponsor WHERE sponsor_id=?;";
     public static final String GET_SONG_BY_ID = "SELECT song_id, album_id, title, duration, track_no, release_date, release_country, language, royalty_rate FROM Song WHERE song_id=?;";
