@@ -8,6 +8,12 @@ public class OperationQuery {
     public static final String GET_ALL_GUESTSPEAKERS = "SELECT gspeaker_id as guestSpeakerId, gfirst_name as guestSpeakerFirstName, glast_name as guestSpeakerLastName, gphone_num as guestSpeakerPhoneNum, gemail as guestSpeakerEmail, gcity as guestSpeakerCity FROM Guest_Speaker ";
     public static final String GET_ALL_SPONSORS = "SELECT sponsor_id as sponsorId, sfirst_name as sponsorFirstName, slast_name as sponsorLastName, organization, semail as sponsorEmail, scity as sponsorCity FROM Sponsor";
     public static final String GET_ALL_SONGS = "SELECT song_id as songId, album_id as albumId, title, duration, track_no as trackNo, release_date as releaseDate, release_country as releaseCountry, language, royalty_rate as royalty_rate FROM Song";
+    public static final String GET_SONGS_BY_ARTIST_ID =
+            "SELECT song.song_id as songId, song.album_id as albumId, title, duration, track_no as trackNo, release_date as releaseDate, release_country as releaseCountry, language, royalty_rate as royalty_rate, pb.is_main as isMainArtist " +
+                    "FROM Song song JOIN performed_by pb ON song.song_id = pb.song_id AND song.album_id = pb.album_id WHERE pb.user_id = ?";
+    public static final String GET_SONGS_BY_ALBUM_ID =
+            "SELECT song_id as songId, album_id as albumId, title, duration, track_no as trackNo, release_date as releaseDate, release_country as releaseCountry, language, royalty_rate as royalty_rate " +
+                    "FROM Song WHERE album_id = ?";
     public static final String GET_ALL_RECORD_LABELS = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label";
     public static final String INSERT_USER = "INSERT INTO User (first_name, last_name, email_id, phone_num, reg_date) VALUES(?, ?, ?, ?, ?)";
     public static final String INSERT_ARTIST = "INSERT INTO Artist (user_id, rlabel_id, primary_genre_id, status, type, artist_country) VALUES(?, ?, ?, ?, ?, ?)";

@@ -2,7 +2,7 @@ package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.Song;
-import edu.ncsu.csc540.s23.backend.model.Sponsor;
+import edu.ncsu.csc540.s23.backend.model.dto.ArtistSongDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -86,5 +86,26 @@ public class SongService {
         }catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }
+    }
+
+    public List<ArtistSongDTO> getSongsByArtist(Long artistId) {
+        return jdbcTemplate.query(OperationQuery.GET_SONGS_BY_ARTIST_ID, (rs, rowNum) -> {
+            ArtistSongDTO song = new ArtistSongDTO();
+            song.setSongId(rs.getLong(1));
+            song.setAlbumId(rs.getLong(2));
+            song.setTitle(rs.getString(3));
+            song.setDuration(rs.getTime(4));
+            song.setTrackNo(rs.getLong(5));
+            song.setReleaseDate(rs.getDate(6));
+            song.setReleaseCountry(rs.getString(7));
+            song.setLanguage(rs.getString(8));
+            song.setRoyaltyRate(rs.getDouble(9));
+            song.setMainArtist(rs.getBoolean(10));
+            return song;
+        }, artistId);
+    }
+
+    public List<Song> getSongsByAlbum(Long albumId) {
+        return jdbcTemplate.query(OperationQuery.GET_SONGS_BY_ALBUM_ID, BeanPropertyRowMapper.newInstance(Song.class), albumId);
     }
 }
