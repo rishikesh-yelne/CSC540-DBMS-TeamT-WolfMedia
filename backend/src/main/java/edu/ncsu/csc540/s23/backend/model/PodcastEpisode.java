@@ -1,5 +1,6 @@
 package edu.ncsu.csc540.s23.backend.model;
 
+import java.sql.Date;
 import java.sql.Time;
 
 public class PodcastEpisode {
@@ -10,7 +11,7 @@ public class PodcastEpisode {
 
     private String episodeTitle;
 
-    private String podcastReleaseDate;
+    private Date podcastReleaseDate;
 
     private Time podcastDuration;
 
@@ -42,13 +43,11 @@ public class PodcastEpisode {
         this.episodeTitle = episodeTitle;
     }
 
-    public String getPodcastReleaseDate() {
+    public Date getPodcastReleaseDate() {
         return podcastReleaseDate;
     }
 
-    public void setPodcastReleaseDate(String podcastReleaseDate) {
-        this.podcastReleaseDate = podcastReleaseDate;
-    }
+    public void setPodcastReleaseDate(Date podcastReleaseDate) { this.podcastReleaseDate = podcastReleaseDate; }
 
     public Time getPodcastDuration() {
         return podcastDuration;
