@@ -1,7 +1,7 @@
 package edu.ncsu.csc540.s23.backend.model;
 
+import java.sql.Date;
 import java.sql.Time;
-import java.time.Instant;
 
 public class Song {
 
@@ -15,7 +15,7 @@ public class Song {
 
     private Long trackNo;
 
-    private Instant releaseDate;
+    private Date releaseDate;
 
     private String releaseCountry;
 
@@ -63,11 +63,11 @@ public class Song {
         this.trackNo = trackNo;
     }
 
-    public Instant getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Instant releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
