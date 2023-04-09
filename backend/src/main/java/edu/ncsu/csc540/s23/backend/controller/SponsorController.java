@@ -1,6 +1,7 @@
 package edu.ncsu.csc540.s23.backend.controller;
 
 import edu.ncsu.csc540.s23.backend.model.GuestSpeaker;
+import edu.ncsu.csc540.s23.backend.model.Song;
 import edu.ncsu.csc540.s23.backend.model.Sponsor;
 import edu.ncsu.csc540.s23.backend.service.GuestSpeakerService;
 import edu.ncsu.csc540.s23.backend.service.SponsorService;
@@ -18,6 +19,9 @@ public class SponsorController {
 
     @GetMapping("/all")
     public List<Sponsor> getAllSponsors() { return sponsorService.getAllSponsors(); }
+
+    @GetMapping("/{id}")
+    public Sponsor getSponsor(@PathVariable Long id) { return sponsorService.getSponsor(id); }
 
     @PostMapping("/add")
     public Long addSponsor(@RequestBody Sponsor sponsor) { return sponsorService.createNewSponsor(sponsor); }
