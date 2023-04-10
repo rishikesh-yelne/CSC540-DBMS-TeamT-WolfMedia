@@ -20,8 +20,8 @@ public class SongController {
     @GetMapping("/all")
     public List<Song> getAllSongs() { return songService.getAllSongs(); }
 
-    @GetMapping("/{id}")
-    public Song getSong(@PathVariable Long id) { return songService.getSong(id); }
+    @GetMapping()
+    public Song getSong(@RequestParam(name = "id") Long id, @RequestParam Long aid) { return songService.getSong(id, aid); }
 
     @PostMapping("/add")
     public Long addSong(@RequestBody Song song) { return songService.createNewSong(song); }
