@@ -21,7 +21,7 @@ public class SongController {
     public List<Song> getAllSongs() { return songService.getAllSongs(); }
 
     @GetMapping()
-    public Song getSong(@RequestParam(name = "id") Long id, @RequestParam Long aid) { return songService.getSong(id, aid); }
+    public Song getSong(@RequestParam(name = "song_id") Long song_id, @RequestParam Long album_id) { return songService.getSong(song_id, album_id); }
 
     @PostMapping("/add")
     public Long addSong(@RequestBody Song song) { return songService.createNewSong(song); }
@@ -31,4 +31,7 @@ public class SongController {
 
     @GetMapping("/album/{albumId}")
     public List<Song> getSongsByAlbum(@PathVariable Long albumId) { return songService.getSongsByAlbum(albumId); }
+
+    @PutMapping()
+    public boolean updateSong(@RequestBody Song song){return songService.updateSong(song);}
 }
