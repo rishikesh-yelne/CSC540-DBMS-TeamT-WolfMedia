@@ -24,7 +24,7 @@ public class OperationQuery {
     public static final String GET_USER_BY_ID = "SELECT user_id, first_name, last_name, email_id, phone_num, reg_date FROM User WHERE user_id=?;";
     public static final String GET_GUEST_SPEAKER_BY_ID = "SELECT gspeaker_id, gfirst_name, glast_name, gphone_num, gemail, gcity FROM Guest_Speaker WHERE gspeaker_id=?;";
     public static final String GET_SPONSOR_BY_ID = "SELECT sponsor_id, sfirst_name, slast_name, organization, semail, scity FROM Sponsor WHERE sponsor_id=?;";
-    public static final String GET_SONG_BY_ID = "SELECT song_id, album_id, title, duration, track_no, release_date, release_country, language, royalty_rate FROM Song WHERE song_id=?;";
+    public static final String GET_SONG_BY_ID = "SELECT song_id, album_id, title, duration, track_no, release_date, release_country, language, royalty_rate FROM Song WHERE song_id=? AND album_id=?;";
     public static final String GET_ALBUM_BY_ID = "SELECT album_id, album_name, release_year, edition FROM Album WHERE album_id=?;";
     public static final String GET_ARTIST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, rlabel_id as recordLabelId, primary_genre_id, status, type, artist_country FROM User u JOIN Artist a ON u.user_id=a.user_id WHERE u.user_id=?;";
     public static final String GET_PODCAST_HOST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, city FROM User u JOIN Podcast_Host p ON u.user_id=p.user_id WHERE u.user_id=?;";

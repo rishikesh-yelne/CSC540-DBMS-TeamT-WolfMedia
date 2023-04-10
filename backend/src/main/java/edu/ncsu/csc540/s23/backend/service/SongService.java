@@ -32,11 +32,12 @@ public class SongService {
         return jdbcTemplate.query(OperationQuery.GET_ALL_SONGS, BeanPropertyRowMapper.newInstance(Song.class));
     }
 
-    public Song getSong(Long id) {
+    public Song getSong(Long id, Long aid) {
         try {
             Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(OperationQuery.GET_SONG_BY_ID);
             statement.setLong(1, id);
+            statement.setLong(2, aid);
 
             ResultSet result = statement.executeQuery();
             Song song = new Song();
