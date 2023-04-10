@@ -53,4 +53,30 @@ public class PodcastService {
             throw new RuntimeException(ex.getMessage(), ex);
         }
     }
+
+    public Podcast getPodcast(Long id) {
+        try {
+            Connection connectoin = getConnection();
+            String[] generatedColumns = { "podcast_id" };
+            PreparedStatement statement = connectoin.prepareStatement(OperationQuery.GET_PODCAST_BY_ID, generatedColumns);
+            statement.setLong(1, id);
+
+            ResultSet result = statement.executeQuery();
+            Podcast podcast = new Podcast();
+            while( result.next()) {
+                podcast.setPodcastId(result.getLong(1));
+                podcast.setPodcastName(result.getString(2));
+                podcast.setPodcastLanguage(result.getString(3));
+                podcast.setCountry(result.getString(4));
+
+            }
+            result.close();
+            statement.close();
+
+            return podcast;
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

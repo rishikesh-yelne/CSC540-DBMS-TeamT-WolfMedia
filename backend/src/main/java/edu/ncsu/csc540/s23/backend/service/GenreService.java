@@ -74,4 +74,12 @@ public class GenreService {
             throw new RuntimeException(ex.getMessage(), ex);
         }
     }
+
+    public boolean updateGenre(Genre genre) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_GENRE, genre.getName(), genre.getGenreType(), genre.getGenreId()) > 0;
+    }
+
+    public boolean updateGenreName(Long id, String name) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_GENRE_NAME, name, id) > 0;
+    }
 }

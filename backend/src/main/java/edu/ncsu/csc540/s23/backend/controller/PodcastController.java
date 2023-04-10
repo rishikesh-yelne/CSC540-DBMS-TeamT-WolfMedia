@@ -17,6 +17,8 @@ public class PodcastController {
     @GetMapping("/all")
     public List<Podcast> getAllPodcasts() { return podcastService.getAllPodcasts(); }
 
+    @GetMapping("/{id}")
+    public Podcast getPodcast(@PathVariable Long id) { return podcastService.getPodcast(id); }
     @PostMapping("/add")
     public Long addPodcast(@RequestBody Podcast podcast) { return podcastService.createNewPodcast(podcast); }
 }
