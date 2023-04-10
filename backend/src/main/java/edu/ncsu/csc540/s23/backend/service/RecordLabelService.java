@@ -2,11 +2,13 @@ package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.RecordLabel;
+import org.apache.logging.log4j.message.ReusableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,4 +54,25 @@ public class RecordLabelService {
         }
     }
 
+    public RecordLabel getRecordLabel(Long id) {
+        try {
+            Connection connection = getConnection();
+            String[] generatedColumns = { "rlabel_id" };
+            PreparedStatement statement = connection.prepareStatement(OperationQuery.GET_RECORD_LABEL_ID, generatedColumns);
+            statement.setLong(1, id);
+
+            ResultSet result = statement.executeQuery();
+            RecordLabel recordLabel = new RecordLabel();
+            while(result.next()) {
+                recordLabel.setRecordLabelId(result.getLong(1));
+                recordLabel.setRecordLabelName(result.getString(2));
+            }
+            result.close();
+            statement.close();
+
+            return recordLabel;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

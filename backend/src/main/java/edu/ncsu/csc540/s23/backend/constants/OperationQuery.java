@@ -23,6 +23,7 @@ public class OperationQuery {
     public static final String GET_ALBUM_BY_ID = "SELECT album_id, album_name, release_year, edition FROM Album WHERE album_id=?;";
     public static final String GET_ARTIST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, rlabel_id as recordLabelId, primary_genre_id, status, type, artist_country FROM User u JOIN Artist a ON u.user_id=a.user_id WHERE u.user_id=?;";
     public static final String GET_PODCAST_HOST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, city FROM User u JOIN Podcast_Host p ON u.user_id=p.user_id WHERE u.user_id=?;";
+    public static final String GET_RECORD_LABEL_ID = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label WHERE rlabel_id=?;";
     public static final String INSERT_GENRE = "INSERT INTO Genre (name, gtype) VALUES (?, ?)";
     public static final String INSERT_GUESTSPEAKER = "INSERT INTO Guest_Speaker (gfirst_name, glast_name, gphone_num, gemail, gcity) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_SPONSOR = "INSERT INTO Sponsor (sfirst_name, slast_name, organization, semail, scity) VALUES (?, ?, ?, ?, ?)";
@@ -55,5 +56,6 @@ public class OperationQuery {
                     "FROM Accounts acc JOIN pays_ph pp ON acc.transac_id=pp.transac_id " +
                     "JOIN User phost ON pp.user_id=phost.user_id " +
                     "GROUP BY phost.user_id, acc.payment_date ORDER BY phost.user_id, acc.payment_date ASC";
+
 
 }
