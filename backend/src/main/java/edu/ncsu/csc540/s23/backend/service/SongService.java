@@ -109,4 +109,8 @@ public class SongService {
     public List<Song> getSongsByAlbum(Long albumId) {
         return jdbcTemplate.query(OperationQuery.GET_SONGS_BY_ALBUM_ID, BeanPropertyRowMapper.newInstance(Song.class), albumId);
     }
+
+    public Long getPlayCount(Long songId, Long albumId, int month, int year) {
+        return 0L;
+    }
 }

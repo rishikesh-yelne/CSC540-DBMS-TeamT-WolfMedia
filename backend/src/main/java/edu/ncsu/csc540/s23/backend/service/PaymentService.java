@@ -11,8 +11,10 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +23,12 @@ public class PaymentService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    private SongService songService;
+
+    public PaymentService(SongService songService) {
+        this.songService = songService;
+    }
 
     public Double getPaymentToRecordLabel(Long recordLabelId, int month, int year) {
         return jdbcTemplate.queryForObject(OperationQuery.GET_PAYMENT_TO_RL_BY_ID, Double.class, recordLabelId, month, year);
@@ -67,7 +75,26 @@ public class PaymentService {
         if (paymentExists) return "Payment already done for the month & year : " + Month.of(paymentMonth).name() + " " + paymentYear;
 
         // payment does not exist, calculate payment for the Song
+        Song song = this.songService.getSong(payment.getSongId(), payment.getAlbumId());
+        Long playCount = this.songService.getPlayCount(payment.getSongId(), payment.getAlbumId(), paymentMonth, paymentYear);
+
+        payment.setAmount(song.getRoyaltyRate()*playCount);
+        payment.setPaymentDate(Date.valueOf(LocalDate.of(paymentYear, paymentMonth, getLastDateOfMonth(paymentMonth, paymentYear))));
+        makePaymentToRecordLabel(payment);
         return "Payment successful";
+    }
+
+    private int getLastDateOfMonth(int month, int year) {
+        switch (month) {
+            case 1,3,5,7,8,10,12: return 31;
+            case 4,6,9,11: return 30;
+            case 2: return year % 4 == 0 ? 29 : 28;
+            default: return 28; // 28th would be present in all the months, safe case
+        }
+    }
+
+    private void makePaymentToRecordLabel(PayRecordDTO payment) {
+
     }
 
     private boolean checkIfRecordPaymentExists(Long recordLabelId, Long songId, Long albumId, int month, int year) {
