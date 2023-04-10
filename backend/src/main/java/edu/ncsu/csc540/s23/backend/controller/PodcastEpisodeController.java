@@ -19,4 +19,6 @@ public class PodcastEpisodeController {
     @PostMapping("/add")
     public Long addPodcastEpisode(@RequestBody PodcastEpisode podcastEpisode) { return podcastEpisodeService.createNewPodcastEpisode(podcastEpisode); }
 
+    @GetMapping("/podcast/{podcastId}")
+    public List<PodcastEpisode> getPodcastEpisodesByPodcast(@PathVariable Long podcastId) { return podcastEpisodeService.getPodcastEpisodesByPodcast(podcastId); }
 }
