@@ -79,4 +79,17 @@ public class OperationQuery {
                     "SET pname = ?, planguage = ?, country = ? " +
                     "WHERE podcast_id = ?;";
 
+    public static final String UPDATE_RECORD_LABEL =
+            "UPDATE Record_Label " +
+            "SET rlabel_name = ? " +
+            "WHERE rlabel_id = ?;";
+    public static final String UPDATE_PODCAST_EPISODE =
+            "UPDATE Podcast_Episode " +
+            "SET podcast_id = ?, epi_title = ?, prelease_date = ?, " +
+            "pduration = ?, adv_count = ?, episode_no = ? " +
+            "WHERE pepi_id = ?;";
+    public static final String UPDATE_PODCAST_EPISODE_PODCAST_ID =
+            "UPDATE Podcast_Episode " +
+            "SET podcast_id = ? " +
+            "WHERE pepi_id = ?";
 }

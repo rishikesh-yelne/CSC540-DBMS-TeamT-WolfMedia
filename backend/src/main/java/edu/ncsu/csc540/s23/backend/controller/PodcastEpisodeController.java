@@ -23,4 +23,10 @@ public class PodcastEpisodeController {
 
     @GetMapping("/podcast/{podcastId}")
     public List<PodcastEpisode> getPodcastEpisodesByPodcast(@PathVariable Long podcastId) { return podcastEpisodeService.getPodcastEpisodesByPodcast(podcastId); }
+
+    @PutMapping
+    public boolean updatePodcastEpisode(@RequestBody PodcastEpisode podcastEpisode) { return podcastEpisodeService.updatePodcastEpisode(podcastEpisode); }
+
+    @PatchMapping("/{podcastEpisodeId}")
+    public boolean updatePodcastEpisodePodcastId(@PathVariable Long podcastEpisodeId, @RequestBody Long podcastId ) { return podcastEpisodeService.updatePodcastEpisodePodcastId(podcastEpisodeId, podcastId); }
 }

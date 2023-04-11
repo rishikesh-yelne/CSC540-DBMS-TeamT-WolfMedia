@@ -21,4 +21,7 @@ public class RecordLabelController {
 
     @PostMapping("/add")
     public Long addRecordLabel(@RequestBody RecordLabel recordLabel) { return recordLabelService.createNewRecordLabel(recordLabel); }
+
+    @PutMapping()
+    public boolean updateRecordLabel(@RequestBody RecordLabel recordLabel) { return recordLabelService.updateRecordLabel(recordLabel); }
 }

@@ -27,7 +27,7 @@ public class PodcastEpisode {
         this.podcastEpisodeId = podcastEpisodeId;
     }
 
-    public Long getPodcastId() {
+    public long getPodcastId() {
         return podcastId;
     }
 

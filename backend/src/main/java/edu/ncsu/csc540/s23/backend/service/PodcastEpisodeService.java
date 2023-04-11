@@ -5,7 +5,6 @@ import edu.ncsu.csc540.s23.backend.model.PodcastEpisode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
@@ -74,5 +73,13 @@ public class PodcastEpisodeService {
     }
     public List<PodcastEpisode> getPodcastEpisodesByPodcast(Long podcastId) {
         return jdbcTemplate.query(OperationQuery.GET_PODCAST_EPISODES_BY_PODCAST, BeanPropertyRowMapper.newInstance(PodcastEpisode.class), podcastId);
+    }
+
+    public boolean updatePodcastEpisode(PodcastEpisode podcastEpisode) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST_EPISODE, podcastEpisode.getPodcastId(), podcastEpisode.getEpisodeTitle(), podcastEpisode.getPodcastReleaseDate(), podcastEpisode.getPodcastDuration(), podcastEpisode.getAdvertisementCount(), podcastEpisode.getEpisodeNo(), podcastEpisode.getPodcastEpisodeId())>0 ;
+    }
+
+    public boolean updatePodcastEpisodePodcastId(Long podcastEpisodeId, Long podcastId){
+        return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST_EPISODE_PODCAST_ID, podcastId, podcastEpisodeId) >0;
     }
 }

@@ -75,4 +75,9 @@ public class RecordLabelService {
             throw new RuntimeException(ex);
         }
     }
+
+    //update reecord label
+    public boolean updateRecordLabel(RecordLabel recordLabel) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_RECORD_LABEL, recordLabel.getRecordLabelName(), recordLabel.getRecordLabelId()) >0;
+    }
 }
