@@ -189,4 +189,9 @@ public class UserService {
         int rowsAffected = jdbcTemplate.update(OperationQuery.UPDATE_ARTIST, artist.getFirstName(), artist.getLastName(), artist.getEmailId(), artist.getPhoneNum(), artist.getRegDate(), artist.getRecordLabelId(), artist.getPrimaryGenreId(), artist.getStatus(), artist.getType(), artist.getArtistCountry(), artist.getUserId());
         return rowsAffected>0;
     }
+
+    public boolean updatePodcastHost(PodcastHost podcastHost){
+        int rowsAffected = jdbcTemplate.update(OperationQuery.UPDATE_PODCAST_HOST, podcastHost.getFirstName(), podcastHost.getLastName(), podcastHost.getEmailId(), podcastHost.getPhoneNum(), podcastHost.getRegDate(), podcastHost.getCity(), podcastHost.getUserId());
+        return rowsAffected>0;
+    }
 }
