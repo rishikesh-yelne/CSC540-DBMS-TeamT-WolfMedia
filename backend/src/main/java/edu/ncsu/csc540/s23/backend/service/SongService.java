@@ -32,12 +32,12 @@ public class SongService {
         return jdbcTemplate.query(OperationQuery.GET_ALL_SONGS, BeanPropertyRowMapper.newInstance(Song.class));
     }
 
-    public Song getSong(Long id, Long aid) {
+    public Song getSong(Long song_id, Long album_id) {
         try {
             Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(OperationQuery.GET_SONG_BY_ID);
-            statement.setLong(1, id);
-            statement.setLong(2, aid);
+            statement.setLong(1, song_id);
+            statement.setLong(2, album_id);
 
             ResultSet result = statement.executeQuery();
             Song song = new Song();
@@ -108,6 +108,11 @@ public class SongService {
 
     public List<Song> getSongsByAlbum(Long albumId) {
         return jdbcTemplate.query(OperationQuery.GET_SONGS_BY_ALBUM_ID, BeanPropertyRowMapper.newInstance(Song.class), albumId);
+    }
+
+    public boolean updateSong(Song song){
+        int rowsAffected = jdbcTemplate.update(OperationQuery.UPDATE_SONG, song.getTitle(), song.getDuration(), song.getTrackNo(), song.getReleaseDate(), song.getReleaseCountry(), song.getLanguage(), song.getRoyaltyRate(), song.getSongId(), song.getAlbumId());
+        return rowsAffected>0;
     }
 
     public Long getPlayCount(Long songId, Long albumId, int month, int year) {
