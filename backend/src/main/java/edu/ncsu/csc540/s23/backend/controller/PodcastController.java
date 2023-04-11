@@ -21,4 +21,7 @@ public class PodcastController {
     public Podcast getPodcast(@PathVariable Long id) { return podcastService.getPodcast(id); }
     @PostMapping("/add")
     public Long addPodcast(@RequestBody Podcast podcast) { return podcastService.createNewPodcast(podcast); }
+
+    @PutMapping()
+    public boolean updatePodcast(@RequestBody Podcast podcast) { return podcastService.updatePodcast(podcast); }
 }

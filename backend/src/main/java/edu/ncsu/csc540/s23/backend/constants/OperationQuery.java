@@ -66,4 +66,9 @@ public class OperationQuery {
             "UPDATE Genre " +
                     "SET name = ? " +
                     "WHERE genre_id = ?";
+    public static final String UPDATE_PODCAST =
+            "UPDATE Podcast " +
+                    "SET pname = ?, planguage = ?, country = ? " +
+                    "WHERE podcast_id = ?;";
+
 }

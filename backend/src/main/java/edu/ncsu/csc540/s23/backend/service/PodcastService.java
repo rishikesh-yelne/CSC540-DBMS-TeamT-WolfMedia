@@ -79,4 +79,10 @@ public class PodcastService {
             throw new RuntimeException(ex);
         }
     }
+
+    //update podcast
+    public boolean updatePodcast(Podcast podcast) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST, podcast.getPodcastName(), podcast.getPodcastLanguage(), podcast.getCountry(), podcast.getPodcastId()) >0 ;
+    }
+
 }
