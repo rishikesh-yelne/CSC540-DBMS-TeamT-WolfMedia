@@ -8,10 +8,17 @@ public class OperationQuery {
     public static final String GET_ALL_GUESTSPEAKERS = "SELECT gspeaker_id as guestSpeakerId, gfirst_name as guestSpeakerFirstName, glast_name as guestSpeakerLastName, gphone_num as guestSpeakerPhoneNum, gemail as guestSpeakerEmail, gcity as guestSpeakerCity FROM Guest_Speaker ";
     public static final String GET_ALL_SPONSORS = "SELECT sponsor_id as sponsorId, sfirst_name as sponsorFirstName, slast_name as sponsorLastName, organization, semail as sponsorEmail, scity as sponsorCity FROM Sponsor";
     public static final String GET_ALL_SONGS = "SELECT song_id as songId, album_id as albumId, title, duration, track_no as trackNo, release_date as releaseDate, release_country as releaseCountry, language, royalty_rate as royalty_rate FROM Song";
+    public static final String GET_SONGS_BY_ARTIST_ID =
+            "SELECT song.song_id as songId, song.album_id as albumId, title, duration, track_no as trackNo, release_date as releaseDate, release_country as releaseCountry, language, royalty_rate as royalty_rate, pb.is_main as isMainArtist " +
+                    "FROM Song song JOIN performed_by pb ON song.song_id = pb.song_id AND song.album_id = pb.album_id WHERE pb.user_id = ?";
+    public static final String GET_SONGS_BY_ALBUM_ID =
+            "SELECT song_id as songId, album_id as albumId, title, duration, track_no as trackNo, release_date as releaseDate, release_country as releaseCountry, language, royalty_rate as royalty_rate " +
+                    "FROM Song WHERE album_id = ?";
     public static final String GET_ALL_ALBUMS = "SELECT album_id as albumId, album_name as albumName, release_year as releaseYear, edition FROM Album";
     public static final String GET_ALL_RECORD_LABELS = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label";
     public static final String GET_ALL_PODCASTS = "SELECT podcast_id, pname as podcastName, planguage as podcastLanguage, country FROM Podcast";
     public static final String GET_ALL_PODCAST_EPISODES = "SELECT pepi_id as podcastEpisodeId, podcast_id, epi_title as episodeTitle, prelease_date as podcastReleaseDate, pduration as podcastDuration, adv_count as advertisementCount, episode_no FROM Podcast_Episode";
+    public static final String GET_PODCAST_EPISODES_BY_PODCAST = "SELECT pepi_id as podcastEpisodeId, podcast_id, epi_title as episodeTitle, prelease_date as podcastReleaseDate, pduration as podcastDuration, adv_count as advertisementCount, episode_no FROM Podcast_Episode WHERE podcast_id=?";
     public static final String INSERT_USER = "INSERT INTO User (first_name, last_name, email_id, phone_num, reg_date) VALUES(?, ?, ?, ?, ?)";
     public static final String INSERT_ARTIST = "INSERT INTO Artist (user_id, rlabel_id, primary_genre_id, status, type, artist_country) VALUES(?, ?, ?, ?, ?, ?)";
     public static final String INSERT_PODCAST_HOST = "INSERT INTO Podcast_Host (user_id, city) VALUES(?, ?)";
@@ -19,7 +26,7 @@ public class OperationQuery {
     public static final String GET_GENRE_BY_ID = "SELECT genre_id, name, gtype as genreType FROM Genre WHERE genre_id=?;";
     public static final String GET_GUEST_SPEAKER_BY_ID = "SELECT gspeaker_id, gfirst_name, glast_name, gphone_num, gemail, gcity FROM Guest_Speaker WHERE gspeaker_id=?;";
     public static final String GET_SPONSOR_BY_ID = "SELECT sponsor_id, sfirst_name, slast_name, organization, semail, scity FROM Sponsor WHERE sponsor_id=?;";
-    public static final String GET_SONG_BY_ID = "SELECT song_id, album_id, title, duration, track_no, release_date, release_country, language, royalty_rate FROM Song WHERE song_id=?;";
+    public static final String GET_SONG_BY_ID = "SELECT song_id, album_id, title, duration, track_no, release_date, release_country, language, royalty_rate FROM Song WHERE song_id=? AND album_id=?;";
     public static final String GET_ALBUM_BY_ID = "SELECT album_id, album_name, release_year, edition FROM Album WHERE album_id=?;";
     public static final String GET_ARTIST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, rlabel_id as recordLabelId, primary_genre_id, status, type, artist_country FROM User u JOIN Artist a ON u.user_id=a.user_id WHERE u.user_id=?;";
     public static final String GET_PODCAST_HOST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, city FROM User u JOIN Podcast_Host p ON u.user_id=p.user_id WHERE u.user_id=?;";
@@ -34,6 +41,7 @@ public class OperationQuery {
     public static final String INSERT_RECORD_LABEL = "INSERT INTO Record_Label (rlabel_name) VALUES (?)";
     public static final String INSERT_PODCAST = "INSERT INTO Podcast (pname, planguage, country) VALUES (?, ?, ?)";
     public static final String INSERT_PODCAST_EPISODE = "INSERT INTO Podcast_Episode (podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES (?, ?, ?, ?, ?, ?)";
+    public static final String UPDATE_SONG = "UPDATE Song SET title=?, duration=?, track_no=?, release_date=?, release_country=?, language=?, royalty_rate=? WHERE song_id=? AND album_id = ?";
     public static final String GET_PAYMENT_TO_RL_BY_ID =
             "SELECT sum(acc.amount)*0.3 FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +
                     "WHERE pr.rlabel_id = ? AND month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";

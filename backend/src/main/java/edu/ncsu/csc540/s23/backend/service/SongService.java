@@ -2,7 +2,7 @@ package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.Song;
-import edu.ncsu.csc540.s23.backend.model.Sponsor;
+import edu.ncsu.csc540.s23.backend.model.dto.ArtistSongDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,11 +32,12 @@ public class SongService {
         return jdbcTemplate.query(OperationQuery.GET_ALL_SONGS, BeanPropertyRowMapper.newInstance(Song.class));
     }
 
-    public Song getSong(Long id) {
+    public Song getSong(Long song_id, Long album_id) {
         try {
             Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(OperationQuery.GET_SONG_BY_ID);
-            statement.setLong(1, id);
+            statement.setLong(1, song_id);
+            statement.setLong(2, album_id);
 
             ResultSet result = statement.executeQuery();
             Song song = new Song();
@@ -86,5 +87,31 @@ public class SongService {
         }catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }
+    }
+
+    public List<ArtistSongDTO> getSongsByArtist(Long artistId) {
+        return jdbcTemplate.query(OperationQuery.GET_SONGS_BY_ARTIST_ID, (rs, rowNum) -> {
+            ArtistSongDTO song = new ArtistSongDTO();
+            song.setSongId(rs.getLong(1));
+            song.setAlbumId(rs.getLong(2));
+            song.setTitle(rs.getString(3));
+            song.setDuration(rs.getTime(4));
+            song.setTrackNo(rs.getLong(5));
+            song.setReleaseDate(rs.getDate(6));
+            song.setReleaseCountry(rs.getString(7));
+            song.setLanguage(rs.getString(8));
+            song.setRoyaltyRate(rs.getDouble(9));
+            song.setMainArtist(rs.getBoolean(10));
+            return song;
+        }, artistId);
+    }
+
+    public List<Song> getSongsByAlbum(Long albumId) {
+        return jdbcTemplate.query(OperationQuery.GET_SONGS_BY_ALBUM_ID, BeanPropertyRowMapper.newInstance(Song.class), albumId);
+    }
+
+    public boolean updateSong(Song song){
+        int rowsAffected = jdbcTemplate.update(OperationQuery.UPDATE_SONG, song.getTitle(), song.getDuration(), song.getTrackNo(), song.getReleaseDate(), song.getReleaseCountry(), song.getLanguage(), song.getRoyaltyRate(), song.getSongId(), song.getAlbumId());
+        return rowsAffected>0;
     }
 }
