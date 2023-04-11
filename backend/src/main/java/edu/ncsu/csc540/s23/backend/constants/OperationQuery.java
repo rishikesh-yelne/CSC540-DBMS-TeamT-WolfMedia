@@ -38,6 +38,9 @@ public class OperationQuery {
     public static final String INSERT_PODCAST = "INSERT INTO Podcast (pname, planguage, country) VALUES (?, ?, ?)";
     public static final String INSERT_PODCAST_EPISODE = "INSERT INTO Podcast_Episode (podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES (?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_SONG = "UPDATE Song SET title=?, duration=?, track_no=?, release_date=?, release_country=?, language=?, royalty_rate=? WHERE song_id=? AND album_id = ?";
+    public static final String UPDATE_ARTIST = "UPDATE User u JOIN Artist a ON u.user_id=a.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, rlabel_id=?, primary_genre_id=?, status=?, type=?, artist_country=? WHERE a.user_id=?";
+    public static final String UPDATE_PODCAST_HOST = "UPDATE User u JOIN Podcast_Host ph ON u.user_id=ph.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, city=? WHERE ph.user_id=?";
+
     public static final String GET_PAYMENT_TO_RL_BY_ID =
             "SELECT sum(acc.amount)*0.3 FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +
                     "WHERE pr.rlabel_id = ? AND month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";
