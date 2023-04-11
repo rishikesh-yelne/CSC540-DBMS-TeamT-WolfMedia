@@ -184,4 +184,9 @@ public class UserService {
             throw new RuntimeException(ex.getMessage(), ex);
         }
     }
+
+    public boolean updateArtist(Artist artist){
+        int rowsAffected = jdbcTemplate.update(OperationQuery.UPDATE_ARTIST, artist.getFirstName(), artist.getLastName(), artist.getEmailId(), artist.getPhoneNum(), artist.getRegDate(), artist.getRecordLabelId(), artist.getPrimaryGenreId(), artist.getStatus(), artist.getType(), artist.getArtistCountry(), artist.getUserId());
+        return rowsAffected>0;
+    }
 }

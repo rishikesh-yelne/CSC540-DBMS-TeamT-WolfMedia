@@ -46,4 +46,7 @@ public class UserController {
 
     @GetMapping("/{id}/podcast-host")
     public PodcastHost getPodcastHost(@PathVariable Long id) { return userService.getPodcastHost(id); }
+
+    @PutMapping()
+    public boolean updateArtist(@RequestBody Artist artist){return userService.updateArtist(artist);}
 }
