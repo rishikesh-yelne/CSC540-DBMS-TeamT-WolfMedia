@@ -57,4 +57,7 @@ public class PodcastEpisodeService {
         }
     }
 
+    public List<PodcastEpisode> getPodcastEpisodesByPodcast(Long podcastId) {
+        return jdbcTemplate.query(OperationQuery.GET_PODCAST_EPISODES_BY_PODCAST, BeanPropertyRowMapper.newInstance(PodcastEpisode.class), podcastId);
+    }
 }
