@@ -5,6 +5,7 @@ import edu.ncsu.csc540.s23.backend.model.Podcast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
@@ -53,4 +54,21 @@ public class PodcastService {
             throw new RuntimeException(ex.getMessage(), ex);
         }
     }
+
+    public Podcast getPodcast(Long id) {
+        return jdbcTemplate.queryForObject(OperationQuery.GET_PODCAST_BY_ID, (rs, rowNum) -> {
+            Podcast podcast = new Podcast();
+            podcast.setPodcastId(rs.getLong(1));
+            podcast.setPodcastName(rs.getString(2));
+            podcast.setPodcastLanguage(rs.getString(3));
+            podcast.setCountry(rs.getString(4));
+            return podcast;
+        }, id);
+    }
+
+    //update podcast
+    public boolean updatePodcast(Podcast podcast) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST, podcast.getPodcastName(), podcast.getPodcastLanguage(), podcast.getCountry(), podcast.getPodcastId()) >0 ;
+    }
+
 }
