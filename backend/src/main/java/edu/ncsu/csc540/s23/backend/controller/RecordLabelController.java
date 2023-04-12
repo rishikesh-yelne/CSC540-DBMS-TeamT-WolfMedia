@@ -16,6 +16,12 @@ public class RecordLabelController {
     @GetMapping("/all")
     public List<RecordLabel> getAllRecordLabels() { return recordLabelService.getAllRecordLabels(); }
 
+    @GetMapping("/{id}")
+    public RecordLabel getRecordLabel(@PathVariable Long id) { return recordLabelService.getRecordLabel(id); }
+
     @PostMapping("/add")
     public Long addRecordLabel(@RequestBody RecordLabel recordLabel) { return recordLabelService.createNewRecordLabel(recordLabel); }
+
+    @PutMapping()
+    public boolean updateRecordLabel(@RequestBody RecordLabel recordLabel) { return recordLabelService.updateRecordLabel(recordLabel); }
 }

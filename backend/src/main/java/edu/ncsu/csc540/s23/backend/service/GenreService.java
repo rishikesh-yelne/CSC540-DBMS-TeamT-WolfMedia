@@ -5,6 +5,7 @@ import edu.ncsu.csc540.s23.backend.model.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
@@ -50,5 +51,23 @@ public class GenreService {
         }catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }
+    }
+
+    public Genre getGenre(Long id) {
+        return jdbcTemplate.queryForObject(OperationQuery.GET_GENRE_BY_ID, (rs, rowNum) -> {
+            Genre genre = new Genre();
+            genre.setGenreId(rs.getLong(1));
+            genre.setName(rs.getString(2));
+            genre.setGenreType(rs.getString(3));
+            return genre;
+        }, id);
+    }
+
+    public boolean updateGenre(Genre genre) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_GENRE, genre.getName(), genre.getGenreType(), genre.getGenreId()) > 0;
+    }
+
+    public boolean updateGenreName(Long id, String name) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_GENRE_NAME, name, id) > 0;
     }
 }
