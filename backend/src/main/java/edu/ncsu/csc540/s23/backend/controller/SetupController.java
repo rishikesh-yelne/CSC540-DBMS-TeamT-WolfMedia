@@ -18,7 +18,7 @@ public class SetupController {
     public void initializeDatabase() {
         try {
             // drop existing tables
-            jdbcTemplate.execute(SetupQuery.DROP_TABLE_HOSTED_BY);
+//            jdbcTemplate.execute(SetupQuery.DROP_TABLE_HOSTED_BY);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_SPONSORS);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_RATES);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_CONTRIBUTED_TO);
@@ -59,7 +59,7 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_GUEST_SPEAKER);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_SPONSOR);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_ACCOUNTS);
-            jdbcTemplate.execute(SetupQuery.CREATE_TABLE_HOSTED_BY);
+//            jdbcTemplate.execute(SetupQuery.CREATE_TABLE_HOSTED_BY);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_SPONSORS);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_RATES);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_CONTRIBUTED_TO);
@@ -149,7 +149,7 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_13);
 
             // insert relationship data
-            jdbcTemplate.execute(SetupQuery.INSERT_HOSTED_BY);
+//            jdbcTemplate.execute(SetupQuery.INSERT_HOSTED_BY);
             jdbcTemplate.execute(SetupQuery.INSERT_RATED_1);
             jdbcTemplate.execute(SetupQuery.INSERT_RATED_2);
             jdbcTemplate.execute(SetupQuery.INSERT_CONTRIBUTED_TO_1);
