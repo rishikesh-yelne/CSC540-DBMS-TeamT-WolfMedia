@@ -35,6 +35,6 @@ public class SongController {
     @PutMapping()
     public boolean updateSong(@RequestBody Song song){return songService.updateSong(song);}
 
-    @DeleteMapping()
-    public boolean deleteSong(@RequestParam Long song_id){return songService.deleteSong(song_id);}
+    @DeleteMapping("{song_id}")
+    public boolean deleteSong(@PathVariable Long song_id){return songService.deleteSong(song_id);}
 }
