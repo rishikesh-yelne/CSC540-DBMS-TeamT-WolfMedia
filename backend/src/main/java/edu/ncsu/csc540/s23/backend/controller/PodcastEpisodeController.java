@@ -16,7 +16,7 @@ public class PodcastEpisodeController {
     @GetMapping("/all")
     public List<PodcastEpisode> getAllPodcastEpisodes() { return podcastEpisodeService.getAllPodcastEpisodes(); }
 
-    @GetMapping("/")
+    @GetMapping
     public PodcastEpisode getPodcastEpisode(@RequestParam(name="pepi_id") Long podcastEpisodeId, @RequestParam(name="podcast_id") Long podcastId) { return podcastEpisodeService.getPodcastEpisode(podcastEpisodeId,podcastId); }
     @PostMapping("/add")
     public Long addPodcastEpisode(@RequestBody PodcastEpisode podcastEpisode) { return podcastEpisodeService.createNewPodcastEpisode(podcastEpisode); }
@@ -27,6 +27,6 @@ public class PodcastEpisodeController {
     @PutMapping
     public boolean updatePodcastEpisode(@RequestBody PodcastEpisode podcastEpisode) { return podcastEpisodeService.updatePodcastEpisode(podcastEpisode); }
 
-    @PatchMapping("/{podcastEpisodeId}")
-    public boolean updatePodcastEpisodePodcastId(@PathVariable Long podcastEpisodeId, @RequestBody Long podcastId ) { return podcastEpisodeService.updatePodcastEpisodePodcastId(podcastEpisodeId, podcastId); }
+    @PatchMapping("/{podcastEpisodeId}/{podcastId}")
+    public boolean updatePodcastEpisodePodcastId(@PathVariable Long podcastEpisodeId, @PathVariable Long podcastId ) { return podcastEpisodeService.updatePodcastEpisodePodcastId(podcastEpisodeId, podcastId); }
 }
