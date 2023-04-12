@@ -1,9 +1,7 @@
 package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
-import edu.ncsu.csc540.s23.backend.model.Artist;
-import edu.ncsu.csc540.s23.backend.model.RecordLabel;
-import edu.ncsu.csc540.s23.backend.model.Song;
+import edu.ncsu.csc540.s23.backend.model.*;
 import edu.ncsu.csc540.s23.backend.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -35,14 +33,20 @@ public class PaymentService {
     private SongService songService;
     private RecordLabelService recordLabelService;
     private UserService userService;
+    private PodcastService podcastService;
+    private PodcastEpisodeService podcastEpisodeService;
 
     public PaymentService(
             SongService songService,
             RecordLabelService recordLabelService,
-            UserService userService) {
+            UserService userService,
+            PodcastService podcastService,
+            PodcastEpisodeService podcastEpisodeService) {
         this.songService = songService;
         this.recordLabelService = recordLabelService;
         this.userService = userService;
+        this.podcastService = podcastService;
+        this.podcastEpisodeService = podcastEpisodeService;
     }
 
     public Double getPaymentToRecordLabel(Long recordLabelId, int month, int year) {
@@ -296,9 +300,13 @@ public class PaymentService {
         return Boolean.TRUE.equals(jdbcTemplate.queryForObject(OperationQuery.CHECK_IF_ARTIST_PAYMENT_EXISTS, Boolean.class, artistId, songId, albumId, month, year));
     }
 
-//    public String payPodcastHost(Long podcastHostId, Optional<Integer> month, Optional<Integer> year) {
-//        return null;
-//    }
+    public String payPodcastHost(Long podcastHostId, Optional<Integer> month, Optional<Integer> year) {
+        List<Podcast> podcasts = this.podcastService.getPodcastsByPodcastHost(podcastHostId);
+        for (Podcast podcast: podcasts) {
+
+        }
+        return null;
+    }
 
     private int getLastDateOfMonth(int month, int year) {
         return switch (month) {

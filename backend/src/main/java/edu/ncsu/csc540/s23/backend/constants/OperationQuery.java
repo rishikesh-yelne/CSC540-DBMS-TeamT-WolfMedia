@@ -17,6 +17,7 @@ public class OperationQuery {
     public static final String GET_ALL_ALBUMS = "SELECT album_id as albumId, album_name as albumName, release_year as releaseYear, edition FROM Album";
     public static final String GET_ALL_RECORD_LABELS = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label";
     public static final String GET_ALL_PODCASTS = "SELECT podcast_id, pname as podcastName, planguage as podcastLanguage, country FROM Podcast";
+    public static final String GET_PODCAST_BY_PODCAST_HOST_ID = "SELECT podcast_id, pname as podcastName, planguage as podcastLanguage, country, user_id as podcastHostId FROM Podcast WHERE podcast_id=?;";
     public static final String GET_ALL_PODCAST_EPISODES = "SELECT pepi_id as podcastEpisodeId, podcast_id, epi_title as episodeTitle, prelease_date as podcastReleaseDate, pduration as podcastDuration, adv_count as advertisementCount, episode_no FROM Podcast_Episode";
     public static final String GET_PODCAST_EPISODES_BY_PODCAST = "SELECT pepi_id as podcastEpisodeId, podcast_id, epi_title as episodeTitle, prelease_date as podcastReleaseDate, pduration as podcastDuration, adv_count as advertisementCount, episode_no FROM Podcast_Episode WHERE podcast_id=?";
     public static final String INSERT_USER = "INSERT INTO User (first_name, last_name, email_id, phone_num, reg_date) VALUES(?, ?, ?, ?, ?)";
@@ -123,4 +124,8 @@ public class OperationQuery {
     public static final String DELETE_PODCAST_EPISODE = "DELETE FROM Podcast_Episode WHERE pepi_id = ?;";
     public static final String DELETE_ARTIST = "DELETE FROM Artist WHERE user_id = ?;";
     public static final String DELETE_PODCAST_HOST = "DELETE FROM Podcast_Host WHERE user_id = ?;";
+    public static final String ADD_SPONSOR_TO_PODCAST = "INSERT INTO sponsors (podcast_id, sponsor_id) VALUES(?, ?)";
+    public static final String GET_SPONSORS_OF_PODCAST =
+            "SELECT s.sponsor_id as sponsorId, sfirst_name as sponsorFirstName, slast_name as sponsorLastName, organization, semail as sponsorEmail, scity as sponsorCity " +
+                    "FROM Sponsor s JOIN sponsors ss ON s.sponsor_id = ss.sponsor_id WHERE ss.podcast_id = ?";
 }

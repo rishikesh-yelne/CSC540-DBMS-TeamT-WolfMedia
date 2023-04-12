@@ -2,6 +2,7 @@ package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.Podcast;
+import edu.ncsu.csc540.s23.backend.model.Sponsor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -71,4 +72,15 @@ public class PodcastService {
         return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST, podcast.getPodcastName(), podcast.getPodcastLanguage(), podcast.getCountry(), podcast.getPodcastId()) >0 ;
     }
 
+    public List<Podcast> getPodcastsByPodcastHost(Long podcastHostId) {
+        return jdbcTemplate.query(OperationQuery.GET_PODCAST_BY_PODCAST_HOST_ID, BeanPropertyRowMapper.newInstance(Podcast.class), podcastHostId);
+    }
+
+    public boolean addSponsorToPodcast(Long podcastId, Long sponsorId) {
+        return jdbcTemplate.update(OperationQuery.ADD_SPONSOR_TO_PODCAST, podcastId, sponsorId) > 0;
+    }
+
+    public List<Sponsor> getSponsorsOfPodcast(Long podcastId) {
+        return jdbcTemplate.query(OperationQuery.GET_SPONSORS_OF_PODCAST, BeanPropertyRowMapper.newInstance(Sponsor.class), podcastId);
+    }
 }
