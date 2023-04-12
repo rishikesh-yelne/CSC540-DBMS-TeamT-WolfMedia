@@ -1,9 +1,6 @@
 package edu.ncsu.csc540.s23.backend.controller;
 
-import edu.ncsu.csc540.s23.backend.model.dto.ArtistPaymentDTO;
-import edu.ncsu.csc540.s23.backend.model.dto.PayRecordDTO;
-import edu.ncsu.csc540.s23.backend.model.dto.PodcastHostPaymentDTO;
-import edu.ncsu.csc540.s23.backend.model.dto.RecordLabelPaymentDTO;
+import edu.ncsu.csc540.s23.backend.model.dto.*;
 import edu.ncsu.csc540.s23.backend.service.PaymentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,9 +46,25 @@ public class PaymentController {
 
     @PostMapping("/pay-record-label")
     public String payRecordLabel(
-            @RequestBody PayRecordDTO payment,
+            @RequestParam Long recordLabelId,
             @RequestParam(required = false) Optional<Integer> month,
             @RequestParam(required = false) Optional<Integer> year) {
-        return this.paymentService.payRecordLabel(payment, month, year);
+        return this.paymentService.payRecordLabel(recordLabelId, month, year);
     }
+
+    @PostMapping("/pay-artist")
+    public String payArtist(
+            @RequestParam Long artistId,
+            @RequestParam(required = false) Optional<Integer> month,
+            @RequestParam(required = false) Optional<Integer> year) {
+        return this.paymentService.payArtist(artistId, month, year);
+    }
+
+//    @PostMapping("/pay-podcast-host")
+//    public String payPodcastHost(
+//            @RequestParam Long podcastHostId,
+//            @RequestParam(required = false) Optional<Integer> month,
+//            @RequestParam(required = false) Optional<Integer> year) {
+//        return this.paymentService.payPodcastHost(podcastHostId, month, year);
+//    }
 }

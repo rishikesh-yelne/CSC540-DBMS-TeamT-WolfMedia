@@ -110,12 +110,20 @@ public class SongService {
         return jdbcTemplate.query(OperationQuery.GET_SONGS_BY_ALBUM_ID, BeanPropertyRowMapper.newInstance(Song.class), albumId);
     }
 
+    public List<Song> getSongsByRecordLabel(Long recordLabelId) {
+        return jdbcTemplate.query(OperationQuery.GET_SONGS_BY_RECORD_LABEL_ID, BeanPropertyRowMapper.newInstance(Song.class), recordLabelId);
+    }
+
     public boolean updateSong(Song song){
         int rowsAffected = jdbcTemplate.update(OperationQuery.UPDATE_SONG, song.getTitle(), song.getDuration(), song.getTrackNo(), song.getReleaseDate(), song.getReleaseCountry(), song.getLanguage(), song.getRoyaltyRate(), song.getSongId(), song.getAlbumId());
         return rowsAffected>0;
     }
 
     public Long getPlayCount(Long songId, Long albumId, int month, int year) {
-        return 0L;
+        return jdbcTemplate.queryForObject(OperationQuery.GET_SONG_PLAY_COUNT_FOR_MONTH, Long.class, songId, albumId, month, year);
+    }
+
+    public Long getArtistCount(Long songId, Long albumId) {
+        return jdbcTemplate.queryForObject(OperationQuery.GET_SONG_ARTIST_COUNT, Long.class, songId, albumId);
     }
 }

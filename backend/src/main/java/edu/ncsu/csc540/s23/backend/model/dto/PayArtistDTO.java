@@ -1,11 +1,10 @@
 package edu.ncsu.csc540.s23.backend.model.dto;
 
-import java.sql.Date;
-
-public class PayRecordDTO extends PaymentDTO {
+public class PayArtistDTO extends PaymentDTO {
     private Long recordLabelId;
     private Long songId;
     private Long albumId;
+    private Long artistId;
 
     public Long getRecordLabelId() {
         return recordLabelId;
@@ -29,5 +28,13 @@ public class PayRecordDTO extends PaymentDTO {
 
     public void setAlbumId(Long albumId) {
         this.albumId = albumId;
+    }
+
+    public Long getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(Long artistId) {
+        this.artistId = artistId;
     }
 }
