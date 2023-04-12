@@ -1,6 +1,7 @@
 package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
+import edu.ncsu.csc540.s23.backend.model.RecordLabel;
 import edu.ncsu.csc540.s23.backend.model.Song;
 import edu.ncsu.csc540.s23.backend.model.dto.ArtistPaymentDTO;
 import edu.ncsu.csc540.s23.backend.model.dto.PayRecordDTO;
@@ -11,10 +12,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +25,13 @@ public class PaymentService {
     private JdbcTemplate jdbcTemplate;
 
     private SongService songService;
+    private RecordLabelService recordLabelService;
 
-    public PaymentService(SongService songService) {
+    public PaymentService(
+            SongService songService,
+            RecordLabelService recordLabelService) {
         this.songService = songService;
+        this.recordLabelService = recordLabelService;
     }
 
     public Double getPaymentToRecordLabel(Long recordLabelId, int month, int year) {
@@ -77,24 +81,77 @@ public class PaymentService {
         // payment does not exist, calculate payment for the Song
         Song song = this.songService.getSong(payment.getSongId(), payment.getAlbumId());
         Long playCount = this.songService.getPlayCount(payment.getSongId(), payment.getAlbumId(), paymentMonth, paymentYear);
+        //RecordLabel recordLabel = this.recordLabelService.getRecordLabel(payment.getRecordLabelId());
 
+        payment.setPayer("WolfMedia");
+        //payment.setPayee(recordLabel.getRecordLabelName());
         payment.setAmount(song.getRoyaltyRate()*playCount);
         payment.setPaymentDate(Date.valueOf(LocalDate.of(paymentYear, paymentMonth, getLastDateOfMonth(paymentMonth, paymentYear))));
-        makePaymentToRecordLabel(payment);
-        return "Payment successful";
-    }
-
-    private int getLastDateOfMonth(int month, int year) {
-        switch (month) {
-            case 1,3,5,7,8,10,12: return 31;
-            case 4,6,9,11: return 30;
-            case 2: return year % 4 == 0 ? 29 : 28;
-            default: return 28; // 28th would be present in all the months, safe case
+        try {
+            makePaymentToRecordLabel(payment);
+            return "Payment successful";
+        } catch (SQLException sqlEx) {
+            return "Payment failed. Error : " + sqlEx.getMessage();
         }
     }
 
-    private void makePaymentToRecordLabel(PayRecordDTO payment) {
+    private int getLastDateOfMonth(int month, int year) {
+        return switch (month) {
+            case 1, 3, 5, 7, 8, 10, 12 -> 31;
+            case 4, 6, 9, 11 -> 30;
+            case 2 -> year % 4 == 0 ? 29 : 28;
+            default -> 28; // 28th would be present in all the months, safe case
+        };
+    }
 
+    private void makePaymentToRecordLabel(PayRecordDTO payment) throws SQLException {
+        String query_RecordLabel = OperationQuery.PAY_RECORD_LABEL_ACCOUNTS;
+        String[] generatedColumns = { "transac_id" };
+        String query_pays_record = OperationQuery.PAY_RECORD_LABEL;
+
+        Connection connection = ConnectionService.getConnection();
+
+        try (
+                PreparedStatement statement1 = connection.prepareStatement(query_RecordLabel, generatedColumns);
+                PreparedStatement statement2 = connection.prepareStatement(query_pays_record);
+                ) {
+            connection.setAutoCommit(false);
+
+            statement1.setDouble(1, payment.getAmount());
+            statement1.setString(2, payment.getPayer());
+            statement1.setString(3, payment.getPayee());
+            statement1.setDate(4, payment.getPaymentDate());
+
+            int rowsAffected1 = statement1.executeUpdate();
+            if (rowsAffected1 <= 0) throw new SQLException("Transaction failed");
+
+            Long transacId = -1L;
+            ResultSet result = statement1.getGeneratedKeys();
+            if (result.next()) {
+                 transacId = result.getLong(1);
+            }
+            result.close();
+
+            if (transacId == -1L) throw new SQLException("Transaction not created");
+
+            statement2.setLong(1, transacId);
+            statement2.setLong(2, payment.getRecordLabelId());
+            statement2.setLong(3, payment.getSongId());
+            statement2.setLong(4, payment.getAlbumId());
+
+            int rowsAffected2 = statement2.executeUpdate();
+            if (rowsAffected2 <= 0) throw new SQLException("Transaction failed");
+
+            connection.commit();
+        } catch (SQLException sqlEx) {
+            if (connection != null) {
+                connection.rollback();
+            }
+        } finally {
+            if (connection != null) {
+                connection.setAutoCommit(true);
+            }
+        }
     }
 
     private boolean checkIfRecordPaymentExists(Long recordLabelId, Long songId, Long albumId, int month, int year) {

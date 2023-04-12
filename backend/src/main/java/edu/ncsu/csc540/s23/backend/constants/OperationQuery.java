@@ -65,4 +65,8 @@ public class OperationQuery {
     public static final String CHECK_IF_RECORD_PAYMENT_EXISTS =
             "SELECT count(pr.transac_id) > 0 FROM pays_record pr JOIN Accounts acc ON pr.transac_id=acc.transac_id " +
                     "WHERE pr.rlabel_id=? AND pr.song_id=? AND pr.album_id=? AND month(acc.payment_date)=? AND year(acc.payment_date)=?;";
+    public static final String PAY_RECORD_LABEL_ACCOUNTS =
+            "INSERT INTO Accounts (amount, payer, payee, payment_date) VALUES (?, ?, ?, ?);";
+    public static final String PAY_RECORD_LABEL =
+            "INSERT INTO pays_record (transac_id, rlabel_id, song_id, album_id) VALUES (?, ?, ?, ?);";
 }
