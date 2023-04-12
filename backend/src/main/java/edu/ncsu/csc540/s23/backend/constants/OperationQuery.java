@@ -16,7 +16,7 @@ public class OperationQuery {
                     "FROM Song WHERE album_id = ?";
     public static final String GET_ALL_ALBUMS = "SELECT album_id as albumId, album_name as albumName, release_year as releaseYear, edition FROM Album";
     public static final String GET_ALL_RECORD_LABELS = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label";
-    public static final String GET_ALL_PODCASTS = "SELECT podcast_id, pname as podcastName, planguage as podcastLanguage, country FROM Podcast";
+    public static final String GET_ALL_PODCASTS = "SELECT podcast_id, user_id as podcastHostId, pname as podcastName, planguage as podcastLanguage, country FROM Podcast";
     public static final String GET_ALL_PODCAST_EPISODES = "SELECT pepi_id as podcastEpisodeId, podcast_id, epi_title as episodeTitle, prelease_date as podcastReleaseDate, pduration as podcastDuration, adv_count as advertisementCount, episode_no FROM Podcast_Episode";
     public static final String GET_PODCAST_EPISODES_BY_PODCAST = "SELECT pepi_id as podcastEpisodeId, podcast_id, epi_title as episodeTitle, prelease_date as podcastReleaseDate, pduration as podcastDuration, adv_count as advertisementCount, episode_no FROM Podcast_Episode WHERE podcast_id=?";
     public static final String INSERT_USER = "INSERT INTO User (first_name, last_name, email_id, phone_num, reg_date) VALUES(?, ?, ?, ?, ?)";
@@ -30,7 +30,7 @@ public class OperationQuery {
     public static final String GET_ALBUM_BY_ID = "SELECT album_id, album_name, release_year, edition FROM Album WHERE album_id=?;";
     public static final String GET_ARTIST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, rlabel_id as recordLabelId, primary_genre_id, status, type, artist_country FROM User u JOIN Artist a ON u.user_id=a.user_id WHERE u.user_id=?;";
     public static final String GET_PODCAST_HOST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, city FROM User u JOIN Podcast_Host p ON u.user_id=p.user_id WHERE u.user_id=?;";
-    public static final String GET_PODCAST_BY_ID = "SELECT podcast_id, pname as podcastName, planguage as podcastLanguage, country FROM Podcast WHERE podcast_id=?;";
+    public static final String GET_PODCAST_BY_ID = "SELECT podcast_id, user_id as podcastHostId, pname as podcastName, planguage as podcastLanguage, country FROM Podcast WHERE podcast_id=?;";
     public static final String GET_PODCAST_EPISODE_BY_ID = "SELECT pepi_id, podcast_id, epi_title as episodeTitle, prelease_date as podcastReleaseDate, pduration as podcastDuration, adv_count as advertisementCount, episode_no FROM Podcast_Episode WHERE pepi_id=? AND podcast_id=?;";
     public static final String GET_RECORD_LABEL_BY_ID = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label WHERE rlabel_id=?;";
     public static final String INSERT_GENRE = "INSERT INTO Genre (name, gtype) VALUES (?, ?)";
@@ -39,7 +39,7 @@ public class OperationQuery {
     public static final String INSERT_SONG = "INSERT INTO Song (album_id, title, duration, track_no, release_date, release_country, language, royalty_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String INSERT_ALBUM = "INSERT INTO Album (album_name, release_year, edition) VALUES (?, ?, ?)";
     public static final String INSERT_RECORD_LABEL = "INSERT INTO Record_Label (rlabel_name) VALUES (?)";
-    public static final String INSERT_PODCAST = "INSERT INTO Podcast (pname, planguage, country) VALUES (?, ?, ?)";
+    public static final String INSERT_PODCAST = "INSERT INTO Podcast (user_id, pname, planguage, country) VALUES (?, ?, ?, ?)";
     public static final String INSERT_PODCAST_EPISODE = "INSERT INTO Podcast_Episode (podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES (?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_SONG = "UPDATE Song SET title=?, duration=?, track_no=?, release_date=?, release_country=?, language=?, royalty_rate=? WHERE song_id=? AND album_id = ?";
     public static final String UPDATE_ARTIST = "UPDATE User u JOIN Artist a ON u.user_id=a.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, rlabel_id=?, primary_genre_id=?, status=?, type=?, artist_country=? WHERE a.user_id=?";
@@ -80,7 +80,7 @@ public class OperationQuery {
                     "WHERE genre_id = ?";
     public static final String UPDATE_PODCAST =
             "UPDATE Podcast " +
-                    "SET pname = ?, planguage = ?, country = ? " +
+                    "SET user_id =?, pname = ?, planguage = ?, country = ? " +
                     "WHERE podcast_id = ?;";
 
     public static final String UPDATE_RECORD_LABEL =
