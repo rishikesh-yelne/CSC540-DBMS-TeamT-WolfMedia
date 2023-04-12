@@ -125,5 +125,9 @@ public class SongService {
 
     public Long getArtistCount(Long songId, Long albumId) {
         return jdbcTemplate.queryForObject(OperationQuery.GET_SONG_ARTIST_COUNT, Long.class, songId, albumId);
+
+    public boolean deleteSong(Long song_id){
+        int rowsAffected=jdbcTemplate.update(OperationQuery.DELETE_SONG, song_id);
+        return rowsAffected>0;
     }
 }

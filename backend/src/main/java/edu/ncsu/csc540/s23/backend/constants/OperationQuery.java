@@ -44,6 +44,7 @@ public class OperationQuery {
     public static final String UPDATE_SONG = "UPDATE Song SET title=?, duration=?, track_no=?, release_date=?, release_country=?, language=?, royalty_rate=? WHERE song_id=? AND album_id = ?";
     public static final String UPDATE_ARTIST = "UPDATE User u JOIN Artist a ON u.user_id=a.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, rlabel_id=?, primary_genre_id=?, status=?, type=?, artist_country=? WHERE a.user_id=?";
     public static final String UPDATE_PODCAST_HOST = "UPDATE User u JOIN Podcast_Host ph ON u.user_id=ph.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, city=? WHERE ph.user_id=?";
+    public static final String DELETE_SONG = "DELETE FROM Song WHERE song_id=?;";
 
     public static final String GET_PAYMENT_TO_RL_BY_ID =
             "SELECT sum(acc.amount)*0.3 FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +
@@ -119,4 +120,7 @@ public class OperationQuery {
                     "WHERE a.rlabel_id=?;";
     public static final String PAY_ARTIST =
             "INSERT INTO pays_artist (transac_id, rlabel_id, user_id, song_id, album_id) VALUES (?, ?, ?, ?, ?);";
+    public static final String DELETE_PODCAST_EPISODE = "DELETE FROM Podcast_Episode WHERE pepi_id = ?;";
+    public static final String DELETE_ARTIST = "DELETE FROM Artist WHERE user_id = ?;";
+    public static final String DELETE_PODCAST_HOST = "DELETE FROM Podcast_Host WHERE user_id = ?;";
 }

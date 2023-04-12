@@ -91,6 +91,11 @@ public class UserService {
         }
     }
 
+    // delete artist
+    public boolean deleteArtist(Long id) {
+        return jdbcTemplate.update(OperationQuery.DELETE_ARTIST, id) >0;
+    }
+
     public List<PodcastHost> getAllPodcastHosts() {
         return jdbcTemplate.query(OperationQuery.GET_ALL_PODCAST_HOSTS, BeanPropertyRowMapper.newInstance(PodcastHost.class));
     }
@@ -193,5 +198,10 @@ public class UserService {
     public boolean updatePodcastHost(PodcastHost podcastHost){
         int rowsAffected = jdbcTemplate.update(OperationQuery.UPDATE_PODCAST_HOST, podcastHost.getFirstName(), podcastHost.getLastName(), podcastHost.getEmailId(), podcastHost.getPhoneNum(), podcastHost.getRegDate(), podcastHost.getCity(), podcastHost.getUserId());
         return rowsAffected>0;
+    }
+
+    //delete podcast host
+    public boolean deletePodcastHost(Long id) {
+        return jdbcTemplate.update(OperationQuery.DELETE_PODCAST_HOST, id) >0;
     }
 }
