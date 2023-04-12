@@ -29,4 +29,7 @@ public class PodcastEpisodeController {
 
     @PatchMapping("/{podcastEpisodeId}/{podcastId}")
     public boolean updatePodcastEpisodePodcastId(@PathVariable Long podcastEpisodeId, @PathVariable Long podcastId ) { return podcastEpisodeService.updatePodcastEpisodePodcastId(podcastEpisodeId, podcastId); }
+
+    @DeleteMapping("/{id}")
+    public boolean deletePodcastEpisode(@PathVariable Long id) { return podcastEpisodeService.deletePodcastEpisode(id); }
 }
