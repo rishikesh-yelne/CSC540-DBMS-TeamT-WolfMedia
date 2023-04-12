@@ -114,4 +114,9 @@ public class SongService {
         int rowsAffected = jdbcTemplate.update(OperationQuery.UPDATE_SONG, song.getTitle(), song.getDuration(), song.getTrackNo(), song.getReleaseDate(), song.getReleaseCountry(), song.getLanguage(), song.getRoyaltyRate(), song.getSongId(), song.getAlbumId());
         return rowsAffected>0;
     }
+
+    public boolean deleteSong(Long song_id){
+        int rowsAffected=jdbcTemplate.update(OperationQuery.DELETE_SONG, song_id);
+        return rowsAffected>0;
+    }
 }
