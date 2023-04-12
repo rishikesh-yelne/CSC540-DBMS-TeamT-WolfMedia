@@ -2,11 +2,13 @@ package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.RecordLabel;
+import org.apache.logging.log4j.message.ReusableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,4 +54,17 @@ public class RecordLabelService {
         }
     }
 
+    public RecordLabel getRecordLabel(Long id) {
+        return jdbcTemplate.queryForObject(OperationQuery.GET_RECORD_LABEL_BY_ID, (rs, rowNum) -> {
+            RecordLabel recordLabel = new RecordLabel();
+            recordLabel.setRecordLabelId(rs.getLong(1));
+            recordLabel.setRecordLabelName(rs.getString(2));
+            return recordLabel;
+        }, id);
+    }
+
+    //update record label
+    public boolean updateRecordLabel(RecordLabel recordLabel) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_RECORD_LABEL, recordLabel.getRecordLabelName(), recordLabel.getRecordLabelId()) >0;
+    }
 }

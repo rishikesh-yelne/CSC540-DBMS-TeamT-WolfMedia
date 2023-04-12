@@ -57,7 +57,29 @@ public class PodcastEpisodeService {
         }
     }
 
+    public PodcastEpisode getPodcastEpisode(Long podcastEpisodeId, Long podcastId) {
+        return jdbcTemplate.queryForObject(OperationQuery.GET_PODCAST_EPISODE_BY_ID, (rs, rowNum) -> {
+            PodcastEpisode episode = new PodcastEpisode();
+            episode.setPodcastEpisodeId(rs.getLong(1));
+            episode.setPodcastId(rs.getLong(2));
+            episode.setEpisodeTitle(rs.getString(3));
+            episode.setPodcastReleaseDate(rs.getDate(4));
+            episode.setPodcastDuration(rs.getTime(5));
+            episode.setAdvertisementCount(rs.getLong(6));
+            episode.setEpisodeNo(rs.getLong(7));
+
+            return episode;
+        }, podcastEpisodeId, podcastId);
+    }
     public List<PodcastEpisode> getPodcastEpisodesByPodcast(Long podcastId) {
         return jdbcTemplate.query(OperationQuery.GET_PODCAST_EPISODES_BY_PODCAST, BeanPropertyRowMapper.newInstance(PodcastEpisode.class), podcastId);
+    }
+
+    public boolean updatePodcastEpisode(PodcastEpisode podcastEpisode) {
+        return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST_EPISODE, podcastEpisode.getPodcastId(), podcastEpisode.getEpisodeTitle(), podcastEpisode.getPodcastReleaseDate(), podcastEpisode.getPodcastDuration(), podcastEpisode.getAdvertisementCount(), podcastEpisode.getEpisodeNo(), podcastEpisode.getPodcastEpisodeId())>0 ;
+    }
+
+    public boolean updatePodcastEpisodePodcastId(Long podcastEpisodeId, Long podcastId){
+        return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST_EPISODE_PODCAST_ID, podcastId, podcastEpisodeId) >0;
     }
 }
