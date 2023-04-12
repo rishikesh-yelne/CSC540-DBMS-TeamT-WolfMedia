@@ -82,4 +82,9 @@ public class PodcastEpisodeService {
     public boolean updatePodcastEpisodePodcastId(Long podcastEpisodeId, Long podcastId){
         return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST_EPISODE_PODCAST_ID, podcastId, podcastEpisodeId) >0;
     }
+
+    //delete podcast episode
+    public boolean deletePodcastEpisode(Long id) {
+        return jdbcTemplate.update(OperationQuery.DELETE_PODCAST_EPISODE, id) >0;
+    }
 }

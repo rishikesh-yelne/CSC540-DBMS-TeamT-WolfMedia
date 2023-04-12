@@ -96,4 +96,7 @@ public class OperationQuery {
             "UPDATE Podcast_Episode " +
             "SET podcast_id = ? " +
             "WHERE pepi_id = ?";
+    public static final String DELETE_PODCAST_EPISODE = "DELETE FROM Podcast_Episode WHERE pepi_id = ?;";
+    public static final String DELETE_ARTIST = "DELETE FROM Artist WHERE user_id = ?;";
+    public static final String DELETE_PODCAST_HOST = "DELETE FROM Podcast_Host WHERE user_id = ?;";
 }

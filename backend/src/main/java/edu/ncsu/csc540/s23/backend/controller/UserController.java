@@ -52,4 +52,12 @@ public class UserController {
 
     @PutMapping("update-podcast-host")
     public boolean updatePodcastHost(@RequestBody PodcastHost podcastHost){return userService.updatePodcastHost(podcastHost);}
+
+    //delete artist
+    @DeleteMapping("/{id}/artist")
+    public boolean deleteArtist(@PathVariable Long id) { return userService.deleteArtist(id); }
+
+    //delete podcast host
+    @DeleteMapping("/{id}/podcast-host")
+    public boolean deletePodcastHost(@PathVariable Long id) { return userService.deletePodcastHost(id); }
 }
