@@ -55,28 +55,15 @@ public class RecordLabelService {
     }
 
     public RecordLabel getRecordLabel(Long id) {
-        try {
-            Connection connection = getConnection();
-            String[] generatedColumns = { "rlabel_id" };
-            PreparedStatement statement = connection.prepareStatement(OperationQuery.GET_RECORD_LABEL_ID, generatedColumns);
-            statement.setLong(1, id);
-
-            ResultSet result = statement.executeQuery();
+        return jdbcTemplate.queryForObject(OperationQuery.GET_RECORD_LABEL_BY_ID, (rs, rowNum) -> {
             RecordLabel recordLabel = new RecordLabel();
-            while(result.next()) {
-                recordLabel.setRecordLabelId(result.getLong(1));
-                recordLabel.setRecordLabelName(result.getString(2));
-            }
-            result.close();
-            statement.close();
-
+            recordLabel.setRecordLabelId(rs.getLong(1));
+            recordLabel.setRecordLabelName(rs.getString(2));
             return recordLabel;
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
+        }, id);
     }
 
-    //update reecord label
+    //update record label
     public boolean updateRecordLabel(RecordLabel recordLabel) {
         return jdbcTemplate.update(OperationQuery.UPDATE_RECORD_LABEL, recordLabel.getRecordLabelName(), recordLabel.getRecordLabelId()) >0;
     }

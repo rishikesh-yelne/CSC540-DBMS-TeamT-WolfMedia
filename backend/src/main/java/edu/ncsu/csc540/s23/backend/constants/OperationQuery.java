@@ -32,7 +32,7 @@ public class OperationQuery {
     public static final String GET_PODCAST_HOST_BY_ID = "SELECT u.user_id as user_id, first_name, last_name, email_id, phone_num, reg_date, city FROM User u JOIN Podcast_Host p ON u.user_id=p.user_id WHERE u.user_id=?;";
     public static final String GET_PODCAST_BY_ID = "SELECT podcast_id, pname as podcastName, planguage as podcastLanguage, country FROM Podcast WHERE podcast_id=?;";
     public static final String GET_PODCAST_EPISODE_BY_ID = "SELECT pepi_id, podcast_id, epi_title as episodeTitle, prelease_date as podcastReleaseDate, pduration as podcastDuration, adv_count as advertisementCount, episode_no FROM Podcast_Episode WHERE pepi_id=? AND podcast_id=?;";
-    public static final String GET_RECORD_LABEL_ID = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label WHERE rlabel_id=?;";
+    public static final String GET_RECORD_LABEL_BY_ID = "SELECT rlabel_id as recordLabelId, rlabel_name as recordLabelName FROM Record_Label WHERE rlabel_id=?;";
     public static final String INSERT_GENRE = "INSERT INTO Genre (name, gtype) VALUES (?, ?)";
     public static final String INSERT_GUESTSPEAKER = "INSERT INTO Guest_Speaker (gfirst_name, glast_name, gphone_num, gemail, gcity) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_SPONSOR = "INSERT INTO Sponsor (sfirst_name, slast_name, organization, semail, scity) VALUES (?, ?, ?, ?, ?)";
