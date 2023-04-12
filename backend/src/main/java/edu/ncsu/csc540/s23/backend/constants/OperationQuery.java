@@ -96,6 +96,30 @@ public class OperationQuery {
             "UPDATE Podcast_Episode " +
             "SET podcast_id = ? " +
             "WHERE pepi_id = ?";
+    public static final String CHECK_IF_RECORD_PAYMENT_EXISTS =
+            "SELECT count(pr.transac_id) > 0 FROM pays_record pr JOIN Accounts acc ON pr.transac_id=acc.transac_id " +
+                    "WHERE pr.rlabel_id=? AND pr.song_id=? AND pr.album_id=? AND month(acc.payment_date)=? AND year(acc.payment_date)=?;";
+    public static final String CHECK_IF_ARTIST_PAYMENT_EXISTS =
+            "SELECT count(pa.transac_id) > 0 FROM pays_artist pa JOIN Accounts acc ON pa.transac_id=acc.transac_id " +
+                    "WHERE pa.user_id=? AND pa.song_id=? AND pa.album_id=? AND month(acc.payment_date)=? AND year(acc.payment_date)=?;";
+    public static final String INSERT_ACCOUNTS =
+            "INSERT INTO Accounts (amount, payer, payee, payment_date) VALUES (?, ?, ?, ?);";
+    public static final String PAY_RECORD_LABEL =
+            "INSERT INTO pays_record (transac_id, rlabel_id, song_id, album_id) VALUES (?, ?, ?, ?);";
+    public static final String GET_SONG_PLAY_COUNT_FOR_MONTH =
+            "SELECT COUNT(*) FROM listens_to " +
+                    "WHERE song_id=? AND album_id=? AND month(timestamp)=? AND year(timestamp)=?;";
+    public static final String GET_SONG_ARTIST_COUNT =
+            "SELECT COUNT(*) FROM performed_by " +
+                    "WHERE song_id=? AND album_id=?;";
+    public static final String GET_SONGS_BY_RECORD_LABEL_ID =
+            "SELECT s.song_id as songId, s.album_id as albumId, s.title, s.duration, s.track_no as trackNo, s.release_date as releaseDate, s.release_country as releaseCountry, s.language, s.royalty_rate as royalty_rate " +
+                    "FROM Song s " +
+                    "JOIN performed_by pb ON s.song_id = pb.song_id AND s.album_id = pb.album_id " +
+                    "JOIN Artist a ON pb.user_id = a.user_id " +
+                    "WHERE a.rlabel_id=?;";
+    public static final String PAY_ARTIST =
+            "INSERT INTO pays_artist (transac_id, rlabel_id, user_id, song_id, album_id) VALUES (?, ?, ?, ?, ?);";
     public static final String DELETE_PODCAST_EPISODE = "DELETE FROM Podcast_Episode WHERE pepi_id = ?;";
     public static final String DELETE_ARTIST = "DELETE FROM Artist WHERE user_id = ?;";
     public static final String DELETE_PODCAST_HOST = "DELETE FROM Podcast_Host WHERE user_id = ?;";
