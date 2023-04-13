@@ -42,6 +42,6 @@ public class SongController {
     @PostMapping("/add-genre")
     public boolean assignGenreToSong(@RequestParam Long id, @RequestParam Long song_id, @RequestParam Long album_id) { return songService.assignGenreToSong(id, song_id, album_id); }
 
-    @GetMapping("/has_genre")
+    @GetMapping("/genre")
     public List<Genre> getGenreOfSong(@RequestParam Long songId, @RequestParam Long albumId) { return songService.getGenreOfSong(songId, albumId); }
 }
