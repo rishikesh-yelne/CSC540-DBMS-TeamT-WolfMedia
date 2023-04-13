@@ -62,7 +62,7 @@ public class SetupController {
 //            jdbcTemplate.execute(SetupQuery.CREATE_TABLE_HOSTED_BY);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_SPONSORS);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_RATES);
-            jdbcTemplate.execute(SetupQuery.CREATE_TABLE_CONTRIBUTED_TO);
+//            jdbcTemplate.execute(SetupQuery.CREATE_TABLE_CONTRIBUTED_TO);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_PERFORMED_BY);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_LISTENS_TO);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_SUBSCRIBES_TO);
@@ -152,8 +152,8 @@ public class SetupController {
 //            jdbcTemplate.execute(SetupQuery.INSERT_HOSTED_BY);
             jdbcTemplate.execute(SetupQuery.INSERT_RATED_1);
             jdbcTemplate.execute(SetupQuery.INSERT_RATED_2);
-            jdbcTemplate.execute(SetupQuery.INSERT_CONTRIBUTED_TO_1);
-            jdbcTemplate.execute(SetupQuery.INSERT_CONTRIBUTED_TO_2);
+//            jdbcTemplate.execute(SetupQuery.INSERT_CONTRIBUTED_TO_1);
+//            jdbcTemplate.execute(SetupQuery.INSERT_CONTRIBUTED_TO_2);
             jdbcTemplate.execute(SetupQuery.INSERT_PERFORMED_BY_1);
             jdbcTemplate.execute(SetupQuery.INSERT_PERFORMED_BY_2);
             jdbcTemplate.execute(SetupQuery.INSERT_PERFORMED_BY_3);

@@ -13,17 +13,23 @@ public class AlbumController {
 
     private AlbumService albumService;
 
-    public AlbumController(AlbumService albumService) { this.albumService = albumService;}
+    public AlbumController(AlbumService albumService) {
+        this.albumService = albumService;
+    }
 
     @GetMapping("/all")
-    public List<Album> getAllAlbums() { return albumService.getAllAlbums(); }
+    public List<Album> getAllAlbums() {
+        return albumService.getAllAlbums();
+    }
 
     @GetMapping("/{id}")
-    public Album getAlbum(@PathVariable Long id) { return albumService.getAlbum(id); }
+    public Album getAlbum(@PathVariable Long id) {
+        return albumService.getAlbum(id);
+    }
 
     @PostMapping("/add")
-    public Long addAlbum(@RequestBody Album album) { return albumService.createNewAlbum(album); }
+    public Long addAlbum(@RequestBody Album album) {
+        return albumService.createNewAlbum(album);
+    }
 
-    @PatchMapping("/{artistId}/{albumId}")
-    public boolean assignArtistToAlbum(@PathVariable Long artistId, @PathVariable Long albumId){return albumService.assignArtistToAlbum(albumId, artistId);}
 }

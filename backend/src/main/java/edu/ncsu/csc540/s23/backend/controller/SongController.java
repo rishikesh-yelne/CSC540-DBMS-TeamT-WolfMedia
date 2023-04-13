@@ -37,4 +37,7 @@ public class SongController {
 
     @DeleteMapping("/{song_id}")
     public boolean deleteSong(@PathVariable Long song_id){return songService.deleteSong(song_id);}
+
+    @PatchMapping()
+    public boolean assignArtistToSong(@RequestParam(name = "song_id") Long song_id, @RequestParam Long album_id, @RequestParam() Long user_id, @RequestParam Long is_main){return songService.assignArtistToSong(song_id, album_id, user_id, is_main);}
 }
