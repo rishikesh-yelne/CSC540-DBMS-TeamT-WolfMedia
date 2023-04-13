@@ -77,4 +77,8 @@ public class AlbumService {
             throw new RuntimeException(ex.getMessage(), ex);
         }
     }
+
+    public boolean assignArtistToAlbum(Long artistId, Long albumId){
+        return jdbcTemplate.update(OperationQuery.ASSIGN_ARTIST_TO_ALBUM, artistId, albumId)>0;
+    }
 }

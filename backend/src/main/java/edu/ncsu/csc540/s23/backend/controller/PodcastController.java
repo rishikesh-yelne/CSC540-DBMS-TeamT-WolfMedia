@@ -12,19 +12,28 @@ public class PodcastController {
 
     private PodcastService podcastService;
 
-    public PodcastController(PodcastService podcastService) { this.podcastService = podcastService; }
+    public PodcastController(PodcastService podcastService) {
+        this.podcastService = podcastService;
+    }
 
     @GetMapping("/all")
-    public List<Podcast> getAllPodcasts() { return podcastService.getAllPodcasts(); }
+    public List<Podcast> getAllPodcasts() {
+        return podcastService.getAllPodcasts();
+    }
 
     @GetMapping("/{id}")
-    public Podcast getPodcast(@PathVariable Long id) { return podcastService.getPodcast(id); }
+    public Podcast getPodcast(@PathVariable Long id) {
+        return podcastService.getPodcast(id);
+    }
+
     @PostMapping("/add")
-    public Long addPodcast(@RequestBody Podcast podcast) { return podcastService.createNewPodcast(podcast); }
+    public Long addPodcast(@RequestBody Podcast podcast) {
+        return podcastService.createNewPodcast(podcast);
+    }
 
     @PutMapping()
-    public boolean updatePodcast(@RequestBody Podcast podcast) { return podcastService.updatePodcast(podcast); }
+    public boolean updatePodcast(@RequestBody Podcast podcast) {
+        return podcastService.updatePodcast(podcast);
+    }
 
-    @PatchMapping("/{podcast_id}/{podcast_host_id}")
-    public boolean assignPodcastHost(@PathVariable Long podcast_id, @PathVariable Long podcast_host_id){return podcastService.assignPodcastHost(podcast_id, podcast_host_id);}
 }
