@@ -2,10 +2,12 @@ package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.Podcast;
+import edu.ncsu.csc540.s23.backend.model.User;
 import edu.ncsu.csc540.s23.backend.model.Sponsor;
 import edu.ncsu.csc540.s23.backend.model.dto.PodcastRatingDTO;
 import edu.ncsu.csc540.s23.backend.model.relationships.Rates;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class PodcastService {
@@ -23,12 +26,18 @@ public class PodcastService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    private UserService userService;
+
     private Connection getConnection() {
         try {
             return jdbcTemplate.getDataSource().getConnection();
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }
+    }
+
+    public PodcastService(UserService userService) {
+        this.userService = userService;
     }
 
     public List<Podcast> getAllPodcasts() {
@@ -45,6 +54,7 @@ public class PodcastService {
             statement.setString(2, podcast.getPodcastName());
             statement.setString(3, podcast.getPodcastLanguage());
             statement.setString(4,podcast.getCountry());
+            statement.setDouble(5, podcast.getFlatFee());
 
             int rowsAffected = statement.executeUpdate();
             if(rowsAffected <= 0) throw new SQLException("Podcast creation failed");
@@ -68,6 +78,7 @@ public class PodcastService {
             podcast.setPodcastName(rs.getString(3));
             podcast.setPodcastLanguage(rs.getString(4));
             podcast.setCountry(rs.getString(5));
+            podcast.setFlatFee(rs.getDouble(6));
             return podcast;
         }, id);
     }
@@ -107,4 +118,28 @@ public class PodcastService {
     public List<PodcastRatingDTO> getPodcastRatings() {
         return jdbcTemplate.query(OperationQuery.GET_PODCAST_RATINGS, BeanPropertyRowMapper.newInstance(PodcastRatingDTO.class));
     }
+    //increment subscriber count by 1
+    public boolean incrementSubscriberCount(Long userId, Long podcastId) {
+        return jdbcTemplate.update(OperationQuery.INSERT_SUBSCRIBES_TO, userId, podcastId) > 0;
+    }
+
+    //increment subscriber count by X
+//    public boolean updateSubscriberCount(Long podcastId, Long count) {
+//        List<User> users = this.userService.getAllUsers();
+//
+//        int[] rowsAffected = jdbcTemplate.batchUpdate(OperationQuery.INSERT_SUBSCRIBES_TO, new BatchPreparedStatementSetter() {
+//            @Override
+//            public void setValues(PreparedStatement ps, int i) throws SQLException {
+//                Random rand = new Random();
+//                ps.setLong(1, users.get(rand.nextInt(users.size())).getUserId());
+//                ps.setLong(2, podcastId);
+//            }
+//
+//            @Override
+//            public int getBatchSize() {
+//                return Math.toIntExact(count);
+//            }
+//        });
+//        return rowsAffected.length>0;
+//    }
 }

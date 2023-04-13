@@ -43,8 +43,11 @@ public class OperationQuery {
     public static final String INSERT_SONG = "INSERT INTO Song (album_id, title, duration, track_no, release_date, release_country, language, royalty_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String INSERT_ALBUM = "INSERT INTO Album (album_name, release_year, edition) VALUES (?, ?, ?)";
     public static final String INSERT_RECORD_LABEL = "INSERT INTO Record_Label (rlabel_name) VALUES (?)";
-    public static final String INSERT_PODCAST = "INSERT INTO Podcast (user_id, pname, planguage, country) VALUES (?, ?, ?, ?)";
+    public static final String INSERT_PODCAST = "INSERT INTO Podcast (user_id, pname, planguage, country, flat_fee) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_PODCAST_EPISODE = "INSERT INTO Podcast_Episode (podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES (?, ?, ?, ?, ?, ?)";
+    public static final String INSERT_LISTENS_TO = "INSERT INTO listens_to (song_id, album_id, user_id, timestamp) VALUES (?, ?, ?, ?);";
+    public static final String INSERT_LISTENS_TO_P = "INSERT INTO listens_to_p (user_id, pepi_id, podcast_id, ptimestamp) VALUES (?, ?, ?, ?);";
+    public static final String INSERT_SUBSCRIBES_TO = "INSERT INTO subscribes_to (user_id, podcast_id) VALUES (?, ?);";
     public static final String UPDATE_SONG = "UPDATE Song SET title=?, duration=?, track_no=?, release_date=?, release_country=?, language=?, royalty_rate=? WHERE song_id=? AND album_id = ?";
     public static final String UPDATE_ARTIST = "UPDATE User u JOIN Artist a ON u.user_id=a.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, rlabel_id=?, primary_genre_id=?, status=?, type=?, artist_country=? WHERE a.user_id=?";
     public static final String UPDATE_PODCAST_HOST = "UPDATE User u JOIN Podcast_Host ph ON u.user_id=ph.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, city=? WHERE ph.user_id=?";

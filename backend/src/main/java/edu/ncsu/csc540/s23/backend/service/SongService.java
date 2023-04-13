@@ -3,23 +3,29 @@ package edu.ncsu.csc540.s23.backend.service;
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.Genre;
 import edu.ncsu.csc540.s23.backend.model.Song;
+import edu.ncsu.csc540.s23.backend.model.User;
 import edu.ncsu.csc540.s23.backend.model.dto.ArtistSongDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class SongService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    private UserService userService;
+
+    public SongService(UserService userService) {
+        this.userService = userService;
+    }
 
     private Connection getConnection() {
         try {
@@ -139,5 +145,32 @@ public class SongService {
 
     public List<Genre> getGenreOfSong(Long songId, Long albumId) {
         return jdbcTemplate.query(OperationQuery.GET_GENRES_OF_SONG, BeanPropertyRowMapper.newInstance(Genre.class), songId, albumId);
+    }
+
+    //increment listen count of song by 1
+    public boolean incrementListenCount(Long songId, Long albumId, Long userId) {
+        return jdbcTemplate.update(OperationQuery.INSERT_LISTENS_TO, songId, albumId, userId, new Timestamp(System.currentTimeMillis())) > 0;
+    }
+
+    //update listen count by x
+    public boolean updateListenCount(Long songId, Long albumId, Long count) {
+
+        List<User> users = this.userService.getAllUsers();
+        int[] rowsAffected = jdbcTemplate.batchUpdate(OperationQuery.INSERT_LISTENS_TO, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                Random rand = new Random();
+                ps.setLong(1,songId);
+                ps.setLong(2,albumId);
+                ps.setLong(3,users.get(rand.nextInt(users.size())).getUserId());
+                ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()+i*1000));
+
+            }
+            @Override
+            public int getBatchSize() {
+                return Math.toIntExact(count);
+            }
+        });
+        return rowsAffected.length>0;
     }
 }

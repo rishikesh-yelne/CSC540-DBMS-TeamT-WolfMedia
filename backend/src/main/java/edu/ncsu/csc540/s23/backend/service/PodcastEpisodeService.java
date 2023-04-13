@@ -91,4 +91,10 @@ public class PodcastEpisodeService {
     public boolean deletePodcastEpisode(Long id) {
         return jdbcTemplate.update(OperationQuery.DELETE_PODCAST_EPISODE, id) >0;
     }
+
+    //increment podcast episode listen count by 1
+    public boolean incrementListenCount(Long podcastEpisodeId, Long podcastId, Long userId) {
+        return jdbcTemplate.update(OperationQuery.INSERT_LISTENS_TO_P, userId, podcastEpisodeId, podcastId) > 0;
+    }
+
 }
