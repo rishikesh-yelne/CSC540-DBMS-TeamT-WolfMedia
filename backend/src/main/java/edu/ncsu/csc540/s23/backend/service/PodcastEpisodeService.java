@@ -75,6 +75,10 @@ public class PodcastEpisodeService {
         return jdbcTemplate.query(OperationQuery.GET_PODCAST_EPISODES_BY_PODCAST, BeanPropertyRowMapper.newInstance(PodcastEpisode.class), podcastId);
     }
 
+    public List<PodcastEpisode> getPodcastEpisodesByPodcast(Long podcastId, int month, int year) {
+        return jdbcTemplate.query(OperationQuery.GET_PODCAST_EPISODES_BY_PODCAST_TILL_MONTH_YEAR, BeanPropertyRowMapper.newInstance(PodcastEpisode.class), podcastId, month, year);
+    }
+
     public boolean updatePodcastEpisode(PodcastEpisode podcastEpisode) {
         return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST_EPISODE, podcastEpisode.getPodcastId(), podcastEpisode.getEpisodeTitle(), podcastEpisode.getPodcastReleaseDate(), podcastEpisode.getPodcastDuration(), podcastEpisode.getAdvertisementCount(), podcastEpisode.getEpisodeNo(), podcastEpisode.getPodcastEpisodeId())>0 ;
     }

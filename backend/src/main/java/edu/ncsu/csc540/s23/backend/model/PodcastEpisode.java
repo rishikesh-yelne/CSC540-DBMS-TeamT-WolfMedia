@@ -19,6 +19,16 @@ public class PodcastEpisode {
 
     private Long episodeNo;
 
+    private Double bonusRate;
+
+    public Double getBonusRate() {
+        return bonusRate;
+    }
+
+    public void setBonusRate(Double bonusRate) {
+        this.bonusRate = bonusRate;
+    }
+
     public Long getPodcastEpisodeId() {
         return podcastEpisodeId;
     }

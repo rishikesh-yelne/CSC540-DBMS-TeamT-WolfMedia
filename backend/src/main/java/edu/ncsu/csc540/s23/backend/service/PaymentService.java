@@ -301,11 +301,115 @@ public class PaymentService {
     }
 
     public String payPodcastHost(Long podcastHostId, Optional<Integer> month, Optional<Integer> year) {
+        int paymentMonth, paymentYear;
+        List<String> response = new ArrayList<>();
+        if (month.isEmpty() || year.isEmpty()) {
+            // month and year is empty, make payment for current month and year
+            paymentMonth = LocalDate.now().getMonth().getValue();
+            paymentYear = LocalDate.now().getYear();
+        } else {
+            paymentMonth = month.get();
+            paymentYear = year.get();
+        }
+
         List<Podcast> podcasts = this.podcastService.getPodcastsByPodcastHost(podcastHostId);
         for (Podcast podcast: podcasts) {
+            PodcastHost podcastHost = this.userService.getPodcastHost(podcast.getPodcastHostId());
+            List<PodcastEpisode> episodes = this.podcastEpisodeService.getPodcastEpisodesByPodcast(podcast.getPodcastId(), paymentMonth, paymentYear);
+            for (PodcastEpisode episode: episodes) {
+                response.add(payPodcastHost(podcast, podcastHost, episode, paymentMonth, paymentYear));
+            }
 
         }
-        return null;
+        response = response.stream().filter(Objects::nonNull).toList();
+        return String.join("\n", response);
+    }
+
+    private String payPodcastHost(Podcast podcast, PodcastHost podcastHost, PodcastEpisode episode, int paymentMonth, int paymentYear) {
+        boolean paymentExists = checkIfPodcastHostPaymentExists(
+                podcastHost.getUserId(),
+                podcast.getPodcastId(),
+                episode.getPodcastEpisodeId(),
+                paymentMonth,
+                paymentYear);
+
+        if (paymentExists) return "Payment already done for the month & year : " + Month.of(paymentMonth).name() + " " + paymentYear + " to the podcast host for the podcast episode (" + episode.getPodcastEpisodeId() + ", " + podcast.getPodcastId() + ")";
+
+        double amount = podcast.getFlatFee() + episode.getAdvertisementCount()*episode.getBonusRate();
+
+        // if 0 amount, no need to make payment
+        if (amount == 0D) return "Payment amount is 0. No payment needed for the podcast episode (" + episode.getPodcastEpisodeId() + ", " + podcast.getPodcastId() + ")";
+
+        PayPodcastHostDTO payment = new PayPodcastHostDTO();
+
+        payment.setAmount(amount);
+        payment.setPayer("WolfMedia");
+        payment.setPayee(podcastHost.getFirstName() + " " + podcastHost.getLastName());
+        payment.setPaymentDate(Date.valueOf(LocalDate.of(paymentYear, paymentMonth, getLastDateOfMonth(paymentMonth, paymentYear))));
+
+        payment.setPodcastId(podcast.getPodcastId());
+        payment.setPodcastEpisodeId(episode.getPodcastEpisodeId());
+        payment.setPodcastHostId(podcast.getPodcastHostId());
+        try {
+            makePaymentToPodcastHost(payment);
+            return "Payment successful for the podcast episode (" + episode.getPodcastEpisodeId() + ", " + podcast.getPodcastId() + ")";
+        } catch (SQLException sqlEx) {
+            return "Payment failed  for the podcast episode (" + episode.getPodcastEpisodeId() + ", " + podcast.getPodcastId() + "). Error : " + sqlEx.getMessage();
+        }
+    }
+
+    private void makePaymentToPodcastHost(PayPodcastHostDTO payment) throws SQLException {
+        String query_PodcastHost = OperationQuery.INSERT_ACCOUNTS;
+        String[] generatedColumns = { "transac_id" };
+        String query_pays_ph = OperationQuery.PAY_PODCAST_HOST;
+
+        Connection connection = getConnection();
+
+        try (
+                PreparedStatement statement1 = connection.prepareStatement(query_PodcastHost, generatedColumns);
+                PreparedStatement statement2 = connection.prepareStatement(query_pays_ph);
+        ) {
+            connection.setAutoCommit(false);
+
+            statement1.setDouble(1, payment.getAmount());
+            statement1.setString(2, payment.getPayer());
+            statement1.setString(3, payment.getPayee());
+            statement1.setDate(4, payment.getPaymentDate());
+
+            int rowsAffected1 = statement1.executeUpdate();
+            if (rowsAffected1 <= 0) throw new SQLException("Transaction failed");
+
+            long transacId = -1L;
+            ResultSet result = statement1.getGeneratedKeys();
+            if (result.next()) {
+                transacId = result.getLong(1);
+            }
+            result.close();
+
+            if (transacId == -1L) throw new SQLException("Transaction not created");
+
+            statement2.setLong(1, transacId);
+            statement2.setLong(2, payment.getPodcastId());
+            statement2.setLong(3, payment.getPodcastEpisodeId());
+            statement2.setLong(4, payment.getPodcastHostId());
+
+            int rowsAffected2 = statement2.executeUpdate();
+            if (rowsAffected2 <= 0) throw new SQLException("Transaction failed");
+
+            connection.commit();
+        } catch (SQLException sqlEx) {
+            if (connection != null) {
+                connection.rollback();
+            }
+        } finally {
+            if (connection != null) {
+                connection.setAutoCommit(true);
+            }
+        }
+    }
+
+    private boolean checkIfPodcastHostPaymentExists(Long podcastHostId, Long podcastId, Long podcastEpisodeId, int month, int year) {
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(OperationQuery.CHECK_IF_PODCAST_HOST_PAYMENT_EXISTS, Boolean.class, podcastHostId, podcastId, podcastEpisodeId, month, year));
     }
 
     private int getLastDateOfMonth(int month, int year) {
