@@ -24,4 +24,7 @@ public class PodcastController {
 
     @PutMapping()
     public boolean updatePodcast(@RequestBody Podcast podcast) { return podcastService.updatePodcast(podcast); }
+
+    @PatchMapping("/{podcast_id}/{podcast_host_id}")
+    public boolean assignPodcastHost(@PathVariable Long podcast_id, @PathVariable Long podcast_host_id){return podcastService.assignPodcastHost(podcast_id, podcast_host_id);}
 }

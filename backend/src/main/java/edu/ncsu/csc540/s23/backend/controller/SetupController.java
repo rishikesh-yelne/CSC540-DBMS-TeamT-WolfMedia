@@ -34,14 +34,14 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_PAYS_PH);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_PAYS_ARTIST);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_ARTIST);
-            jdbcTemplate.execute(SetupQuery.DROP_TABLE_PODCAST_HOST);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_SONG);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_GENRE);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_RECORD_LABEL);
-            jdbcTemplate.execute(SetupQuery.DROP_TABLE_USER);
-            jdbcTemplate.execute(SetupQuery.DROP_TABLE_ALBUM);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_PODCAST_EPISODE);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_PODCAST);
+            jdbcTemplate.execute(SetupQuery.DROP_TABLE_PODCAST_HOST);
+            jdbcTemplate.execute(SetupQuery.DROP_TABLE_USER);
+            jdbcTemplate.execute(SetupQuery.DROP_TABLE_ALBUM);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_GUEST_SPEAKER);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_SPONSOR);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_ACCOUNTS);
@@ -59,7 +59,7 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_GUEST_SPEAKER);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_SPONSOR);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_ACCOUNTS);
-            jdbcTemplate.execute(SetupQuery.CREATE_TABLE_HOSTED_BY);
+//            jdbcTemplate.execute(SetupQuery.CREATE_TABLE_HOSTED_BY);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_SPONSORS);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_RATES);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_CONTRIBUTED_TO);
@@ -149,7 +149,7 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_13);
 
             // insert relationship data
-            jdbcTemplate.execute(SetupQuery.INSERT_HOSTED_BY);
+//            jdbcTemplate.execute(SetupQuery.INSERT_HOSTED_BY);
             jdbcTemplate.execute(SetupQuery.INSERT_RATED_1);
             jdbcTemplate.execute(SetupQuery.INSERT_RATED_2);
             jdbcTemplate.execute(SetupQuery.INSERT_CONTRIBUTED_TO_1);
