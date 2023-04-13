@@ -51,6 +51,9 @@ public class OperationQuery {
     public static final String DELETE_SONG = "DELETE FROM Song WHERE song_id=?;";
     public static final String ASSIGN_PODCAST_HOST = "UPDATE Podcast SET user_id=? WHERE podcast_id=?;";
     public static final String ASSIGN_ARTIST_TO_ALBUM = "UPDATE contributed_to SET user_id=? WHERE podcast_id=?;";
+    public static final String ASSIGN_PRIMARY_GENRE_TO_ARTIST="UPDATE Artist SET primaryGenreId=? WHERE user_id=?;";
+    public static final String ASSIGN_GUEST_SPEAKER_TO_PODCAST_EPISODE = "INSERT INTO episode_has (gspeaker_id ,pepi_id, podcast_id) VALUES (?, ?, ?)";
+
 
     public static final String GET_PAYMENT_TO_RL_BY_ID =
             "SELECT sum(acc.amount)*0.3 FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +

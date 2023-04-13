@@ -91,4 +91,8 @@ public class PodcastEpisodeService {
     public boolean deletePodcastEpisode(Long id) {
         return jdbcTemplate.update(OperationQuery.DELETE_PODCAST_EPISODE, id) >0;
     }
+
+    public boolean assignGuestSpeaker(Long gspeaker_id ,Long pepi_id, Long podcast_id){
+        return jdbcTemplate.update(OperationQuery.ASSIGN_GUEST_SPEAKER_TO_PODCAST_EPISODE, gspeaker_id ,pepi_id, podcast_id)>0;
+    }
 }

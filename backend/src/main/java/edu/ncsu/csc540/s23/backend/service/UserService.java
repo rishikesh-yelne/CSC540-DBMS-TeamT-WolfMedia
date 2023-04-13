@@ -204,4 +204,8 @@ public class UserService {
     public boolean deletePodcastHost(Long id) {
         return jdbcTemplate.update(OperationQuery.DELETE_PODCAST_HOST, id) >0;
     }
+
+    public boolean assignGenreToArtist(Long genreId, Long artistId){
+        return jdbcTemplate.update(OperationQuery.ASSIGN_PRIMARY_GENRE_TO_ARTIST, genreId, artistId)>0;
+    }
 }
