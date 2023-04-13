@@ -36,6 +36,10 @@ public class PodcastService {
         }
     }
 
+    public PodcastService(UserService userService) {
+        this.userService = userService;
+    }
+
     public List<Podcast> getAllPodcasts() {
         return jdbcTemplate.query(OperationQuery.GET_ALL_PODCASTS, BeanPropertyRowMapper.newInstance(Podcast.class));
     }
@@ -120,22 +124,22 @@ public class PodcastService {
     }
 
     //increment subscriber count by X
-    public boolean updateSubscriberCount(Long podcastId, Long count) {
-        List<User> users = this.userService.getAllUsers();
-
-        int[] rowsAffected = jdbcTemplate.batchUpdate(OperationQuery.INSERT_SUBSCRIBES_TO, new BatchPreparedStatementSetter() {
-            @Override
-            public void setValues(PreparedStatement ps, int i) throws SQLException {
-                Random rand = new Random();
-                ps.setLong(1, users.get(rand.nextInt(users.size())).getUserId());
-                ps.setLong(2, podcastId);
-            }
-
-            @Override
-            public int getBatchSize() {
-                return Math.toIntExact(count);
-            }
-        });
-        return rowsAffected.length>0;
-    }
+//    public boolean updateSubscriberCount(Long podcastId, Long count) {
+//        List<User> users = this.userService.getAllUsers();
+//
+//        int[] rowsAffected = jdbcTemplate.batchUpdate(OperationQuery.INSERT_SUBSCRIBES_TO, new BatchPreparedStatementSetter() {
+//            @Override
+//            public void setValues(PreparedStatement ps, int i) throws SQLException {
+//                Random rand = new Random();
+//                ps.setLong(1, users.get(rand.nextInt(users.size())).getUserId());
+//                ps.setLong(2, podcastId);
+//            }
+//
+//            @Override
+//            public int getBatchSize() {
+//                return Math.toIntExact(count);
+//            }
+//        });
+//        return rowsAffected.length>0;
+//    }
 }

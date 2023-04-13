@@ -57,6 +57,6 @@ public class PodcastController {
     public boolean incrementSubscriberCount(@RequestParam(name="user_id") Long userId, @RequestParam(name="podcast_id") Long podcastId) { return podcastService.incrementSubscriberCount(userId, podcastId); }
 
     //update subscriber count by X
-    @PostMapping("/update-subscribe")
-    public boolean updateSubscribeCount(@RequestParam(name="podcast_id") Long podcastId, @RequestParam(name="count") Long count) { return podcastService.updateSubscriberCount(podcastId, count); }
+//    @PostMapping("/update-subscribe")
+//    public boolean updateSubscribeCount(@RequestParam(name="podcast_id") Long podcastId, @RequestParam(name="count") Long count) { return podcastService.updateSubscriberCount(podcastId, count); }
 }
