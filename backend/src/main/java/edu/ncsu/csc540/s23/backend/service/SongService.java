@@ -131,4 +131,8 @@ public class SongService {
         int rowsAffected=jdbcTemplate.update(OperationQuery.DELETE_SONG, song_id);
         return rowsAffected>0;
     }
+
+    public boolean assignGenreToSong(Long id, Long songId, Long albumId) {
+        return jdbcTemplate.update(OperationQuery.ASSIGN_GENRE_TO_SONG, id, songId, albumId) > 0;
+    }
 }

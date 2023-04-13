@@ -9,7 +9,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/podcast")
-public class PodcastController {
+public class
+PodcastController {
 
     private PodcastService podcastService;
 

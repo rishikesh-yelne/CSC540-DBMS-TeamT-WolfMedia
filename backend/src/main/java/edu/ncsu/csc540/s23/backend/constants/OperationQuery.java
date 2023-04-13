@@ -137,4 +137,5 @@ public class OperationQuery {
     public static final String GET_SPONSORS_OF_PODCAST =
             "SELECT s.sponsor_id as sponsorId, sfirst_name as sponsorFirstName, slast_name as sponsorLastName, organization, semail as sponsorEmail, scity as sponsorCity " +
                     "FROM Sponsor s JOIN sponsors ss ON s.sponsor_id = ss.sponsor_id WHERE ss.podcast_id = ?";
+    public static final String ASSIGN_GENRE_TO_SONG = "INSERT INTO has (genre_id, song_id, album_id) VALUES(?, ?, ?)";
 }

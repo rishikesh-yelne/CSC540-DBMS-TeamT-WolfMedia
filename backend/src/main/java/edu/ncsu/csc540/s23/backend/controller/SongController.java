@@ -37,4 +37,7 @@ public class SongController {
 
     @DeleteMapping("/{song_id}")
     public boolean deleteSong(@PathVariable Long song_id){return songService.deleteSong(song_id);}
+
+    @PostMapping("/add-genre")
+    public boolean assignGenreToSong(@RequestParam Long id, @RequestParam Long song_id, @RequestParam Long album_id) { return songService.assignGenreToSong(id, song_id, album_id); }
 }
