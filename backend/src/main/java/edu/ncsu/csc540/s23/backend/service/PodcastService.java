@@ -86,4 +86,8 @@ public class PodcastService {
     public List<Sponsor> getSponsorsOfPodcast(Long podcastId) {
         return jdbcTemplate.query(OperationQuery.GET_SPONSORS_OF_PODCAST, BeanPropertyRowMapper.newInstance(Sponsor.class), podcastId);
     }
+    public boolean assignPodcastHost(Long podcastId, Long podcastHostId){
+        return jdbcTemplate.update(OperationQuery.ASSIGN_PODCAST_HOST, podcastHostId, podcastId)>0;
+    }
+
 }

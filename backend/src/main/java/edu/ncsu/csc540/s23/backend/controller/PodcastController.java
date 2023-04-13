@@ -34,4 +34,7 @@ public class PodcastController {
 
     @GetMapping("/sponsors/{podcastId}")
     public List<Sponsor> getSponsorsOfPodcast(@PathVariable Long podcastId) { return podcastService.getSponsorsOfPodcast(podcastId); }
+
+    @PatchMapping("/{podcast_id}/{podcast_host_id}")
+    public boolean assignPodcastHost(@PathVariable Long podcast_id, @PathVariable Long podcast_host_id){return podcastService.assignPodcastHost(podcast_id, podcast_host_id);}
 }

@@ -19,12 +19,12 @@ public class SetupQuery {
     public static final String DROP_TABLE_PAYS_PH = "DROP TABLE IF EXISTS pays_ph;";
     public static final String DROP_TABLE_PAYS_ARTIST = "DROP TABLE IF EXISTS pays_artist;";
     public static final String DROP_TABLE_ARTIST = "DROP TABLE IF EXISTS Artist;";
-    public static final String DROP_TABLE_PODCAST_HOST = "DROP TABLE IF EXISTS Podcast_Host;";
     public static final String DROP_TABLE_SONG = "DROP TABLE IF EXISTS Song;";
     public static final String DROP_TABLE_GENRE = "DROP TABLE IF EXISTS Genre;";
     public static final String DROP_TABLE_RECORD_LABEL = "DROP TABLE IF EXISTS Record_Label;";
     public static final String DROP_TABLE_PODCAST_EPISODE = "DROP TABLE IF EXISTS Podcast_Episode;";
     public static final String DROP_TABLE_PODCAST = "DROP TABLE IF EXISTS Podcast;";
+    public static final String DROP_TABLE_PODCAST_HOST = "DROP TABLE IF EXISTS Podcast_Host;";
     public static final String DROP_TABLE_USER = "DROP TABLE IF EXISTS User;";
     public static final String DROP_TABLE_ALBUM = "DROP TABLE IF EXISTS Album;";
     public static final String DROP_TABLE_GUEST_SPEAKER = "DROP TABLE IF EXISTS Guest_Speaker;";
@@ -39,7 +39,7 @@ public class SetupQuery {
     public static final String CREATE_TABLE_PODCAST_HOST = "CREATE TABLE IF NOT EXISTS Podcast_Host (user_id int,city varchar(64),PRIMARY KEY(user_id),FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE);";
     public static final String CREATE_TABLE_ALBUM = "CREATE TABLE IF NOT EXISTS Album (album_id int NOT NULL AUTO_INCREMENT,album_name varchar(64) NOT NULL,release_year int NOT NULL,edition varchar(30) NOT NULL,PRIMARY KEY (album_id));";
     public static final String CREATE_TABLE_SONG = "CREATE TABLE IF NOT EXISTS Song (song_id int NOT NULL AUTO_INCREMENT,album_id int,title varchar(64) NOT NULL,duration time NOT NULL,track_no int NOT NULL,release_date DATETIME NOT NULL,release_country varchar(64) NOT NULL,language varchar(30) NOT NULL,royalty_rate DECIMAL(10,2) NOT NULL,PRIMARY KEY (song_id, album_id),UNIQUE(album_id, title),FOREIGN KEY (`album_id`) REFERENCES `Album` (`album_id`) ON DELETE CASCADE);";
-    public static final String CREATE_TABLE_PODCAST = "CREATE TABLE IF NOT EXISTS Podcast (podcast_id int NOT NULL AUTO_INCREMENT,user_id int, pname varchar(64) NOT NULL,planguage varchar(30) NOT NULL,country varchar(64) NOT NULL, flat_fee DECIMAL(10,2) NOT NULL,PRIMARY KEY(podcast_id), FOREIGN KEY (`user_id`) REFERENCES `Podcast_Host` (`user_id`) ON DELETE NULL);";
+    public static final String CREATE_TABLE_PODCAST = "CREATE TABLE IF NOT EXISTS Podcast (podcast_id int NOT NULL AUTO_INCREMENT,user_id int, pname varchar(64) NOT NULL,planguage varchar(30) NOT NULL,country varchar(64) NOT NULL,PRIMARY KEY(podcast_id), FOREIGN KEY (`user_id`) REFERENCES `Podcast_Host` (`user_id`) ON DELETE SET NULL);";
     public static final String CREATE_TABLE_PODCAST_EPISODE = "CREATE TABLE IF NOT EXISTS Podcast_Episode(pepi_id int NOT NULL AUTO_INCREMENT,podcast_id int,epi_title varchar(128) NOT NULL,prelease_date DATETIME NOT NULL,pduration time NOT NULL,adv_count int NOT NULL,episode_no int NOT NULL,PRIMARY KEY (pepi_id, podcast_id),UNIQUE(podcast_id, epi_title),FOREIGN KEY (`podcast_id`) REFERENCES `Podcast` (`podcast_id`) ON DELETE CASCADE);";
     public static final String CREATE_TABLE_GUEST_SPEAKER = "CREATE TABLE IF NOT EXISTS Guest_Speaker (gspeaker_id int NOT NULL AUTO_INCREMENT,gfirst_name varchar(64) NOT NULL,glast_name varchar(64) NOT NULL,gphone_num varchar(16) NOT NULL UNIQUE,gemail varchar(64) NOT NULL UNIQUE,gcity varchar(64) NOT NULL,PRIMARY KEY(gspeaker_id));";
     public static final String CREATE_TABLE_SPONSOR = "CREATE TABLE IF NOT EXISTS Sponsor (sponsor_id int NOT NULL AUTO_INCREMENT,sfirst_name varchar(64) NOT NULL,slast_name varchar(64) NOT NULL,organization varchar(128) NOT NULL,semail varchar(64) NOT NULL UNIQUE,scity varchar(64) NOT NULL,PRIMARY KEY(sponsor_id));";
