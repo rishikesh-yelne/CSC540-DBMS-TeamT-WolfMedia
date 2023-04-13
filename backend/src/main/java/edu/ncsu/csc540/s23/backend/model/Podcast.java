@@ -4,6 +4,8 @@ public class Podcast {
 
     private Long podcastId;
 
+    private Long podcastHostId;
+
     private String podcastName;
 
     private String podcastLanguage;
@@ -16,6 +18,13 @@ public class Podcast {
 
     public void setPodcastId(Long podcastId) {
         this.podcastId = podcastId;
+    }
+    public Long getPodcastHostId() {
+        return podcastHostId;
+    }
+
+    public void setPodcastHostId(Long podcastHostId) {
+        this.podcastHostId = podcastHostId;
     }
 
     public String getPodcastName() {
