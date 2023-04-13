@@ -46,7 +46,7 @@ public class SongController {
     public List<Genre> getGenreOfSong(@RequestParam Long songId, @RequestParam Long albumId) { return songService.getGenreOfSong(songId, albumId); }
 
     //increment song listen count by 1
-    @PostMapping()
+    @PostMapping("/listen")
     public boolean incrementListenCount(@RequestParam(name="song_id") Long songId, @RequestParam(name="album_id") Long albumId, @RequestParam(name="user_id") Long userId) { return songService.incrementListenCount(songId, albumId, userId); }
 
     //update listen count by X

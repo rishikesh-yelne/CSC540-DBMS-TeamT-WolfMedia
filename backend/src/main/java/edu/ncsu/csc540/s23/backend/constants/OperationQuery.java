@@ -43,7 +43,7 @@ public class OperationQuery {
     public static final String INSERT_SONG = "INSERT INTO Song (album_id, title, duration, track_no, release_date, release_country, language, royalty_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String INSERT_ALBUM = "INSERT INTO Album (album_name, release_year, edition) VALUES (?, ?, ?)";
     public static final String INSERT_RECORD_LABEL = "INSERT INTO Record_Label (rlabel_name) VALUES (?)";
-    public static final String INSERT_PODCAST = "INSERT INTO Podcast (user_id, pname, planguage, country, flat_fee) VALUES (?, ?, ?, ?)";
+    public static final String INSERT_PODCAST = "INSERT INTO Podcast (user_id, pname, planguage, country, flat_fee) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_PODCAST_EPISODE = "INSERT INTO Podcast_Episode (podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES (?, ?, ?, ?, ?, ?)";
     public static final String INSERT_LISTENS_TO = "INSERT INTO listens_to (song_id, album_id, user_id, timestamp) VALUES (?, ?, ?, ?);";
     public static final String INSERT_LISTENS_TO_P = "INSERT INTO listens_to_p (user_id, pepi_id, podcast_id, ptimestamp) VALUES (?, ?, ?, ?);";
