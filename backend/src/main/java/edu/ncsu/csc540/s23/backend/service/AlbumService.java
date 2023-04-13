@@ -78,7 +78,7 @@ public class AlbumService {
         }
     }
 
-    public boolean assignArtistToAlbum(Long artistId, Long albumId){
-        return jdbcTemplate.update(OperationQuery.ASSIGN_ARTIST_TO_ALBUM, artistId, albumId)>0;
+    public boolean assignArtistToAlbum(Long albumId, Long artistId){
+        return jdbcTemplate.update(OperationQuery.ASSIGN_ARTIST_TO_ALBUM, albumId, artistId)>0;
     }
 }

@@ -25,5 +25,5 @@ public class AlbumController {
     public Long addAlbum(@RequestBody Album album) { return albumService.createNewAlbum(album); }
 
     @PatchMapping("/{artistId}/{albumId}")
-    public boolean assignArtistToAlbum(@PathVariable Long artistId, @PathVariable Long albumId){return albumService.assignArtistToAlbum(artistId, albumId);}
+    public boolean assignArtistToAlbum(@PathVariable Long artistId, @PathVariable Long albumId){return albumService.assignArtistToAlbum(albumId, artistId);}
 }
