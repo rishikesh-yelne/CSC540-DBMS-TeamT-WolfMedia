@@ -145,4 +145,8 @@ public class OperationQuery {
             "SELECT user_id, podcast_id, rating FROM rates WHERE podcast_id=?;";
     public static final String GET_PODCAST_RATINGS =
             "SELECT avg(rating) as rating, podcast_id FROM rates GROUP BY podcast_id;";
+    public static final String ASSIGN_GENRE_TO_SONG = "INSERT INTO has (genre_id, song_id, album_id) VALUES(?, ?, ?)";
+    public static final String GET_GENRES_OF_SONG =
+            "SELECT g.genre_id, name, gtype as genreType " +
+                    "FROM Genre g JOIN has h ON g.genre_id = h.genre_id WHERE h.song_id = ? AND h.album_id = ?";
 }
