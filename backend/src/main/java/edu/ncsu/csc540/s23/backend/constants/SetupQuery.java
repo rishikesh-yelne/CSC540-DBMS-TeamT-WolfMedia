@@ -61,8 +61,16 @@ public class SetupQuery {
     public static final String CREATE_TABLE_PAYS_ARTIST = "CREATE TABLE IF NOT EXISTS pays_artist(rlabel_id int NOT NULL,transac_id int NOT NULL,user_id int NOT NULL,song_id int NOT NULL,album_id int NOT NULL,PRIMARY KEY (rlabel_id, transac_id, user_id, song_id, album_id),FOREIGN KEY (`rlabel_id`) REFERENCES `Record_Label` (`rlabel_id`) ON DELETE CASCADE,FOREIGN KEY (`transac_id`) REFERENCES `Accounts` (`transac_id`) ON DELETE CASCADE,FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE,FOREIGN KEY (`song_id`) REFERENCES `Song` (`song_id`) ON DELETE CASCADE,FOREIGN KEY (`album_id`) REFERENCES `Album` (`album_id`) ON DELETE CASCADE);";
     // endregion
     // region Insert Data
-    public static final String INSERT_USER_1 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8001, 'Alex', 'A', 'alex.a@ncsu.edu', '+1(919)000-0001', '2023-04-02')";
-    public static final String INSERT_USER_2 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8002, 'John', 'J', 'john.j@ncsu.edu', '+1(919)000-0002', '2023-04-03')";
+    public static final String INSERT_USER_1 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8001, 'Alex', 'A', 'alex.a@ncsu.edu', '+1(919)000-0001', '2023-01-01')";
+    public static final String INSERT_USER_2 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8002, 'John', 'J', 'john.j@ncsu.edu', '+1(919)000-0002', '2023-01-02')";
+    public static final String INSERT_USER_3 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8003, 'Test1', 'User1', 'test1.user1@ncsu.edu', '+1(919)000-0003', '2023-01-03')";
+    public static final String INSERT_USER_4 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8004, 'Test2', 'User2', 'test2.user2@ncsu.edu', '+1(919)000-0004', '2023-01-04')";
+    public static final String INSERT_USER_5 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8005, 'Test3', 'User3', 'test3.user3@ncsu.edu', '+1(919)000-0005', '2023-01-05')";
+    public static final String INSERT_USER_6 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8006, 'Test4', 'User4', 'test4.user4@ncsu.edu', '+1(919)000-0006', '2023-01-06')";
+    public static final String INSERT_USER_7 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8007, 'Test5', 'User5', 'test5.user5@ncsu.edu', '+1(919)000-0007', '2023-01-07')";
+    public static final String INSERT_USER_8 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8008, 'Test6', 'User6', 'test6.user6@ncsu.edu', '+1(919)000-0008', '2023-02-01')";
+    public static final String INSERT_USER_9 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8009, 'Test7', 'User7', 'test7.user7@ncsu.edu', '+1(919)000-0009', '2023-03-01')";
+    public static final String INSERT_USER_10 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8010, 'Test8', 'User8', 'test8.user8@ncsu.edu', '+1(919)000-0010', '2023-04-01')";
     public static final String INSERT_ARTIST_USER_1 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(2001, 'Forest', 'F', 'forest.f@ncsu.edu', '+1(919)000-1001', '2023-01-01')";
     public static final String INSERT_ARTIST_USER_2 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(2002, 'Rain', 'R', 'rain.r@ncsu.edu', '+1(919)000-1002', '2023-01-02')";
     public static final String INSERT_PODCAST_HOST_USER_1 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(6001, 'Matthew', 'Wilson', 'matthew.wilson@ncsu.edu', '+1(919)000-2001', '2023-01-03')";
@@ -104,6 +112,27 @@ public class SetupQuery {
     public static final String INSERT_TRANSACTION_JAN_9 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(9, 700, 'Melodic Avenue Music', 'Rain R', '2023-01-31');";
     public static final String INSERT_TRANSACTION_JAN_10 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(10, 10, 'WolfMedia', 'Matthew Wilson', '2023-01-31');";
     public static final String INSERT_TRANSACTION_JAN_11 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(11, 10, 'WolfMedia', 'Matthew Wilson', '2023-01-31');";
+    public static final String INSERT_TRANSACTION_JAN_12 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(37, 10, 'Alex A', 'WolfMedia', '2023-01-01');";
+    public static final String INSERT_TRANSACTION_JAN_13 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(38, 10, 'John J', 'WolfMedia', '2023-01-01');";
+    public static final String INSERT_TRANSACTION_JAN_14 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(39, 500, 'Test1 User1', 'WolfMedia', '2023-01-01');";
+    public static final String INSERT_TRANSACTION_JAN_15 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(40, 500, 'Test2 User2', 'WolfMedia', '2023-01-01');";
+    public static final String INSERT_TRANSACTION_JAN_16 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(41, 50, 'Test3 User3', 'WolfMedia', '2023-01-01');";
+    public static final String INSERT_TRANSACTION_JAN_17 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(42, 30, 'Test4 User4', 'WolfMedia', '2023-01-01');";
+    public static final String INSERT_TRANSACTION_JAN_18 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(43, 11, 'Test5 User5', 'WolfMedia', '2023-01-01');";
 
     // Transactions in February 2023
     public static final String INSERT_TRANSACTION_FEB_1 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(12, 2, 'WolfMedia', 'Elevate Records', '2023-02-28');";
@@ -118,6 +147,30 @@ public class SetupQuery {
     public static final String INSERT_TRANSACTION_FEB_10 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(21, 10, 'WolfMedia', 'Matthew Wilson', '2023-02-28');";
     public static final String INSERT_TRANSACTION_FEB_11 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(22, 10, 'WolfMedia', 'Matthew Wilson', '2023-02-28');";
     public static final String INSERT_TRANSACTION_FEB_12 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(23, 10, 'WolfMedia', 'Matthew Wilson', '2023-02-28');";
+    public static final String INSERT_TRANSACTION_FEB_13 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(44, 10, 'Alex A', 'WolfMedia', '2023-02-01');";
+    public static final String INSERT_TRANSACTION_FEB_14 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(45, 10, 'John J', 'WolfMedia', '2023-02-01');";
+    public static final String INSERT_TRANSACTION_FEB_15 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(46, 1000, 'Test1 User1', 'WolfMedia', '2023-02-01');";
+    public static final String INSERT_TRANSACTION_FEB_16 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(47, 1000, 'Test2 User2', 'WolfMedia', '2023-02-01');";
+    public static final String INSERT_TRANSACTION_FEB_17 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(48, 100, 'Test3 User3', 'WolfMedia', '2023-02-01');";
+    public static final String INSERT_TRANSACTION_FEB_18 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(49, 60, 'Test4 User4', 'WolfMedia', '2023-02-01');";
+    public static final String INSERT_TRANSACTION_FEB_19 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(50, 22, 'Test5 User5', 'WolfMedia', '2023-02-01');";
+    public static final String INSERT_TRANSACTION_FEB_20 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(51, 20, 'Test6 User6', 'WolfMedia', '2023-02-01');";
 
     // Transactions in March 2023
     public static final String INSERT_TRANSACTION_MAR_1 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(24, 3, 'WolfMedia', 'Elevate Records', '2023-03-31');";
@@ -133,14 +186,69 @@ public class SetupQuery {
     public static final String INSERT_TRANSACTION_MAR_11 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(34, 10, 'WolfMedia', 'Matthew Wilson', '2023-03-31');";
     public static final String INSERT_TRANSACTION_MAR_12 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(35, 10, 'WolfMedia', 'Matthew Wilson', '2023-03-31');";
     public static final String INSERT_TRANSACTION_MAR_13 = "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) VALUES(36, 10, 'WolfMedia', 'Matthew Wilson', '2023-03-31');";
+    public static final String INSERT_TRANSACTION_MAR_14 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(52, 10, 'Alex A', 'WolfMedia', '2023-03-01');";
+    public static final String INSERT_TRANSACTION_MAR_15 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(53, 10, 'John J', 'WolfMedia', '2023-03-01');";
+    public static final String INSERT_TRANSACTION_MAR_16 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(54, 1500, 'Test1 User1', 'WolfMedia', '2023-03-01');";
+    public static final String INSERT_TRANSACTION_MAR_17 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(55, 1500, 'Test2 User2', 'WolfMedia', '2023-03-01');";
+    public static final String INSERT_TRANSACTION_MAR_18 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(56, 150, 'Test3 User3', 'WolfMedia', '2023-03-01');";
+    public static final String INSERT_TRANSACTION_MAR_19 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(57, 90, 'Test4 User4', 'WolfMedia', '2023-03-01');";
+    public static final String INSERT_TRANSACTION_MAR_20 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(58, 33, 'Test5 User5', 'WolfMedia', '2023-03-01');";
+    public static final String INSERT_TRANSACTION_MAR_21 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(59, 20, 'Test6 User6', 'WolfMedia', '2023-03-01');";
+    public static final String INSERT_TRANSACTION_MAR_22 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(60, 20, 'Test7 User7', 'WolfMedia', '2023-03-01');";
 
-    // TODO: Transactions - User pays WolfMedia - Subscriptions
+    // Transactions in April 2023
+    public static final String INSERT_TRANSACTION_APR_1 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(61, 10, 'Alex A', 'WolfMedia', '2023-04-01');";
+    public static final String INSERT_TRANSACTION_APR_2 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(62, 10, 'John J', 'WolfMedia', '2023-04-01');";
+    public static final String INSERT_TRANSACTION_APR_3 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(63, 50000, 'Test1 User1', 'WolfMedia', '2023-04-01');";
+    public static final String INSERT_TRANSACTION_APR_4 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(64, 50000, 'Test2 User2', 'WolfMedia', '2023-04-01');";
+    public static final String INSERT_TRANSACTION_APR_5 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(65, 10000, 'Test3 User3', 'WolfMedia', '2023-04-01');";
+    public static final String INSERT_TRANSACTION_APR_6 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(66, 10000, 'Test4 User4', 'WolfMedia', '2023-04-01');";
+    public static final String INSERT_TRANSACTION_APR_7 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(67, 1000, 'Test5 User5', 'WolfMedia', '2023-04-01');";
+    public static final String INSERT_TRANSACTION_APR_8 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(68, 1000, 'Test6 User6', 'WolfMedia', '2023-04-01');";
+    public static final String INSERT_TRANSACTION_APR_9 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(69, 500, 'Test7 User7', 'WolfMedia', '2023-04-01');";
+    public static final String INSERT_TRANSACTION_APR_10 =
+            "INSERT INTO Accounts (transac_id, amount, payer, payee, payment_date) " +
+                    "VALUES(70, 480, 'Test8 User8', 'WolfMedia', '2023-04-01');";
     // endregion
     // region Insert Relationship Data
     //TODO: setup listens_to
-    //TODO: setup subscribes_to
     //TODO: setup listens_to_p
-    //TODO: setup user_pays
 //    public static final String INSERT_HOSTED_BY = "INSERT INTO hosted_by (podcast_id, user_id) VALUES(5001, 6001);";
     public static final String INSERT_RATED_1 = "INSERT INTO rates (user_id, podcast_id, rating) VALUES(8001, 5001, 5);";
     public static final String INSERT_RATED_2 = "INSERT INTO rates (user_id, podcast_id, rating) VALUES(8002, 5001, 4);";
@@ -156,7 +264,7 @@ public class SetupQuery {
     public static final String INSERT_HAS_3 = "INSERT INTO has (genre_id, song_id, album_id) VALUES(1, 1003, 4002);";
     public static final String INSERT_HAS_4 = "INSERT INTO has (genre_id, song_id, album_id) VALUES(2, 1004, 4002);";
     public static final String INSERT_HAS_GENRE_1 = "INSERT INTO has_genre (genre_id, podcast_id) VALUES(3, 5001);";
-    // no setup data required for sponsors and episode_has
+    // no setup data required for sponsors, episode_has, subscribes_to
 
     // Payment relationship data
     // January
@@ -171,6 +279,27 @@ public class SetupQuery {
     public static final String INSERT_PAYS_ARTIST_JAN_5 = "INSERT INTO pays_artist (rlabel_id, user_id, song_id, album_id, transac_id) VALUES(3002, 2002, 1004, 4002, 9);";
     public static final String INSERT_PAYS_PODCAST_HOST_JAN_1 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7001, 5001, 6001, 10);";
     public static final String INSERT_PAYS_PODCAST_HOST_JAN_2 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7002, 5001, 6001, 11);";
+    public static final String INSERT_USER_PAYS_1 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8001, 37, 'Monthly', 10, 1, '2023-01-01');";
+    public static final String INSERT_USER_PAYS_2 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8002, 38, 'Monthly', 10, 1, '2023-01-01');";
+    public static final String INSERT_USER_PAYS_3 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8003, 39, 'Monthly', 500, 1, '2023-01-01');";
+    public static final String INSERT_USER_PAYS_4 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8004, 40, 'Monthly', 500, 1, '2023-01-01');";
+    public static final String INSERT_USER_PAYS_5 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8005, 41, 'Monthly', 50, 1, '2023-01-01');";
+    public static final String INSERT_USER_PAYS_6 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8006, 42, 'Monthly', 30, 1, '2023-01-01');";
+    public static final String INSERT_USER_PAYS_7 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8007, 43, 'Monthly', 11, 1, '2023-01-01');";
 
     // February
     public static final String INSERT_PAYS_RECORD_FEB_1 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1001, 4001, 12);";
@@ -185,6 +314,30 @@ public class SetupQuery {
     public static final String INSERT_PAYS_PODCAST_HOST_FEB_1 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7001, 5001, 6001, 21);";
     public static final String INSERT_PAYS_PODCAST_HOST_FEB_2 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7002, 5001, 6001, 22);";
     public static final String INSERT_PAYS_PODCAST_HOST_FEB_3 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7003, 5001, 6001, 23);";
+    public static final String INSERT_USER_PAYS_8 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8001, 44, 'Monthly', 10, 1, '2023-02-01');";
+    public static final String INSERT_USER_PAYS_9 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8002, 45, 'Monthly', 10, 1, '2023-02-01');";
+    public static final String INSERT_USER_PAYS_10 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8003, 46, 'Monthly', 1000, 1, '2023-02-01');";
+    public static final String INSERT_USER_PAYS_11 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8004, 47, 'Monthly', 1000, 1, '2023-02-01');";
+    public static final String INSERT_USER_PAYS_12 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8005, 48, 'Monthly', 100, 1, '2023-02-01');";
+    public static final String INSERT_USER_PAYS_13 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8006, 49, 'Monthly', 60, 1, '2023-02-01');";
+    public static final String INSERT_USER_PAYS_14 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8007, 50, 'Monthly', 22, 1, '2023-02-01');";
+    public static final String INSERT_USER_PAYS_15 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8008, 51, 'Monthly', 20, 1, '2023-02-01');";
 
     // March
     public static final String INSERT_PAYS_RECORD_MAR_1 = "INSERT INTO pays_record (rlabel_id, song_id, album_id, transac_id) VALUES(3001, 1001, 4001, 24);";
@@ -200,5 +353,64 @@ public class SetupQuery {
     public static final String INSERT_PAYS_PODCAST_HOST_MAR_2 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7002, 5001, 6001, 34);";
     public static final String INSERT_PAYS_PODCAST_HOST_MAR_3 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7003, 5001, 6001, 35);";
     public static final String INSERT_PAYS_PODCAST_HOST_MAR_4 = "INSERT INTO pays_ph (pepi_id, podcast_id, user_id, transac_id) VALUES(7004, 5001, 6001, 36);";
+    public static final String INSERT_USER_PAYS_16 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8001, 52, 'Monthly', 10, 1, '2023-03-01');";
+    public static final String INSERT_USER_PAYS_17 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8002, 53, 'Monthly', 10, 1, '2023-03-01');";
+    public static final String INSERT_USER_PAYS_18 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8003, 54, 'Monthly', 1500, 1, '2023-03-01');";
+    public static final String INSERT_USER_PAYS_19 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8004, 55, 'Monthly', 1500, 1, '2023-03-01');";
+    public static final String INSERT_USER_PAYS_20 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8005, 56, 'Monthly', 150, 1, '2023-03-01');";
+    public static final String INSERT_USER_PAYS_21 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8006, 57, 'Monthly', 90, 1, '2023-03-01');";
+    public static final String INSERT_USER_PAYS_22 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8007, 58, 'Monthly', 33, 1, '2023-03-01');";
+    public static final String INSERT_USER_PAYS_23 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8008, 59, 'Monthly', 20, 1, '2023-03-01');";
+    public static final String INSERT_USER_PAYS_24 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8009, 60, 'Monthly', 20, 1, '2023-03-01');";
+
+    // April
+    public static final String INSERT_USER_PAYS_25 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8001, 61, 'Monthly', 10, 1, '2023-04-01');";
+    public static final String INSERT_USER_PAYS_26 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8002, 62, 'Monthly', 10, 1, '2023-04-01');";
+    public static final String INSERT_USER_PAYS_27 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8003, 63, 'Monthly', 50000, 1, '2023-04-01');";
+    public static final String INSERT_USER_PAYS_28 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8004, 64, 'Monthly', 50000, 1, '2023-04-01');";
+    public static final String INSERT_USER_PAYS_29 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8005, 65, 'Monthly', 10000, 1, '2023-04-01');";
+    public static final String INSERT_USER_PAYS_30 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8006, 66, 'Monthly', 10000, 1, '2023-04-01');";
+    public static final String INSERT_USER_PAYS_31 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8007, 67, 'Monthly', 1000, 1, '2023-04-01');";
+    public static final String INSERT_USER_PAYS_32 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8008, 68, 'Monthly', 1000, 1, '2023-04-01');";
+    public static final String INSERT_USER_PAYS_33 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8009, 69, 'Monthly', 500, 1, '2023-04-01');";
+    public static final String INSERT_USER_PAYS_34 =
+            "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
+                    "VALUES(8010, 70, 'Monthly', 480, 1, '2023-04-01');";
     // endregion
 }
