@@ -51,4 +51,12 @@ public class PodcastController {
 
     @GetMapping("/ratings")
     public List<PodcastRatingDTO> getPodcastRatings() { return this.podcastService.getPodcastRatings(); }
+
+    //increment subscriber count by 1
+    @PostMapping("/subscribe")
+    public boolean incrementSubscriberCount(@RequestParam(name="user_id") Long userId, @RequestParam(name="podcast_id") Long podcastId) { return podcastService.incrementSubscriberCount(userId, podcastId); }
+
+    //update subscriber count by X
+//    @PostMapping("/update-subscribe")
+//    public boolean updateSubscribeCount(@RequestParam(name="podcast_id") Long podcastId, @RequestParam(name="count") Long count) { return podcastService.updateSubscriberCount(podcastId, count); }
 }

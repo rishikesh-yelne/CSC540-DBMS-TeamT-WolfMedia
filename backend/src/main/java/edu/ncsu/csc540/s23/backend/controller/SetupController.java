@@ -78,6 +78,14 @@ public class SetupController {
             // insert data
             jdbcTemplate.execute(SetupQuery.INSERT_USER_1);
             jdbcTemplate.execute(SetupQuery.INSERT_USER_2);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_3);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_4);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_5);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_6);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_7);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_8);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_9);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_10);
             jdbcTemplate.execute(SetupQuery.INSERT_ARTIST_USER_1);
             jdbcTemplate.execute(SetupQuery.INSERT_ARTIST_USER_2);
             jdbcTemplate.execute(SetupQuery.INSERT_PODCAST_HOST_USER_1);
@@ -120,6 +128,14 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_9);
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_10);
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_11);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_12);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_13);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_14);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_15);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_16);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_17);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_JAN_18);
+
 
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_1);
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_2);
@@ -133,6 +149,14 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_10);
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_11);
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_12);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_13);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_14);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_15);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_16);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_17);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_18);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_19);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_FEB_20);
 
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_1);
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_2);
@@ -147,6 +171,26 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_11);
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_12);
             jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_13);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_14);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_15);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_16);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_17);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_18);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_19);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_20);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_21);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_MAR_22);
+
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_1);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_2);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_3);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_4);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_5);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_6);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_7);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_8);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_9);
+            jdbcTemplate.execute(SetupQuery.INSERT_TRANSACTION_APR_10);
 
             // insert relationship data
 //            jdbcTemplate.execute(SetupQuery.INSERT_HOSTED_BY);
@@ -204,6 +248,41 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.INSERT_PAYS_PODCAST_HOST_MAR_2);
             jdbcTemplate.execute(SetupQuery.INSERT_PAYS_PODCAST_HOST_MAR_3);
             jdbcTemplate.execute(SetupQuery.INSERT_PAYS_PODCAST_HOST_MAR_4);
+
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_1);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_2);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_3);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_4);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_5);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_6);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_7);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_8);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_9);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_10);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_11);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_12);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_13);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_14);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_15);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_16);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_17);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_18);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_19);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_20);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_21);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_22);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_23);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_24);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_25);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_26);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_27);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_28);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_29);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_30);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_31);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_32);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_33);
+            jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_34);
 
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);

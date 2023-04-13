@@ -43,8 +43,11 @@ public class OperationQuery {
     public static final String INSERT_SONG = "INSERT INTO Song (album_id, title, duration, track_no, release_date, release_country, language, royalty_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String INSERT_ALBUM = "INSERT INTO Album (album_name, release_year, edition) VALUES (?, ?, ?)";
     public static final String INSERT_RECORD_LABEL = "INSERT INTO Record_Label (rlabel_name) VALUES (?)";
-    public static final String INSERT_PODCAST = "INSERT INTO Podcast (user_id, pname, planguage, country) VALUES (?, ?, ?, ?)";
+    public static final String INSERT_PODCAST = "INSERT INTO Podcast (user_id, pname, planguage, country, flat_fee) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_PODCAST_EPISODE = "INSERT INTO Podcast_Episode (podcast_id, epi_title, prelease_date, pduration, adv_count, episode_no) VALUES (?, ?, ?, ?, ?, ?)";
+    public static final String INSERT_LISTENS_TO = "INSERT INTO listens_to (song_id, album_id, user_id, timestamp) VALUES (?, ?, ?, ?);";
+    public static final String INSERT_LISTENS_TO_P = "INSERT INTO listens_to_p (user_id, pepi_id, podcast_id, ptimestamp) VALUES (?, ?, ?, ?);";
+    public static final String INSERT_SUBSCRIBES_TO = "INSERT INTO subscribes_to (user_id, podcast_id) VALUES (?, ?);";
     public static final String UPDATE_SONG = "UPDATE Song SET title=?, duration=?, track_no=?, release_date=?, release_country=?, language=?, royalty_rate=? WHERE song_id=? AND album_id = ?";
     public static final String UPDATE_ARTIST = "UPDATE User u JOIN Artist a ON u.user_id=a.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, rlabel_id=?, primary_genre_id=?, status=?, type=?, artist_country=? WHERE a.user_id=?";
     public static final String UPDATE_PODCAST_HOST = "UPDATE User u JOIN Podcast_Host ph ON u.user_id=ph.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, city=? WHERE ph.user_id=?";
@@ -64,6 +67,13 @@ public class OperationQuery {
     public static final String GET_PAYMENT_TO_PH_BY_ID =
             "SELECT sum(acc.amount) FROM Accounts acc JOIN pays_ph pp ON acc.transac_id=pp.transac_id " +
                     "WHERE pp.user_id = ? AND month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";
+    public static final String GET_REVENUE_FOR_MONTH =
+            "SELECT sum(acc.amount) FROM Accounts acc JOIN user_pays up ON acc.transac_id=up.transac_id " +
+                    "WHERE month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";
+    public static final String GET_REVENUE =
+            "SELECT sum(acc.amount) as amount, acc.payment_date " +
+                    "FROM Accounts acc JOIN user_pays up ON acc.transac_id=up.transac_id " +
+                    "GROUP BY acc.payment_date ORDER BY acc.payment_date;";
     public static final String GET_PAYMENTS_TO_RECORD_LABELS =
             "SELECT rl.rlabel_name as RecordLabel, sum(acc.amount)*0.3 as Amount, acc.payment_date as PaymentDate " +
                     "FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +
@@ -149,4 +159,8 @@ public class OperationQuery {
             "SELECT user_id, podcast_id, rating FROM rates WHERE podcast_id=?;";
     public static final String GET_PODCAST_RATINGS =
             "SELECT avg(rating) as rating, podcast_id FROM rates GROUP BY podcast_id;";
+    public static final String ASSIGN_GENRE_TO_SONG = "INSERT INTO has (genre_id, song_id, album_id) VALUES(?, ?, ?)";
+    public static final String GET_GENRES_OF_SONG =
+            "SELECT g.genre_id, name, gtype as genreType " +
+                    "FROM Genre g JOIN has h ON g.genre_id = h.genre_id WHERE h.song_id = ? AND h.album_id = ?";
 }

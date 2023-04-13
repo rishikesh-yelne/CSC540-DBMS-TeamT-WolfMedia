@@ -95,4 +95,10 @@ public class PodcastEpisodeService {
     public boolean assignGuestSpeaker(Long gspeaker_id ,Long pepi_id, Long podcast_id){
         return jdbcTemplate.update(OperationQuery.ASSIGN_GUEST_SPEAKER_TO_PODCAST_EPISODE, gspeaker_id ,pepi_id, podcast_id)>0;
     }
+
+    //increment podcast episode listen count by 1
+    public boolean incrementListenCount(Long podcastEpisodeId, Long podcastId, Long userId) {
+        return jdbcTemplate.update(OperationQuery.INSERT_LISTENS_TO_P, userId, podcastEpisodeId, podcastId) > 0;
+    }
+
 }
