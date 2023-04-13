@@ -2,6 +2,8 @@ package edu.ncsu.csc540.s23.backend.controller;
 
 import edu.ncsu.csc540.s23.backend.model.Podcast;
 import edu.ncsu.csc540.s23.backend.model.Sponsor;
+import edu.ncsu.csc540.s23.backend.model.dto.PodcastRatingDTO;
+import edu.ncsu.csc540.s23.backend.model.relationships.Rates;
 import edu.ncsu.csc540.s23.backend.service.PodcastService;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,4 +39,16 @@ public class PodcastController {
 
     @PatchMapping("/{podcast_id}/{podcast_host_id}")
     public boolean assignPodcastHost(@PathVariable Long podcast_id, @PathVariable Long podcast_host_id){return podcastService.assignPodcastHost(podcast_id, podcast_host_id);}
+
+    @PostMapping("/rate/{podcastId}")
+    public boolean ratePodcast(@PathVariable Long podcastId, @RequestParam Long userId, @RequestParam Double rating) { return this.podcastService.ratePodcast(podcastId, userId, rating); }
+
+    @GetMapping("/rating/{podcastId}")
+    public Double getPodcastRating(@PathVariable Long podcastId) { return this.podcastService.getPodcastRating(podcastId); }
+
+    @GetMapping("/ratings/{podcastId}")
+    public List<Rates> getPodcastRatings(@PathVariable Long podcastId) { return this.podcastService.getPodcastRatings(podcastId); }
+
+    @GetMapping("/ratings")
+    public List<PodcastRatingDTO> getPodcastRatings() { return this.podcastService.getPodcastRatings(); }
 }

@@ -3,6 +3,8 @@ package edu.ncsu.csc540.s23.backend.service;
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.Podcast;
 import edu.ncsu.csc540.s23.backend.model.Sponsor;
+import edu.ncsu.csc540.s23.backend.model.dto.PodcastRatingDTO;
+import edu.ncsu.csc540.s23.backend.model.relationships.Rates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -90,4 +92,19 @@ public class PodcastService {
         return jdbcTemplate.update(OperationQuery.ASSIGN_PODCAST_HOST, podcastHostId, podcastId)>0;
     }
 
+    public boolean ratePodcast(Long podcastId, Long userId, Double rating) {
+        return jdbcTemplate.update(OperationQuery.RATE_PODCAST, podcastId, userId, rating) > 0;
+    }
+
+    public Double getPodcastRating(Long podcastId) {
+        return jdbcTemplate.queryForObject(OperationQuery.GET_PODCAST_RATING_FOR_PODCAST, Double.class, podcastId);
+    }
+
+    public List<Rates> getPodcastRatings(Long podcastId) {
+        return jdbcTemplate.query(OperationQuery.GET_PODCAST_RATINGS_FOR_PODCAST, BeanPropertyRowMapper.newInstance(Rates.class), podcastId);
+    }
+
+    public List<PodcastRatingDTO> getPodcastRatings() {
+        return jdbcTemplate.query(OperationQuery.GET_PODCAST_RATINGS, BeanPropertyRowMapper.newInstance(PodcastRatingDTO.class));
+    }
 }

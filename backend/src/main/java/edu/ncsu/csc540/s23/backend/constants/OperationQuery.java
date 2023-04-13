@@ -137,4 +137,12 @@ public class OperationQuery {
     public static final String GET_SPONSORS_OF_PODCAST =
             "SELECT s.sponsor_id as sponsorId, sfirst_name as sponsorFirstName, slast_name as sponsorLastName, organization, semail as sponsorEmail, scity as sponsorCity " +
                     "FROM Sponsor s JOIN sponsors ss ON s.sponsor_id = ss.sponsor_id WHERE ss.podcast_id = ?";
+    public static final String RATE_PODCAST =
+            "INSERT INTO rates (podcast_id, user_id, rating) VALUES(?, ?, ?);";
+    public static final String GET_PODCAST_RATING_FOR_PODCAST =
+            "SELECT avg(rating) FROM rates WHERE podcast_id=?;";
+    public static final String GET_PODCAST_RATINGS_FOR_PODCAST =
+            "SELECT user_id, podcast_id, rating FROM rates WHERE podcast_id=?;";
+    public static final String GET_PODCAST_RATINGS =
+            "SELECT avg(rating) as rating, podcast_id FROM rates GROUP BY podcast_id;";
 }
