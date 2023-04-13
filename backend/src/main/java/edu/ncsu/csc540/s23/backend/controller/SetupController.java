@@ -18,7 +18,7 @@ public class SetupController {
     public void initializeDatabase() {
         try {
             // drop existing tables
-//            jdbcTemplate.execute(SetupQuery.DROP_TABLE_HOSTED_BY);
+            jdbcTemplate.execute(SetupQuery.DROP_TABLE_HOSTED_BY);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_SPONSORS);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_RATES);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_CONTRIBUTED_TO);
@@ -38,10 +38,10 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_SONG);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_GENRE);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_RECORD_LABEL);
-            jdbcTemplate.execute(SetupQuery.DROP_TABLE_USER);
-            jdbcTemplate.execute(SetupQuery.DROP_TABLE_ALBUM);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_PODCAST_EPISODE);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_PODCAST);
+            jdbcTemplate.execute(SetupQuery.DROP_TABLE_USER);
+            jdbcTemplate.execute(SetupQuery.DROP_TABLE_ALBUM);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_GUEST_SPEAKER);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_SPONSOR);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_ACCOUNTS);
