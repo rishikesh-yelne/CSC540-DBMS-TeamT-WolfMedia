@@ -74,4 +74,8 @@ public class PodcastService {
         return jdbcTemplate.update(OperationQuery.UPDATE_PODCAST, podcast.getPodcastHostId(), podcast.getPodcastName(), podcast.getPodcastLanguage(), podcast.getCountry(), podcast.getPodcastId()) >0 ;
     }
 
+    public boolean assignPodcastHost(Long podcastId, Long podcastHostId){
+        return jdbcTemplate.update(OperationQuery.ASSIGN_PODCAST_HOST, podcastHostId, podcastId)>0;
+    }
+
 }
