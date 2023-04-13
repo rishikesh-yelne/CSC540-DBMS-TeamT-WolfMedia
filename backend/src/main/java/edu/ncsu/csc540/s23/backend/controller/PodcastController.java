@@ -27,4 +27,12 @@ public class PodcastController {
 
     @PatchMapping("/{podcast_id}/{podcast_host_id}")
     public boolean assignPodcastHost(@PathVariable Long podcast_id, @PathVariable Long podcast_host_id){return podcastService.assignPodcastHost(podcast_id, podcast_host_id);}
+
+    //increment subscriber count by 1
+    @PostMapping("/subscribe")
+    public boolean incrementSubscriberCount(@RequestParam(name="user_id") Long userId, @RequestParam(name="podcast_id") Long podcastId) { return podcastService.incrementSubscriberCount(userId, podcastId); }
+
+    //update subscriber count by X
+    @PostMapping("/update-subscribe")
+    public boolean updateSubscribeCount(@RequestParam(name="podcast_id") Long podcastId, @RequestParam(name="count") Long count) { return podcastService.updateSubscriberCount(podcastId, count); }
 }

@@ -39,8 +39,8 @@ public class SongController {
     public boolean deleteSong(@PathVariable Long song_id){return songService.deleteSong(song_id);}
 
     //increment song listen count by 1
-    @PostMapping("/{userId}/listen")
-    public boolean incrementListenCount(@RequestParam(name="song_id") Long songId, @RequestParam(name="album_id") Long albumId, @PathVariable Long userId) { return songService.incrementListenCount(songId, albumId, userId); }
+    @PostMapping()
+    public boolean incrementListenCount(@RequestParam(name="song_id") Long songId, @RequestParam(name="album_id") Long albumId, @RequestParam(name="user_id") Long userId) { return songService.incrementListenCount(songId, albumId, userId); }
 
     //update listen count by X
     @PostMapping("/update-listen")
