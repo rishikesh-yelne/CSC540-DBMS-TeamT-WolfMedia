@@ -127,6 +127,7 @@ public class SongService {
         return rowsAffected>0;
     }
 
+    //increment listen count of song by 1
     public boolean incrementListenCount(Long songId, Long albumId, Long userId) {
         return jdbcTemplate.update(OperationQuery.INSERT_LISTENS_TO, songId, albumId, userId, new Timestamp(System.currentTimeMillis())) > 0;
     }
@@ -142,7 +143,7 @@ public class SongService {
                 ps.setLong(1,songId);
                 ps.setLong(2,albumId);
                 ps.setLong(3,users.get(rand.nextInt(users.size())).getUserId());
-                ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()+i));
+                ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()+i*1000));
 
             }
             @Override
