@@ -1,5 +1,6 @@
 package edu.ncsu.csc540.s23.backend.controller;
 
+import edu.ncsu.csc540.s23.backend.model.Genre;
 import edu.ncsu.csc540.s23.backend.model.Song;
 import edu.ncsu.csc540.s23.backend.model.dto.ArtistSongDTO;
 import edu.ncsu.csc540.s23.backend.model.Sponsor;
@@ -40,4 +41,7 @@ public class SongController {
 
     @PostMapping("/add-genre")
     public boolean assignGenreToSong(@RequestParam Long id, @RequestParam Long song_id, @RequestParam Long album_id) { return songService.assignGenreToSong(id, song_id, album_id); }
+
+    @GetMapping("/has_genre")
+    public List<Genre> getGenreOfSong(@RequestParam Long songId, @RequestParam Long albumId) { return songService.getGenreOfSong(songId, albumId); }
 }
