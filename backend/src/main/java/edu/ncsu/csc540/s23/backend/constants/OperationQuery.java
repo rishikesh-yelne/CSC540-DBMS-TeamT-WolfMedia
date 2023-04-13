@@ -63,6 +63,13 @@ public class OperationQuery {
     public static final String GET_PAYMENT_TO_PH_BY_ID =
             "SELECT sum(acc.amount) FROM Accounts acc JOIN pays_ph pp ON acc.transac_id=pp.transac_id " +
                     "WHERE pp.user_id = ? AND month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";
+    public static final String GET_REVENUE_FOR_MONTH =
+            "SELECT sum(acc.amount) FROM Accounts acc JOIN user_pays up ON acc.transac_id=up.transac_id " +
+                    "WHERE month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";
+    public static final String GET_REVENUE =
+            "SELECT sum(acc.amount) as amount, acc.payment_date " +
+                    "FROM Accounts acc JOIN user_pays up ON acc.transac_id=up.transac_id " +
+                    "GROUP BY acc.payment_date ORDER BY acc.payment_date;";
     public static final String GET_PAYMENTS_TO_RECORD_LABELS =
             "SELECT rl.rlabel_name as RecordLabel, sum(acc.amount)*0.3 as Amount, acc.payment_date as PaymentDate " +
                     "FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +
@@ -148,4 +155,8 @@ public class OperationQuery {
             "SELECT user_id, podcast_id, rating FROM rates WHERE podcast_id=?;";
     public static final String GET_PODCAST_RATINGS =
             "SELECT avg(rating) as rating, podcast_id FROM rates GROUP BY podcast_id;";
+    public static final String ASSIGN_GENRE_TO_SONG = "INSERT INTO has (genre_id, song_id, album_id) VALUES(?, ?, ?)";
+    public static final String GET_GENRES_OF_SONG =
+            "SELECT g.genre_id, name, gtype as genreType " +
+                    "FROM Genre g JOIN has h ON g.genre_id = h.genre_id WHERE h.song_id = ? AND h.album_id = ?";
 }

@@ -1,10 +1,10 @@
 package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
+import edu.ncsu.csc540.s23.backend.model.Genre;
 import edu.ncsu.csc540.s23.backend.model.Song;
 import edu.ncsu.csc540.s23.backend.model.User;
 import edu.ncsu.csc540.s23.backend.model.dto.ArtistSongDTO;
-import edu.ncsu.csc540.s23.backend.model.relationships.ListensTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -137,6 +137,14 @@ public class SongService {
     public boolean deleteSong(Long song_id){
         int rowsAffected=jdbcTemplate.update(OperationQuery.DELETE_SONG, song_id);
         return rowsAffected>0;
+    }
+
+    public boolean assignGenreToSong(Long id, Long songId, Long albumId) {
+        return jdbcTemplate.update(OperationQuery.ASSIGN_GENRE_TO_SONG, id, songId, albumId) > 0;
+    }
+
+    public List<Genre> getGenreOfSong(Long songId, Long albumId) {
+        return jdbcTemplate.query(OperationQuery.GET_GENRES_OF_SONG, BeanPropertyRowMapper.newInstance(Genre.class), songId, albumId);
     }
 
     //increment listen count of song by 1

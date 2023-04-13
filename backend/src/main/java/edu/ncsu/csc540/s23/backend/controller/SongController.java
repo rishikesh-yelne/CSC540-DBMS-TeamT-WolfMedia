@@ -1,5 +1,6 @@
 package edu.ncsu.csc540.s23.backend.controller;
 
+import edu.ncsu.csc540.s23.backend.model.Genre;
 import edu.ncsu.csc540.s23.backend.model.Song;
 import edu.ncsu.csc540.s23.backend.model.dto.ArtistSongDTO;
 import edu.ncsu.csc540.s23.backend.model.Sponsor;
@@ -37,6 +38,12 @@ public class SongController {
 
     @DeleteMapping("/{song_id}")
     public boolean deleteSong(@PathVariable Long song_id){return songService.deleteSong(song_id);}
+
+    @PostMapping("/add-genre")
+    public boolean assignGenreToSong(@RequestParam Long id, @RequestParam Long song_id, @RequestParam Long album_id) { return songService.assignGenreToSong(id, song_id, album_id); }
+
+    @GetMapping("/genre")
+    public List<Genre> getGenreOfSong(@RequestParam Long songId, @RequestParam Long albumId) { return songService.getGenreOfSong(songId, albumId); }
 
     //increment song listen count by 1
     @PostMapping()

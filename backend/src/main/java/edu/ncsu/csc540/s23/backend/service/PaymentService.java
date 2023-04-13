@@ -61,6 +61,10 @@ public class PaymentService {
         return jdbcTemplate.queryForObject(OperationQuery.GET_PAYMENT_TO_PH_BY_ID, Double.class, podcastHostId, month, year);
     }
 
+    public Double getRevenue(int month, int year) {
+        return jdbcTemplate.queryForObject(OperationQuery.GET_REVENUE_FOR_MONTH, Double.class, month, year);
+    }
+
     public List<RecordLabelPaymentDTO> getPaymentToRecordLabels() {
         return jdbcTemplate.query(OperationQuery.GET_PAYMENTS_TO_RECORD_LABELS, BeanPropertyRowMapper.newInstance(RecordLabelPaymentDTO.class));
     }
@@ -71,6 +75,10 @@ public class PaymentService {
 
     public List<PodcastHostPaymentDTO> getPaymentToPodcastHosts() {
         return jdbcTemplate.query(OperationQuery.GET_PAYMENTS_TO_PODCAST_HOSTS, BeanPropertyRowMapper.newInstance(PodcastHostPaymentDTO.class));
+    }
+
+    public List<RevenueDTO> getRevenue() {
+        return jdbcTemplate.query(OperationQuery.GET_REVENUE, BeanPropertyRowMapper.newInstance(RevenueDTO.class));
     }
 
     public String payRecordLabel(Long recordLabelId, Optional<Integer> month, Optional<Integer> year) {
