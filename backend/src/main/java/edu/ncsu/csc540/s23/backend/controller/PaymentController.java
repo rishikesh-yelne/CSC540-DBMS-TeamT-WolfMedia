@@ -60,11 +60,11 @@ public class PaymentController {
         return this.paymentService.payArtist(artistId, month, year);
     }
 
-//    @PostMapping("/pay-podcast-host")
-//    public String payPodcastHost(
-//            @RequestParam Long podcastHostId,
-//            @RequestParam(required = false) Optional<Integer> month,
-//            @RequestParam(required = false) Optional<Integer> year) {
-//        return this.paymentService.payPodcastHost(podcastHostId, month, year);
-//    }
+    @PostMapping("/pay-podcast-host")
+    public String payPodcastHost(
+            @RequestParam Long podcastHostId,
+            @RequestParam(required = false) Optional<Integer> month,
+            @RequestParam(required = false) Optional<Integer> year) {
+        return this.paymentService.payPodcastHost(podcastHostId, month, year);
+    }
 }

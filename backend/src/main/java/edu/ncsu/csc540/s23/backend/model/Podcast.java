@@ -11,6 +11,15 @@ public class Podcast {
     private String podcastLanguage;
 
     private String country;
+    private Double flatFee;
+
+    public Double getFlatFee() {
+        return flatFee;
+    }
+
+    public void setFlatFee(Double flatFee) {
+        this.flatFee = flatFee;
+    }
 
     public Long getPodcastId() {
         return podcastId;
