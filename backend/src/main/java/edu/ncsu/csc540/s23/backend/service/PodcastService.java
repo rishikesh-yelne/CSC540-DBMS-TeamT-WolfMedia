@@ -50,6 +50,7 @@ public class PodcastService {
             statement.setString(2, podcast.getPodcastName());
             statement.setString(3, podcast.getPodcastLanguage());
             statement.setString(4,podcast.getCountry());
+            statement.setDouble(5, podcast.getFlatFee());
 
             int rowsAffected = statement.executeUpdate();
             if(rowsAffected <= 0) throw new SQLException("Podcast creation failed");
@@ -73,6 +74,7 @@ public class PodcastService {
             podcast.setPodcastName(rs.getString(3));
             podcast.setPodcastLanguage(rs.getString(4));
             podcast.setCountry(rs.getString(5));
+            podcast.setFlatFee(rs.getDouble(6));
             return podcast;
         }, id);
     }
