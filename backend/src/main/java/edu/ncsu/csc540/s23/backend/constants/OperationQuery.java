@@ -60,6 +60,13 @@ public class OperationQuery {
     public static final String GET_PAYMENT_TO_PH_BY_ID =
             "SELECT sum(acc.amount) FROM Accounts acc JOIN pays_ph pp ON acc.transac_id=pp.transac_id " +
                     "WHERE pp.user_id = ? AND month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";
+    public static final String GET_REVENUE_FOR_MONTH =
+            "SELECT sum(acc.amount) FROM Accounts acc JOIN user_pays up ON acc.transac_id=up.transac_id " +
+                    "WHERE month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";
+    public static final String GET_REVENUE =
+            "SELECT sum(acc.amount) as amount, acc.payment_date " +
+                    "FROM Accounts acc JOIN user_pays up ON acc.transac_id=up.transac_id " +
+                    "GROUP BY acc.payment_date ORDER BY acc.payment_date;";
     public static final String GET_PAYMENTS_TO_RECORD_LABELS =
             "SELECT rl.rlabel_name as RecordLabel, sum(acc.amount)*0.3 as Amount, acc.payment_date as PaymentDate " +
                     "FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +

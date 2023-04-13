@@ -33,6 +33,11 @@ public class PaymentController {
         return this.paymentService.getPaymentToPodcastHost(id, month, year);
     }
 
+    @GetMapping("/revenue/{month}/{year}")
+    public Double getRevenue(@PathVariable int month, @PathVariable int year) {
+        return this.paymentService.getRevenue(month, year);
+    }
+
     @GetMapping("/record-labels")
     public List<RecordLabelPaymentDTO> getPaymentToRecordLabels() { return this.paymentService.getPaymentToRecordLabels(); }
 
@@ -43,6 +48,9 @@ public class PaymentController {
 
     @GetMapping("/podcast-hosts")
     public List<PodcastHostPaymentDTO> getPaymentToPodcastHosts() { return this.paymentService.getPaymentToPodcastHosts(); }
+
+    @GetMapping("/revenue")
+    public List<RevenueDTO> getRevenue() { return this.paymentService.getRevenue(); }
 
     @PostMapping("/pay-record-label")
     public String payRecordLabel(
