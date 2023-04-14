@@ -75,4 +75,9 @@ public class PaymentController {
             @RequestParam(required = false) Optional<Integer> year) {
         return this.paymentService.payPodcastHost(podcastHostId, month, year);
     }
+
+    @PostMapping("/pay-subscription")
+    public String paySubscription(@RequestBody PaySubscriptionDTO payload) {
+        return this.paymentService.paySubscription(payload);
+    }
 }
