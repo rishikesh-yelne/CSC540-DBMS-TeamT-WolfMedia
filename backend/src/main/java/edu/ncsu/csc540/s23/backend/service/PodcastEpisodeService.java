@@ -2,22 +2,28 @@ package edu.ncsu.csc540.s23.backend.service;
 
 import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.PodcastEpisode;
+import edu.ncsu.csc540.s23.backend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class PodcastEpisodeService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    private UserService userService;
+
+    public PodcastEpisodeService(UserService userService) {
+        this.userService = userService;
+    }
 
     private Connection getConnection() {
         try {
@@ -99,6 +105,30 @@ public class PodcastEpisodeService {
     //increment podcast episode listen count by 1
     public boolean incrementListenCount(Long podcastEpisodeId, Long podcastId, Long userId) {
         return jdbcTemplate.update(OperationQuery.INSERT_LISTENS_TO_P, userId, podcastEpisodeId, podcastId) > 0;
+    }
+
+    //increment podcast episode listen count by X
+    public boolean updateListenCount(Long podcastEpisodeId, Long podcastId, Long count) {
+
+        List<User> users = this.userService.getAllUsers();
+
+        int[] rowsAffected = jdbcTemplate.batchUpdate(OperationQuery.INSERT_LISTENS_TO_P, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                Random rand = new Random();
+                ps.setLong(1, users.get(rand.nextInt(users.size())).getUserId());
+                ps.setLong(2, podcastEpisodeId);
+                ps.setLong(3,podcastId);
+                ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()+i*1000));
+            }
+
+            @Override
+            public int getBatchSize() {
+                return Math.toIntExact(count);
+            }
+        });
+        return rowsAffected.length>0;
+
     }
 
 }
