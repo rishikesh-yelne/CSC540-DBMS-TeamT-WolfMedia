@@ -120,6 +120,9 @@ public class OperationQuery {
     public static final String CHECK_IF_PODCAST_HOST_PAYMENT_EXISTS =
             "SELECT count(pp.transac_id) > 0 FROM pays_ph pp JOIN Accounts acc ON pp.transac_id=acc.transac_id " +
                     "WHERE pp.user_id=? AND pp.podcast_id=? AND pp.pepi_id=? AND month(acc.payment_date)=? AND year(acc.payment_date)=?;";
+    public static final String CHECK_IF_USER_PLAN_ACTIVE =
+            "SELECT count(up.transac_id) > 0 FROM user_pays up JOIN Accounts acc ON up.transac_id=acc.transac_id " +
+                    "WHERE up.user_id=? AND month(acc.payment_date)=? AND year(acc.payment_date)=?;";
     public static final String INSERT_ACCOUNTS =
             "INSERT INTO Accounts (amount, payer, payee, payment_date) VALUES (?, ?, ?, ?);";
     public static final String PAY_RECORD_LABEL =
@@ -128,6 +131,8 @@ public class OperationQuery {
             "INSERT INTO pays_artist (transac_id, rlabel_id, user_id, song_id, album_id) VALUES (?, ?, ?, ?, ?);";
     public static final String PAY_PODCAST_HOST =
             "INSERT INTO pays_ph (transac_id, podcast_id, pepi_id, user_id) VALUES(?, ?, ?, ?);";
+    public static final String PAY_SERVICE =
+            "INSERT INTO user_pays (transac_id, user_id, plan, amount, num_months, start_date) VALUES(?, ?, ?, ?, ?, ?);";
     public static final String GET_SONG_PLAY_COUNT_FOR_MONTH =
             "SELECT COUNT(*) FROM listens_to " +
                     "WHERE song_id=? AND album_id=? AND month(timestamp)=? AND year(timestamp)=?;";
