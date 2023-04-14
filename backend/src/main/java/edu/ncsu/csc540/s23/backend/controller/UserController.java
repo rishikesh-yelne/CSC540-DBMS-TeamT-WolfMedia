@@ -60,4 +60,7 @@ public class UserController {
     //delete podcast host
     @DeleteMapping("/{id}/podcast-host")
     public boolean deletePodcastHost(@PathVariable Long id) { return userService.deletePodcastHost(id); }
+
+    @PatchMapping("/{genreId}/{artistId}")
+    public boolean assignGenreToArtist(@PathVariable Long genreId, @PathVariable Long artistId){return userService.assignGenreToArtist(genreId, artistId);}
 }

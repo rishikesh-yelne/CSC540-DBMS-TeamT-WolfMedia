@@ -32,4 +32,7 @@ public class PodcastEpisodeController {
 
     @DeleteMapping("/{id}")
     public boolean deletePodcastEpisode(@PathVariable Long id) { return podcastEpisodeService.deletePodcastEpisode(id); }
+
+    @PatchMapping("/{guestSpeakerId}/{podcastEpisodeId}/{podcastId}")
+    public boolean assignGuestSpeaker(@PathVariable Long gspeaker_id ,@PathVariable Long pepi_id, @PathVariable Long podcast_id){return podcastEpisodeService.assignGuestSpeaker(gspeaker_id ,pepi_id, podcast_id);}
 }
