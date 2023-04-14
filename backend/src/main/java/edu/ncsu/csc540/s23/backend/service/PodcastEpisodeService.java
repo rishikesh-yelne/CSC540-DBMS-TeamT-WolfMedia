@@ -104,7 +104,7 @@ public class PodcastEpisodeService {
 
     //increment podcast episode listen count by 1
     public boolean incrementListenCount(Long podcastEpisodeId, Long podcastId, Long userId) {
-        return jdbcTemplate.update(OperationQuery.INSERT_LISTENS_TO_P, userId, podcastEpisodeId, podcastId) > 0;
+        return jdbcTemplate.update(OperationQuery.INSERT_LISTENS_TO_P, userId, podcastEpisodeId, podcastId, new Timestamp(System.currentTimeMillis())) > 0;
     }
 
     //increment podcast episode listen count by X
