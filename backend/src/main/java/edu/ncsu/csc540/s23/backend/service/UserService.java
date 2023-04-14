@@ -4,6 +4,10 @@ import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.Artist;
 import edu.ncsu.csc540.s23.backend.model.PodcastHost;
 import edu.ncsu.csc540.s23.backend.model.User;
+import edu.ncsu.csc540.s23.backend.model.dto.AlbumMonthlyPlayCount;
+import edu.ncsu.csc540.s23.backend.model.dto.AlbumPlayCount;
+import edu.ncsu.csc540.s23.backend.model.dto.ArtistMonthlyPlayCount;
+import edu.ncsu.csc540.s23.backend.model.dto.ArtistPlayCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -207,5 +212,21 @@ public class UserService {
 
     public boolean assignGenreToArtist(Long genreId, Long artistId){
         return jdbcTemplate.update(OperationQuery.ASSIGN_PRIMARY_GENRE_TO_ARTIST, genreId, artistId)>0;
+    }
+
+
+    public List<ArtistMonthlyPlayCount> getPlayCount(Long artistId, int month, int year) {
+        String query;
+        if (month < LocalDate.now().getMonth().getValue()
+                && year <= LocalDate.now().getYear()) {
+            query = OperationQuery.GET_ARTIST_HISTORICAL_PLAY_COUNT_FOR_MONTH;
+        } else {
+            query = OperationQuery.GET_ARTIST_PLAY_COUNT_FOR_MONTH;
+        }
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(ArtistMonthlyPlayCount.class), artistId, month, year);
+    }
+
+    public List<ArtistPlayCount> getPlayCount(Long artistId) {
+        return jdbcTemplate.query(OperationQuery.GET_ARTIST_PLAY_COUNT, BeanPropertyRowMapper.newInstance(ArtistPlayCount.class), artistId, artistId);
     }
 }

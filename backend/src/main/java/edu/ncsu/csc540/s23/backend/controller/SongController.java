@@ -5,6 +5,7 @@ import edu.ncsu.csc540.s23.backend.model.Song;
 import edu.ncsu.csc540.s23.backend.model.dto.ArtistSongDTO;
 import edu.ncsu.csc540.s23.backend.model.Sponsor;
 import edu.ncsu.csc540.s23.backend.model.User;
+import edu.ncsu.csc540.s23.backend.model.dto.SongPlayCount;
 import edu.ncsu.csc540.s23.backend.service.SongService;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,4 +56,20 @@ public class SongController {
 
     @PatchMapping("/assign-artist")
     public boolean assignArtistToSong(@RequestParam(name = "song_id") Long song_id, @RequestParam Long album_id, @RequestParam() Long user_id, @RequestParam Long is_main){return songService.assignArtistToSong(song_id, album_id, user_id, is_main);}
+
+    @GetMapping("/play-count/{month}/{year}")
+    public Long getPlayCount(
+            @RequestParam Long songId,
+            @RequestParam Long albumId,
+            @PathVariable int month,
+            @PathVariable int year) {
+        return this.songService.getPlayCount(songId, albumId, month, year);
+    }
+
+    @GetMapping("/play-count")
+    public List<SongPlayCount> getPlayCount(
+            @RequestParam Long songId,
+            @RequestParam Long albumId) {
+        return this.songService.getPlayCount(songId, albumId);
+    }
 }

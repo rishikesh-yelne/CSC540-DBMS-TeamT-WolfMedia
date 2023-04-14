@@ -5,13 +5,16 @@ import edu.ncsu.csc540.s23.backend.model.Genre;
 import edu.ncsu.csc540.s23.backend.model.Song;
 import edu.ncsu.csc540.s23.backend.model.User;
 import edu.ncsu.csc540.s23.backend.model.dto.ArtistSongDTO;
+import edu.ncsu.csc540.s23.backend.model.dto.SongPlayCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
@@ -126,10 +129,6 @@ public class SongService {
         return rowsAffected>0;
     }
 
-    public Long getPlayCount(Long songId, Long albumId, int month, int year) {
-        return jdbcTemplate.queryForObject(OperationQuery.GET_SONG_PLAY_COUNT_FOR_MONTH, Long.class, songId, albumId, month, year);
-    }
-
     public Long getArtistCount(Long songId, Long albumId) {
         return jdbcTemplate.queryForObject(OperationQuery.GET_SONG_ARTIST_COUNT, Long.class, songId, albumId);
     }
@@ -181,5 +180,20 @@ public class SongService {
             }
         });
         return rowsAffected.length>0;
+    }
+
+    public Long getPlayCount(Long songId, Long albumId, int month, int year) {
+        String query;
+        if (month < LocalDate.now().getMonth().getValue()
+                && year <= LocalDate.now().getYear()) {
+            query = OperationQuery.GET_HISTORIC_PLAY_COUNT_FOR_SONG_AND_MONTH;
+        } else {
+            query = OperationQuery.GET_PLAY_COUNT_FOR_SONG_AND_MONTH;
+        }
+        return jdbcTemplate.queryForObject(query, Long.class, songId, albumId, month, year);
+    }
+
+    public List<SongPlayCount> getPlayCount(Long songId, Long albumId) {
+        return jdbcTemplate.query(OperationQuery.GET_PLAY_COUNT_FOR_SONG, BeanPropertyRowMapper.newInstance(SongPlayCount.class), songId, albumId, songId, albumId);
     }
 }
