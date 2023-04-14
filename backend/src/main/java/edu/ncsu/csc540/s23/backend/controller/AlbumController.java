@@ -17,16 +17,19 @@ public class AlbumController {
         this.albumService = albumService;
     }
 
+//    gets all albums
     @GetMapping("/all")
     public List<Album> getAllAlbums() {
         return albumService.getAllAlbums();
     }
 
+//    gets album by id
     @GetMapping("/{id}")
     public Album getAlbum(@PathVariable Long id) {
         return albumService.getAlbum(id);
     }
 
+//    adds a new album
     @PostMapping("/add")
     public Long addAlbum(@RequestBody Album album) {
         return albumService.createNewAlbum(album);
