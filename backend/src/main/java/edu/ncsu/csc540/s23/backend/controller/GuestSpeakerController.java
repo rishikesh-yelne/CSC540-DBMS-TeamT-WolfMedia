@@ -17,12 +17,15 @@ public class GuestSpeakerController {
 
     public GuestSpeakerController(GuestSpeakerService guestSpeakerService) { this.guestSpeakerService = guestSpeakerService;}
 
+//    gets all guest speakers
     @GetMapping("/all")
     public List<GuestSpeaker> getAllGuestSpeakers() { return guestSpeakerService.getAllGuestSpeakers(); }
 
+//    gets a guest speaker by id
     @GetMapping("/{id}")
     public GuestSpeaker getGuestSpeaker(@PathVariable Long id) { return guestSpeakerService.getGuestSpeaker(id); }
 
+//    adds a new guest speaker
     @PostMapping("/add")
     public Long addGuestSpeaker(@RequestBody GuestSpeaker guestSpeaker) { return guestSpeakerService.createNewGuestSpeaker(guestSpeaker); }
 }
