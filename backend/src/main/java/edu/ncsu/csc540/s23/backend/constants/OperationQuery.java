@@ -53,7 +53,10 @@ public class OperationQuery {
     public static final String UPDATE_PODCAST_HOST = "UPDATE User u JOIN Podcast_Host ph ON u.user_id=ph.user_id SET first_name=?, last_name=?, email_id=?, phone_num=?, reg_date=?, city=? WHERE ph.user_id=?";
     public static final String DELETE_SONG = "DELETE FROM Song WHERE song_id=?;";
     public static final String ASSIGN_PODCAST_HOST = "UPDATE Podcast SET user_id=? WHERE podcast_id=?;";
-
+    public static final String ASSIGN_ARTIST_TO_SONG = "INSERT INTO performed_by (song_id, album_id, user_id, is_main) VALUES (?, ?, ?, ?)";
+    public static final String ASSIGN_PRIMARY_GENRE_TO_ARTIST="UPDATE User u JOIN Artist a ON u.user_id=a.user_id SET primary_genre_id=? WHERE a.user_id=?;";
+    public static final String ASSIGN_GUEST_SPEAKER_TO_PODCAST_EPISODE = "INSERT INTO episode_has (gspeaker_id ,pepi_id, podcast_id) VALUES (?, ?, ?)";
+    public static final String CHECK_IF_SONG_HAS_MAIN="SELECT count(song_id)>0 FROM performed_by WHERE song_id=? AND album_id=? AND is_main=1;";
     public static final String GET_PAYMENT_TO_RL_BY_ID =
             "SELECT sum(acc.amount)*0.3 FROM Accounts acc JOIN pays_record pr ON acc.transac_id=pr.transac_id " +
                     "WHERE pr.rlabel_id = ? AND month(acc.payment_date) = ? AND year(acc.payment_date) = ?;";
@@ -120,6 +123,9 @@ public class OperationQuery {
     public static final String CHECK_IF_PODCAST_HOST_PAYMENT_EXISTS =
             "SELECT count(pp.transac_id) > 0 FROM pays_ph pp JOIN Accounts acc ON pp.transac_id=acc.transac_id " +
                     "WHERE pp.user_id=? AND pp.podcast_id=? AND pp.pepi_id=? AND month(acc.payment_date)=? AND year(acc.payment_date)=?;";
+    public static final String CHECK_IF_USER_PLAN_ACTIVE =
+            "SELECT count(up.transac_id) > 0 FROM user_pays up JOIN Accounts acc ON up.transac_id=acc.transac_id " +
+                    "WHERE up.user_id=? AND month(acc.payment_date)=? AND year(acc.payment_date)=?;";
     public static final String INSERT_ACCOUNTS =
             "INSERT INTO Accounts (amount, payer, payee, payment_date) VALUES (?, ?, ?, ?);";
     public static final String PAY_RECORD_LABEL =
@@ -128,6 +134,8 @@ public class OperationQuery {
             "INSERT INTO pays_artist (transac_id, rlabel_id, user_id, song_id, album_id) VALUES (?, ?, ?, ?, ?);";
     public static final String PAY_PODCAST_HOST =
             "INSERT INTO pays_ph (transac_id, podcast_id, pepi_id, user_id) VALUES(?, ?, ?, ?);";
+    public static final String PAY_SERVICE =
+            "INSERT INTO user_pays (transac_id, user_id, plan, amount, num_months, start_date) VALUES(?, ?, ?, ?, ?, ?);";
     public static final String GET_SONG_PLAY_COUNT_FOR_MONTH =
             "SELECT COUNT(*) FROM listens_to " +
                     "WHERE song_id=? AND album_id=? AND month(timestamp)=? AND year(timestamp)=?;";

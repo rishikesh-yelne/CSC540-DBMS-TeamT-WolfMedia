@@ -7,16 +7,11 @@ import edu.ncsu.csc540.s23.backend.model.Sponsor;
 import edu.ncsu.csc540.s23.backend.model.dto.PodcastRatingDTO;
 import edu.ncsu.csc540.s23.backend.model.relationships.Rates;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Random;
 
@@ -123,23 +118,28 @@ public class PodcastService {
         return jdbcTemplate.update(OperationQuery.INSERT_SUBSCRIBES_TO, userId, podcastId) > 0;
     }
 
-    //increment subscriber count by X
-//    public boolean updateSubscriberCount(Long podcastId, Long count) {
-//        List<User> users = this.userService.getAllUsers();
-//
-//        int[] rowsAffected = jdbcTemplate.batchUpdate(OperationQuery.INSERT_SUBSCRIBES_TO, new BatchPreparedStatementSetter() {
-//            @Override
-//            public void setValues(PreparedStatement ps, int i) throws SQLException {
-//                Random rand = new Random();
-//                ps.setLong(1, users.get(rand.nextInt(users.size())).getUserId());
-//                ps.setLong(2, podcastId);
-//            }
-//
-//            @Override
-//            public int getBatchSize() {
-//                return Math.toIntExact(count);
-//            }
-//        });
-//        return rowsAffected.length>0;
-//    }
+    public String updateSubscriberCount(Long podcastId, int count) {
+        StringBuffer result = new StringBuffer();
+        Random random = new Random();
+        for (int i = 0; i < count; i++) {
+            User user = new User();
+            user.setFirstName("Dummy");
+            user.setLastName("User" + System.currentTimeMillis());
+            user.setEmailId(user.getFirstName() + "." + user.getLastName() + "@ncsu.edu");
+            user.setPhoneNum("+1("
+                    + (100 + random.nextInt(999 - 100) + 1)
+                    + ")"
+                    + (100 + random.nextInt(999 - 100) + 1)
+                    + "-"
+                    + (1000 + random.nextInt(9999 - 1000) + 1));
+            user.setRegDate(new Date(System.currentTimeMillis()));
+            Long userId = this.userService.createNewUser(user);
+
+            boolean success = incrementSubscriberCount(userId, podcastId);
+            result.append(success
+                    ? "User " + user.getFirstName() + " " + user.getLastName() + " subscribed to the podcast.\n"
+                    : "User subscription failed");
+        }
+        return result.toString();
+    }
 }

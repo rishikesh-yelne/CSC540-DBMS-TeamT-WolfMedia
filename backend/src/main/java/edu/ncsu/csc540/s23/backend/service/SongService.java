@@ -139,6 +139,15 @@ public class SongService {
         return rowsAffected>0;
     }
 
+    public boolean assignArtistToSong(Long song_id, Long album_id, Long user_id, Long is_main){
+        if (is_main==1){
+            if (Boolean.TRUE.equals(jdbcTemplate.queryForObject(OperationQuery.CHECK_IF_SONG_HAS_MAIN, Boolean.class, song_id, album_id))) {
+                return false;
+            }
+        }
+        return jdbcTemplate.update(OperationQuery.ASSIGN_ARTIST_TO_SONG, song_id, album_id, user_id, is_main)>0;
+    }
+
     public boolean assignGenreToSong(Long id, Long songId, Long albumId) {
         return jdbcTemplate.update(OperationQuery.ASSIGN_GENRE_TO_SONG, id, songId, albumId) > 0;
     }

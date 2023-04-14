@@ -39,4 +39,7 @@ public class PodcastEpisodeController {
 
     @PostMapping("/update-listen")
     public boolean updateListenCount(@RequestParam(name="pepi_id") Long podcastEpisodeId, @RequestParam(name="podcast_id") Long podcastId, @RequestParam(name="count") Long count) { return updateListenCount(podcastEpisodeId, podcastId, count); }
+
+    @PatchMapping("/{guestSpeakerId}/{podcastEpisodeId}/{podcastId}")
+    public boolean assignGuestSpeaker(@PathVariable Long gspeaker_id ,@PathVariable Long pepi_id, @PathVariable Long podcast_id){return podcastEpisodeService.assignGuestSpeaker(gspeaker_id ,pepi_id, podcast_id);}
 }

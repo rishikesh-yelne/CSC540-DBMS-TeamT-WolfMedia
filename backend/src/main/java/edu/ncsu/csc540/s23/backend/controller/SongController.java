@@ -21,8 +21,8 @@ public class SongController {
     @GetMapping("/all")
     public List<Song> getAllSongs() { return songService.getAllSongs(); }
 
-    @GetMapping()
-    public Song getSong(@RequestParam(name = "song_id") Long song_id, @RequestParam Long album_id) { return songService.getSong(song_id, album_id); }
+    @GetMapping("/{song_id}/{album_id}")
+    public Song getSong(@PathVariable Long song_id, @PathVariable Long album_id) { return songService.getSong(song_id, album_id); }
 
     @PostMapping("/add")
     public Long addSong(@RequestBody Song song) { return songService.createNewSong(song); }
@@ -33,7 +33,7 @@ public class SongController {
     @GetMapping("/album/{albumId}")
     public List<Song> getSongsByAlbum(@PathVariable Long albumId) { return songService.getSongsByAlbum(albumId); }
 
-    @PutMapping()
+    @PutMapping("/update")
     public boolean updateSong(@RequestBody Song song){return songService.updateSong(song);}
 
     @DeleteMapping("/{song_id}")
@@ -52,4 +52,7 @@ public class SongController {
     //update listen count by X
     @PostMapping("/update-listen")
     public boolean updateListenCount(@RequestParam(name="song_id") Long songId, @RequestParam(name="album_id") Long albumId, @RequestParam(name="count") Long count) { return songService.updateListenCount(songId, albumId, count); }
+
+    @PatchMapping("/assign-artist")
+    public boolean assignArtistToSong(@RequestParam(name = "song_id") Long song_id, @RequestParam Long album_id, @RequestParam() Long user_id, @RequestParam Long is_main){return songService.assignArtistToSong(song_id, album_id, user_id, is_main);}
 }

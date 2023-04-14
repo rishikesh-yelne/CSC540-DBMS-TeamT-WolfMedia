@@ -420,6 +420,92 @@ public class PaymentService {
         return Boolean.TRUE.equals(jdbcTemplate.queryForObject(OperationQuery.CHECK_IF_PODCAST_HOST_PAYMENT_EXISTS, Boolean.class, podcastHostId, podcastId, podcastEpisodeId, month, year));
     }
 
+    public String paySubscription(PaySubscriptionDTO payload) {
+        boolean planActive = checkIfUserPlanActive(payload.getUserId());
+        if (planActive) return "User's plan is already active, no need to pay subscription again";
+
+        // if 0 amount, no need to make payment
+        if (payload.getAmount() == 0D) return "Payment amount is 0. Payment failed.";
+
+        User user = this.userService.getUser(payload.getUserId());
+
+        PayServiceDTO payment = new PayServiceDTO();
+
+        payment.setAmount(payload.getAmount());
+        payment.setPayer("WolfMedia");
+        payment.setPayee(user.getFirstName() + " " + user.getLastName());
+        payment.setPaymentDate(Date.valueOf(LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1)));
+
+        payment.setUserId(payload.getUserId());
+        payment.setPlan("Monthly");
+        payment.setAmount(payload.getAmount());
+        payment.setNumOfMonths(1);
+        payment.setStartDate(new Date(System.currentTimeMillis()));
+
+        try {
+            makePaymentToService(payment);
+            return "Payment successful. User is now subscribed to the streaming service.";
+        } catch (SQLException sqlEx) {
+            return "Payment failed the user. Error : " + sqlEx.getMessage();
+        }
+    }
+
+    private void makePaymentToService(PayServiceDTO payment) throws SQLException {
+        String query_User = OperationQuery.INSERT_ACCOUNTS;
+        String[] generatedColumns = { "transac_id" };
+        String query_user_pays = OperationQuery.PAY_SERVICE;
+
+        Connection connection = getConnection();
+
+        try (
+                PreparedStatement statement1 = connection.prepareStatement(query_User, generatedColumns);
+                PreparedStatement statement2 = connection.prepareStatement(query_user_pays);
+        ) {
+            connection.setAutoCommit(false);
+
+            statement1.setDouble(1, payment.getAmount());
+            statement1.setString(2, payment.getPayer());
+            statement1.setString(3, payment.getPayee());
+            statement1.setDate(4, payment.getPaymentDate());
+
+            int rowsAffected1 = statement1.executeUpdate();
+            if (rowsAffected1 <= 0) throw new SQLException("Transaction failed");
+
+            long transacId = -1L;
+            ResultSet result = statement1.getGeneratedKeys();
+            if (result.next()) {
+                transacId = result.getLong(1);
+            }
+            result.close();
+
+            if (transacId == -1L) throw new SQLException("Transaction not created");
+
+            statement2.setLong(1, transacId);
+            statement2.setLong(2, payment.getUserId());
+            statement2.setString(3, payment.getPlan());
+            statement2.setDouble(4, payment.getAmount());
+            statement2.setInt(5, payment.getNumOfMonths());
+            statement2.setDate(6, payment.getStartDate());
+
+            int rowsAffected2 = statement2.executeUpdate();
+            if (rowsAffected2 <= 0) throw new SQLException("Transaction failed");
+
+            connection.commit();
+        } catch (SQLException sqlEx) {
+            if (connection != null) {
+                connection.rollback();
+            }
+        } finally {
+            if (connection != null) {
+                connection.setAutoCommit(true);
+            }
+        }
+    }
+
+    private boolean checkIfUserPlanActive(Long userId) {
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(OperationQuery.CHECK_IF_USER_PLAN_ACTIVE, Boolean.class, userId, LocalDate.now().getMonth().getValue(), LocalDate.now().getYear()));
+    }
+
     private int getLastDateOfMonth(int month, int year) {
         return switch (month) {
             case 1, 3, 5, 7, 8, 10, 12 -> 31;
@@ -428,5 +514,4 @@ public class PaymentService {
             default -> 28; // 28th would be present in all the months, safe case
         };
     }
-
 }
