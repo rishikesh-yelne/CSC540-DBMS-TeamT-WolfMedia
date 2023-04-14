@@ -4,15 +4,19 @@ import edu.ncsu.csc540.s23.backend.constants.OperationQuery;
 import edu.ncsu.csc540.s23.backend.model.Album;
 import edu.ncsu.csc540.s23.backend.model.Genre;
 import edu.ncsu.csc540.s23.backend.model.Song;
+import edu.ncsu.csc540.s23.backend.model.dto.AlbumMonthlyPlayCount;
+import edu.ncsu.csc540.s23.backend.model.dto.AlbumPlayCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -76,5 +80,20 @@ public class AlbumService {
         }catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }
+    }
+
+    public List<AlbumMonthlyPlayCount> getPlayCount(Long albumId, int month, int year) {
+        String query;
+        if (month < LocalDate.now().getMonth().getValue()
+                && year <= LocalDate.now().getYear()) {
+            query = OperationQuery.GET_ALBUM_HISTORICAL_PLAY_COUNT_FOR_MONTH;
+        } else {
+            query = OperationQuery.GET_ALBUM_PLAY_COUNT_FOR_MONTH;
+        }
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(AlbumMonthlyPlayCount.class), albumId, month, year);
+    }
+
+    public List<AlbumPlayCount> getPlayCount(Long albumId) {
+        return jdbcTemplate.query(OperationQuery.GET_ALBUM_PLAY_COUNT, BeanPropertyRowMapper.newInstance(AlbumPlayCount.class), albumId, albumId);
     }
 }

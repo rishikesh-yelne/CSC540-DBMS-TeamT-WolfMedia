@@ -136,9 +136,20 @@ public class OperationQuery {
             "INSERT INTO pays_ph (transac_id, podcast_id, pepi_id, user_id) VALUES(?, ?, ?, ?);";
     public static final String PAY_SERVICE =
             "INSERT INTO user_pays (transac_id, user_id, plan, amount, num_months, start_date) VALUES(?, ?, ?, ?, ?, ?);";
-    public static final String GET_SONG_PLAY_COUNT_FOR_MONTH =
-            "SELECT COUNT(*) FROM listens_to " +
+    public static final String GET_PLAY_COUNT_FOR_SONG_AND_MONTH =
+            "SELECT COUNT(*) as playCount FROM listens_to " +
                     "WHERE song_id=? AND album_id=? AND month(timestamp)=? AND year(timestamp)=?;";
+    public static final String GET_HISTORIC_PLAY_COUNT_FOR_SONG_AND_MONTH =
+            "SELECT play_count as playCount FROM Historical_Song_Count " +
+                    "WHERE song_id=? AND album_id=? AND month(month)=? AND year(month)=?;";
+    public static final String GET_PLAY_COUNT_FOR_SONG =
+            "SELECT play_count as playCount, month(month) as month, year(month) as year FROM Historical_Song_Count " +
+                    "WHERE song_id=? AND album_id=? " +
+                    "GROUP BY month(month), year(month) " +
+                    "UNION " +
+            "SELECT COUNT(*) as playCount, month(timestamp) as month, year(timestamp) as year FROM listens_to " +
+                    "WHERE song_id=? AND album_id=? " +
+                    "GROUP BY month(timestamp), year(timestamp) ";
     public static final String GET_SONG_ARTIST_COUNT =
             "SELECT COUNT(*) FROM performed_by " +
                     "WHERE song_id=? AND album_id=?;";
@@ -167,4 +178,43 @@ public class OperationQuery {
     public static final String GET_GENRES_OF_SONG =
             "SELECT g.genre_id, name, gtype as genreType " +
                     "FROM Genre g JOIN has h ON g.genre_id = h.genre_id WHERE h.song_id = ? AND h.album_id = ?";
+    public static final String GET_ALBUM_PLAY_COUNT_FOR_MONTH =
+            "select count(*) as playCount, s.song_id " +
+                    "from Song s join listens_to lt on s.song_id = lt.song_id " +
+                    "where s.album_id=? and month(lt.timestamp)=? and year(lt.timestamp)=?;";
+    public static final String GET_ALBUM_HISTORICAL_PLAY_COUNT_FOR_MONTH =
+            "select play_count as playCount, h.song_id " +
+                    "from Historical_Song_Count h " +
+                    "where h.album_id=? and month(h.month)=? and year(h.month)=?;";
+    public static final String GET_ALBUM_PLAY_COUNT =
+            "select play_count as playCount, h.song_id as songId, month(month) as month, year(month) as year " +
+                    "from Historical_Song_Count h " +
+                    "where h.album_id=? " +
+                    "group by month(h.month), year(h.month) " +
+                    "union " +
+                    "select count(*) as playCount, s.song_id as songId, month(lt.timestamp) as month, year(lt.timestamp) as year " +
+                    "from Song s join listens_to lt on s.song_id = lt.song_id " +
+                    "where s.album_id=? group by month(lt.timestamp), year(lt.timestamp);";
+    public static final String GET_ARTIST_PLAY_COUNT_FOR_MONTH =
+            "SELECT COUNT(*) as playCount, pb.song_id as songId, pb.album_id as albumId " +
+                    "FROM performed_by pb JOIN listens_to lt ON pb.song_id=lt.song_id AND pb.album_id=lt.album_id " +
+                    "WHERE pb.user_id=? AND month(lt.timestamp)=? AND year(lt.timestamp)=?;";
+    public static final String GET_ARTIST_HISTORICAL_PLAY_COUNT_FOR_MONTH =
+            "SELECT play_count as playCount, h.song_id as songId, h.album_id " +
+                    "FROM Historical_Song_Count h JOIN performed_by pb " +
+                    "ON h.song_id=pb.song_id AND h.album_id=pb.album_id " +
+                    "WHERE pb.user_id=? AND month(h.month)=? AND year(h.month)=?;";
+    public static final String GET_ARTIST_PLAY_COUNT =
+            "select play_count as playCount, h.song_id as songId, h.album_id as albumId, month(h.month) as month, year(h.month) as year from Historical_Song_Count h " +
+                    "join performed_by pb " +
+                    "on h.song_id = pb.song_id " +
+                    "and h.album_id = pb.album_id " +
+                    "where pb.user_id=? " +
+                    "group by month(h.month), year(h.month), songId, albumId " +
+                    "union " +
+                    "select count(*) as playCount, performed_by.song_id as songId, performed_by.album_id as albumId, month(lt.timestamp) as month, year(lt.timestamp) as year from performed_by " +
+                    "join listens_to lt " +
+                    "on performed_by.song_id = lt.song_id " +
+                    "and performed_by.album_id = lt.album_id where performed_by.user_id=? " +
+                    "group by month(lt.timestamp), year(lt.timestamp), songId, albumId";
 }
