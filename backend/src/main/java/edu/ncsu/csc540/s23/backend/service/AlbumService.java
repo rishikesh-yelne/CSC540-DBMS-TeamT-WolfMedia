@@ -82,7 +82,7 @@ public class AlbumService {
         }
     }
 
-    public AlbumMonthlyPlayCount getPlayCount(Long albumId, int month, int year) {
+    public List<AlbumMonthlyPlayCount> getPlayCount(Long albumId, int month, int year) {
         String query;
         if (month < LocalDate.now().getMonth().getValue()
                 && year < LocalDate.now().getYear()) {
@@ -90,12 +90,7 @@ public class AlbumService {
         } else {
             query = OperationQuery.GET_ALBUM_PLAY_COUNT_FOR_MONTH;
         }
-        return jdbcTemplate.queryForObject(query, (rs, rowNum) -> {
-            AlbumMonthlyPlayCount playCount = new AlbumMonthlyPlayCount();
-            playCount.setPlayCount(rs.getLong(1));
-            playCount.setSongId(rs.getLong(2));
-            return playCount;
-        }, albumId, month, year);
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(AlbumMonthlyPlayCount.class), albumId, month, year);
     }
 
     public List<AlbumPlayCount> getPlayCount(Long albumId) {

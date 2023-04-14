@@ -35,7 +35,7 @@ public class AlbumController {
     }
 
     @GetMapping("/play-count/{month}/{year}")
-    public AlbumMonthlyPlayCount getPlayCount(
+    public List<AlbumMonthlyPlayCount> getPlayCount(
             @RequestParam Long albumId,
             @PathVariable int month,
             @PathVariable int year) {

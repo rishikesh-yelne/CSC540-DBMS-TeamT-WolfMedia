@@ -3,6 +3,8 @@ package edu.ncsu.csc540.s23.backend.controller;
 import edu.ncsu.csc540.s23.backend.model.Artist;
 import edu.ncsu.csc540.s23.backend.model.PodcastHost;
 import edu.ncsu.csc540.s23.backend.model.User;
+import edu.ncsu.csc540.s23.backend.model.dto.ArtistMonthlyPlayCount;
+import edu.ncsu.csc540.s23.backend.model.dto.ArtistPlayCount;
 import edu.ncsu.csc540.s23.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,4 +65,17 @@ public class UserController {
 
     @PatchMapping("/{genreId}/{artistId}")
     public boolean assignGenreToArtist(@PathVariable Long genreId, @PathVariable Long artistId){return userService.assignGenreToArtist(genreId, artistId);}
+
+    @GetMapping("/song-play-count/{month}/{year}")
+    public List<ArtistMonthlyPlayCount> getPlayCount(
+            @RequestParam Long artistId,
+            @PathVariable int month,
+            @PathVariable int year) {
+        return this.userService.getPlayCount(artistId, month, year);
+    }
+
+    @GetMapping("/song-play-count")
+    public List<ArtistPlayCount> getPlayCount(@RequestParam Long artistId) {
+        return this.userService.getPlayCount(artistId);
+    }
 }
