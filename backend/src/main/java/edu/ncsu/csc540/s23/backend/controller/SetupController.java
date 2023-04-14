@@ -34,6 +34,7 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_PAYS_PH);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_PAYS_ARTIST);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_ARTIST);
+            jdbcTemplate.execute(SetupQuery.DROP_TABLE_HISTORICAL_SONG_COUNT);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_SONG);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_GENRE);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_RECORD_LABEL);
@@ -45,7 +46,6 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_GUEST_SPEAKER);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_SPONSOR);
             jdbcTemplate.execute(SetupQuery.DROP_TABLE_ACCOUNTS);
-
             // create tables if not present
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_USER);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_GENRE);
@@ -74,7 +74,7 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_PAYS_RECORD);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_PAYS_PH);
             jdbcTemplate.execute(SetupQuery.CREATE_TABLE_PAYS_ARTIST);
-
+            jdbcTemplate.execute(SetupQuery.CREATE_TABLE_HISTORICAL_SONG_COUNT);
             // insert data
             jdbcTemplate.execute(SetupQuery.INSERT_USER_1);
             jdbcTemplate.execute(SetupQuery.INSERT_USER_2);
@@ -284,6 +284,19 @@ public class SetupController {
             jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_33);
             jdbcTemplate.execute(SetupQuery.INSERT_USER_PAYS_34);
 
+            //insert historical data
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_JAN_23_1);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_FEB_23_1);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_MAR_23_1);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_JAN_23_2);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_FEB_23_2);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_MAR_23_2);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_JAN_23_3);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_FEB_23_3);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_MAR_23_3);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_JAN_23_4);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_FEB_23_4);
+            jdbcTemplate.execute(SetupQuery.INSERT_HISTORICAL_SONG_COUNT_MAR_23_4);
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }

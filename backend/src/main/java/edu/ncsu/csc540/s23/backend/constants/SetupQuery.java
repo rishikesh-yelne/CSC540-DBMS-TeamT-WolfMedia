@@ -19,6 +19,7 @@ public class SetupQuery {
     public static final String DROP_TABLE_PAYS_PH = "DROP TABLE IF EXISTS pays_ph;";
     public static final String DROP_TABLE_PAYS_ARTIST = "DROP TABLE IF EXISTS pays_artist;";
     public static final String DROP_TABLE_ARTIST = "DROP TABLE IF EXISTS Artist;";
+    public static final String DROP_TABLE_HISTORICAL_SONG_COUNT = "DROP TABLE IF EXISTS Historical_Song_Count;";
     public static final String DROP_TABLE_SONG = "DROP TABLE IF EXISTS Song;";
     public static final String DROP_TABLE_GENRE = "DROP TABLE IF EXISTS Genre;";
     public static final String DROP_TABLE_RECORD_LABEL = "DROP TABLE IF EXISTS Record_Label;";
@@ -59,6 +60,7 @@ public class SetupQuery {
     public static final String CREATE_TABLE_PAYS_RECORD = "CREATE TABLE IF NOT EXISTS pays_record(rlabel_id int NOT NULL,transac_id int NOT NULL,song_id int NOT NULL,album_id int NOT NULL,PRIMARY KEY (rlabel_id, transac_id, song_id, album_id),FOREIGN KEY (`rlabel_id`) REFERENCES `Record_Label` (`rlabel_id`) ON DELETE CASCADE,FOREIGN KEY (`transac_id`) REFERENCES `Accounts` (`transac_id`) ON DELETE CASCADE,FOREIGN KEY (`song_id`) REFERENCES `Song` (`song_id`) ON DELETE CASCADE,FOREIGN KEY (`album_id`) REFERENCES `Album` (`album_id`) ON DELETE CASCADE);";
     public static final String CREATE_TABLE_PAYS_PH = "CREATE TABLE IF NOT EXISTS pays_ph(transac_id int NOT NULL,pepi_id int NOT NULL,podcast_id int NOT NULL,user_id int NOT NULL,PRIMARY KEY (transac_id, pepi_id, podcast_id, user_id),FOREIGN KEY (`transac_id`) REFERENCES `Accounts` (`transac_id`) ON DELETE CASCADE,FOREIGN KEY (`pepi_id`) REFERENCES `Podcast_Episode` (`pepi_id`) ON DELETE CASCADE,FOREIGN KEY (`podcast_id`) REFERENCES `Podcast` (`podcast_id`) ON DELETE CASCADE,FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE);";
     public static final String CREATE_TABLE_PAYS_ARTIST = "CREATE TABLE IF NOT EXISTS pays_artist(rlabel_id int NOT NULL,transac_id int NOT NULL,user_id int NOT NULL,song_id int NOT NULL,album_id int NOT NULL,PRIMARY KEY (rlabel_id, transac_id, user_id, song_id, album_id),FOREIGN KEY (`rlabel_id`) REFERENCES `Record_Label` (`rlabel_id`) ON DELETE CASCADE,FOREIGN KEY (`transac_id`) REFERENCES `Accounts` (`transac_id`) ON DELETE CASCADE,FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE,FOREIGN KEY (`song_id`) REFERENCES `Song` (`song_id`) ON DELETE CASCADE,FOREIGN KEY (`album_id`) REFERENCES `Album` (`album_id`) ON DELETE CASCADE);";
+    public static final String CREATE_TABLE_HISTORICAL_SONG_COUNT = "CREATE TABLE Historical_Song_Count (song_id int NOT NULL, album_id int NOT NULL, play_count int NOT NULL, month DATE NOT NULL, PRIMARY KEY (`song_id`, `album_id`, `month`), FOREIGN KEY (`song_id`) REFERENCES `Song` (`song_id`) ON DELETE CASCADE, FOREIGN KEY (`album_id`) REFERENCES `Album` (`album_id`) ON DELETE CASCADE);";
     // endregion
     // region Insert Data
     public static final String INSERT_USER_1 = "INSERT INTO User (user_id, first_name, last_name, email_id, phone_num, reg_date) VALUES(8001, 'Alex', 'A', 'alex.a@ncsu.edu', '+1(919)000-0001', '2023-01-01')";
@@ -413,4 +415,20 @@ public class SetupQuery {
             "INSERT INTO user_pays (user_id, transac_id, plan, amount, num_months, start_date) " +
                     "VALUES(8010, 70, 'Monthly', 480, 1, '2023-04-01');";
     // endregion
+    //Song historical data
+    public static final String INSERT_HISTORICAL_SONG_COUNT_JAN_23_1 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1001, 4001, 10,'2023-01-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_FEB_23_1 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1001, 4001, 20,'2023-02-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_MAR_23_1 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1001, 4001, 30,'2023-03-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_JAN_23_2 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1002, 4001, 100,'2023-01-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_FEB_23_2 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1002, 4001, 200,'2023-02-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_MAR_23_2 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1002, 4001, 300,'2023-03-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_JAN_23_3 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1003, 4002, 1000,'2023-01-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_FEB_23_3 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1003, 4002, 2000,'2023-02-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_MAR_23_3 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1003, 4002, 3000,'2023-03-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_JAN_23_4 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1004, 4002, 10000,'2023-01-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_FEB_23_4 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1004, 4002, 20000,'2023-02-01');";
+    public static final String INSERT_HISTORICAL_SONG_COUNT_MAR_23_4 = "INSERT INTO Historical_Song_Count(song_id, album_id, play_count, month) VALUES (1004, 4002, 30000,'2023-03-01');";
+
+
+
 }
