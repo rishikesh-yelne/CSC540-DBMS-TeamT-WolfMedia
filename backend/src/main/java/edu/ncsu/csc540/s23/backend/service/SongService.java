@@ -185,7 +185,7 @@ public class SongService {
     public Long getPlayCount(Long songId, Long albumId, int month, int year) {
         String query;
         if (month < LocalDate.now().getMonth().getValue()
-                && year < LocalDate.now().getYear()) {
+                && year <= LocalDate.now().getYear()) {
             query = OperationQuery.GET_HISTORIC_PLAY_COUNT_FOR_SONG_AND_MONTH;
         } else {
             query = OperationQuery.GET_PLAY_COUNT_FOR_SONG_AND_MONTH;

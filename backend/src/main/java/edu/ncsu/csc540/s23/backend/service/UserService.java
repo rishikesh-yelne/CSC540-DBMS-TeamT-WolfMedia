@@ -218,7 +218,7 @@ public class UserService {
     public List<ArtistMonthlyPlayCount> getPlayCount(Long artistId, int month, int year) {
         String query;
         if (month < LocalDate.now().getMonth().getValue()
-                && year < LocalDate.now().getYear()) {
+                && year <= LocalDate.now().getYear()) {
             query = OperationQuery.GET_ARTIST_HISTORICAL_PLAY_COUNT_FOR_MONTH;
         } else {
             query = OperationQuery.GET_ARTIST_PLAY_COUNT_FOR_MONTH;

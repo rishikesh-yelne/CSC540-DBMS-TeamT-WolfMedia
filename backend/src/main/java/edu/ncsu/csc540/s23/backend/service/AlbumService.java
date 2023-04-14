@@ -85,7 +85,7 @@ public class AlbumService {
     public List<AlbumMonthlyPlayCount> getPlayCount(Long albumId, int month, int year) {
         String query;
         if (month < LocalDate.now().getMonth().getValue()
-                && year < LocalDate.now().getYear()) {
+                && year <= LocalDate.now().getYear()) {
             query = OperationQuery.GET_ALBUM_HISTORICAL_PLAY_COUNT_FOR_MONTH;
         } else {
             query = OperationQuery.GET_ALBUM_PLAY_COUNT_FOR_MONTH;
