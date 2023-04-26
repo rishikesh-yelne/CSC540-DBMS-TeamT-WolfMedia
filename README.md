@@ -1,13 +1,14 @@
 # CSC540-DBMS-TeamT-WolfMedia
 
-To access the API endpoints of the WolfMedia Streaming application on your local, run the application and load the following URL:
-`http://localhost:8080/swagger-ui.html`
+To configure the application and database locally, run the docker compose command as follows (inside the `backend` directory):
 
-To configure the mariadb locally, run the docker compose file as follows (inside the `backend` directory):
-`docker-compose up -d`
+`docker compose up --build`
 
 > Make sure that docker is installed locally
 
+To access the API endpoints of the WolfMedia Streaming application, load the following URL:
+
+`http://localhost:8080/swagger-ui.html`
 
 
 ### Team members:
