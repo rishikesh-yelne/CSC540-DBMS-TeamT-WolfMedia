@@ -1,0 +1,15 @@
+version: '3'
+volumes:
+  data:
+services:
+  db:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: ryelne
+      MARIADB_USER: ryelne
+      MARIADB_PASSWORD: ryelne
+    volumes:
+      - data:/var/lib/mariadb
+    ports:
+      - "3306:3306"
