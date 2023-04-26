@@ -2,7 +2,8 @@ version: '3'
 volumes:
   data:
 services:
-  db:
+  backend-db:
+    container_name: backend-db
     image: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: password
@@ -13,3 +14,21 @@ services:
       - data:/var/lib/mariadb
     ports:
       - "3306:3306"
+    networks:
+      - backend
+  backend-api:
+    container_name: backend-api
+    build: ./
+    environment:
+      spring.datasource.url: jdbc:mariadb://backend-db:3306/ryelne
+      spring.datasource.driver-class-name: org.mariadb.jdbc.Driver
+      spring.datasource.username: ryelne
+      spring.datasource.password: ryelne
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend-db
+    networks:
+      - backend
+networks:
+  backend:
